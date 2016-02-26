@@ -28,4 +28,12 @@ public class UserDAO {
         user.setIdNumber(idNumber);
         user.setOccupation(occupation);
     }
+    
+    public User addUser(User user){
+        
+        return user;
+    }
+    
+    
+    
 }

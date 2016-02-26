@@ -1,0 +1,317 @@
+body, html
+{
+	width:100%; 
+	min-height:100%; 
+	margin:0; 
+	padding:0; 
+}
+
+#header
+{
+	background-color:black;
+	width:100%; 
+	height : 50px; 
+	padding: 0; 
+	magin: 0;
+}
+
+#header ul
+{
+	padding: 0; 
+	magin: 0; 
+}
+
+#header ul li
+{
+	text-decoration: none; 
+	float: left; 
+	color: white;
+	display: inline-block;
+	width: 20%;
+	text-align: center;
+	font-size: 30px; 
+	line-height: 50px;
+}
+
+#header ul li a
+{
+	color : white; 
+	text-decoration: none;
+}
+
+#header ul li a:hover
+{
+	text-decoration: underline;
+}
+
+h1{
+	width : 100%; 
+	text-align: center;
+}
+
+#homeProjectListContener{
+	width:80%;
+	margin-left: 10%; 
+	margin-top: 10px; 
+}
+
+#homeProjectListContener > div{
+	width : 31%; 
+	margin : 1%;
+	float: left;
+	border: 2px solid black; 
+}
+
+#homeProjectListContener > div > .title{
+	width: 100%; 
+	height : 30px; 
+	line-height: 30px; 
+	font-size: 20px; 
+	background-color: #cccccc; 
+	text-align: center; 
+	font-weight: bold;
+}
+
+#homeProjectListContener > div > .description{
+	width: 90%; 
+	margin-left : 5%;
+	word-wrap: break-word;
+	margin-top: 2%;
+}
+
+#homeProjectListContener > div > .description > span{
+	font-weight: bold;
+}
+
+#homeProjectListContener > div > .progressBar{
+	height : 20px;
+	width : 90%; 
+	margin:2%;
+	margin-left : 5%; 
+	border : 1px solid red; 
+	overflow: hidden;
+	border-radius:10px;
+}
+
+#homeProjectListContener > div > .progressBar > span{
+	z-index:10;
+	height : 20px; 
+ 	display : block; 
+	width: 96%;
+	position: relative;  
+	left:0; 
+	line-height: 20px;
+	margin-left : 2%;
+}
+
+#homeProjectListContener > div > .progressBar > .actual{ 
+	top:0;  
+	text-align:left; 
+}
+#homeProjectListContener > div > .progressBar > .percentage{
+	top:-20px; 
+	text-align:center; 
+}
+#homeProjectListContener > div > .progressBar > .goal{
+	top:-40px; 
+	text-align: right;
+}
+
+#homeProjectListContener > div > .progressBar > .progressBarColor{
+	z-index:5;
+	height : 20px;
+	position: relative;  
+	width: 12%;
+	top:-40px;
+	left:0; 
+	top:-60px;
+	background-color: orange;
+	opacity:0.6;
+}
+
+#homeProjectListContener > div > .contribution{
+	height: 20px; 
+	width: 90%; 
+	margin-left:5%;
+}
+#homeProjectListContener > div > .contribution input{
+	width: 170px;
+}
+#homeProjectListContener > div > .details{ 
+	width: 90%; 
+	margin: 2%;
+	margin-left:5%;
+	text-align: right;
+}
+
+#homeProjectListContener > div > .details input{ 
+	width: 100%; 
+	border-radius:10px;
+}
+
+#categoryFilter{
+	width:80%; 
+	margin-left:10%;
+}
+
+#categoryFilter fieldset{
+	text-align: center;
+}
+
+#categoryFilter label{
+	float:none;
+	font-size: 25px; 
+	font-weight: bold;
+}
+
+#categoryFilter select{
+	height:30px;
+	font-size: 20px;
+	min-width: 200px;
+}
+#categoryFilter input{
+	height:30px;
+	font-size: 20px;
+}
+
+#aboutContent{
+	width:80%; 
+	margin-left:10%;
+}
+
+#registerForm, #addProject, #editProfil, #generalProfil, #projectProfil{
+	width:80%; 
+	margin-left:10%;
+}
+
+#userDashboard, #adminDashboard{
+	width:80%;
+	margin-left:10%;
+	margin-bottom: 20px;
+}
+
+#userDashboard a, #adminDashboard a{
+	display: block; 
+	width : 31%; 
+	margin:1%; 
+	background-color: #cccccc;
+	float: left;
+	height:150px;
+	line-height: 150px; 
+	font-size: 25px;
+	text-align: center;
+	text-decoration: none; 
+	color: black;
+}
+
+#userDashboard a:hover, #adminDashboard a:hover{
+	box-shadow: inset 0 0 10px #000000;
+	cursor: pointer;
+}
+
+#generalProfil p{
+	font-size: 18px;
+	margin: 0;
+	margin-bottom: 3px;
+}
+
+#generalProfil p span{
+	width: 200px;
+	display: inline-block;
+}
+
+#homeProjectListContener h3
+{
+	margin:1%; 
+	margin-top: 30px;
+}
+
+
+#listUserContener{
+	width:80%; 
+	margin-left:10%;
+}
+
+#listUserContener > .listUserItem{
+	float: left;
+	width:31%; 
+	margin: 1%; 
+	border: 1px solid black;
+}
+
+#listUserContener > .listUserItem > .title{
+	width : 100%; 
+	background-color: #cccccc;
+	text-align: center; 
+	height:25px; 
+	line-height: 25px; 
+	font-size: 20px;
+	
+}
+#listUserContener > .listUserItem > .content{
+	width : 90%; 
+	margin-left: 5%;
+	margin-top:1%;
+	font-size: 17px;
+}
+#listUserContener > .listUserItem > .content > span{
+	display: inline-block;
+	width: 120px;
+	font-weight: bold;
+}
+
+#listUserContener > .listUserItem > .buttonContener{
+	width : 90%; 
+	margin-left: 5%;
+	margin-top:1%;
+}
+
+
+#listUserContener > .listUserItem > .buttonContener > form > input{
+	width: 100%;
+	margin-bottom: 5px;
+}
+
+#listUserContener > a{
+	display: block; 
+	width : 31%; 
+	margin:1%; 
+	background-color: #cccccc;
+	float: left;
+	height:100px;
+	line-height: 100px; 
+	font-size: 25px;
+	text-align: center;
+	text-decoration: none; 
+	color: black;
+}
+
+#listUserContener > a:hover{
+	box-shadow: inset 0 0 10px #000000;
+	cursor: pointer;
+}
+
+#updateCat{
+	width:80%; 
+	margin-left: 10%;
+}
+
+#project{
+	text-align:center; 
+	position: relative;
+	width: 100%;
+}
+
+#project span{
+	display:inline-block;
+	font-weight: bold;
+}
+
+#hello{
+	width:100%; 
+	font-size: 10px; 
+	font-weight: normal;
+	text-align: right;
+	margin: 0; 
+	padding: 0;
+}

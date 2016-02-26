@@ -4,13 +4,16 @@
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>uk.ac.brookes.mscprojectadmin.controllers.LoginServlet</servlet-class>
     </servlet>
-    <servlet-mapping>
+    <!-- <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping> -->
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    <welcome-file-list>
+        <welcome-file>index</welcome-file>
+    </welcome-file-list>
 </web-app>

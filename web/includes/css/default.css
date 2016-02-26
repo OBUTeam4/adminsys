@@ -1,0 +1,108 @@
+
+body, p, legend, label, input {
+    font: normal 10pt verdana, helvetica, sans-serif;
+}
+
+body > div{
+    margin-left: 10%; 
+    width: 80%;
+}
+
+fieldset {
+    padding: 10px;
+    border: 1px #0568CD solid;
+}
+
+legend {
+    font-weight: bold;
+    color: #0568CD;
+}
+
+/* Forms  */
+
+form label {
+    float: left;
+    width: 250px;
+    margin: 3px 0px 0px 0px;
+}
+
+form input {
+    margin: 3px 3px 0px 0px;
+    border: 1px #999 solid;
+    width : 200px;
+}
+
+form select{
+	margin: 3px 3px 0px 0px;
+    border: 1px #999 solid;
+    width : 202px;
+}
+
+form input.sansLabel {
+    margin-left: 250px;
+    width:202px;
+}
+
+form input[type="radio"]
+{
+	width:auto;
+	margin-left: 25px;
+}
+
+form .radioInput{
+	margin-left: 250px;
+}
+
+form .required {
+    color: #c00;
+}
+
+form .error {
+    color: #900;
+}
+
+form .success {
+    color: #090;
+}
+
+.warn {
+    color: yellow;
+}
+
+.conversationCol{
+    width: 48%; 
+    padding: 0.5%;
+    margin: 1%;
+    height: 200px; 
+    background-color: #5bc0de;
+    border-radius: 10px;
+    float: left;
+    border: 1px solid white; 
+}
+
+.conversationCol:hover{
+    border: 1px solid black; 
+    cursor: pointer; 
+}
+
+.sendMessage{
+    float: left;
+    background-color: #dec05b; 
+    min-width: 300px; 
+    max-width: 700px;
+    padding: 10px; 
+    margin: 10px; 
+    font-size: 20px; 
+}
+.recivedMessage{
+    float : right;
+    background-color: #5bc0de; 
+    min-width: 300px;
+    max-width: 700px;
+    padding: 10px; 
+    font-size: 20px; 
+}
+
+.stopfloat{
+    clear: both; 
+}

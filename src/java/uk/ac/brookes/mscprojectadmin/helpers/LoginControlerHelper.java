@@ -16,19 +16,19 @@ import uk.ac.brookes.mscprojectadmin.dao.UserDAO;
  * @author oussamak
  */
 public class LoginControlerHelper {
-    UserDAO userdao;  
-    String[] dashboardURLs = {"/studdash.jsp","/supdash.jsp","/assedash.jsp","/admindash.jsp","/mldash.jsp","/eedash.jsp"};
+    UserDAO userdao;
+    String[] dashboardURLs = {"/studdash.jsp", "/supdash.jsp", "/assedash.jsp", "/admindash.jsp", "/mldash.jsp", "/eedash.jsp"};
     Map<String, String> loginErrors;
     
-    public LoginControlerHelper(){
+    public LoginControlerHelper() {
         userdao = new UserDAO();
     }
     //This method checks username and password are not empty
-    public Map validateLoginDetails(String idNumber, String password){
-         loginErrors = new HashMap<String, String>();
-         try {
+    public Map validateLoginDetails(String idNumber, String password) {
+        loginErrors = new HashMap<String, String>();
+        try {
             checkIDNumber(idNumber);
-                            System.out.println("Check1 OK");
+            System.out.println("Check1 OK");
 
         } catch (Exception e) {
             loginErrors.put("idNumber", e.getMessage());
@@ -40,27 +40,26 @@ public class LoginControlerHelper {
         } catch (Exception e) {
             loginErrors.put("password", e.getMessage());
         }
-        
-        
+
         return loginErrors;
     }
     
     //This method checks if the user recognised by the system
-    public boolean isRegistered(User user) throws SQLException{
+    public boolean isRegistered(User user) throws SQLException {
         boolean userExist = false;
-                        System.out.println("LCH:11");
+        System.out.println("LCH:11");
 
         userExist = userdao.findUserByLoginDetails(user);
         return userExist;
     }
-    
-    public String dashboardURL(User user){
-        String url = null;
-                        System.out.println("here");
 
-                System.out.println(user.getOccupation());
-        switch(user.getOccupation().toLowerCase()){
-            case "student": 
+    public String dashboardURL(User user) {
+        String url = null;
+        System.out.println("here");
+
+        System.out.println(user.getOccupation());
+        switch (user.getOccupation().toLowerCase()) {
+            case "student":
                 url = dashboardURLs[0];
                 break;
             case "supervisor":
@@ -78,16 +77,16 @@ public class LoginControlerHelper {
             case "examiner":
                 url = dashboardURLs[5];
                 break;
-                
+
         }
         return url;
     }
-    
+
     private void checkIDNumber(String idNumber) throws Exception {
         if (idNumber != null && idNumber.trim().length() != 0) {
             // regex digits
-            if (idNumber.trim().length() < 3){
-                    //!idNumber.matches("-?\\d+(\\.\\d+)?")) {
+            if (idNumber.trim().length() < 3) {
+                //!idNumber.matches("-?\\d+(\\.\\d+)?")) {
                 throw new Exception("ID number error.");
             }
         } else {

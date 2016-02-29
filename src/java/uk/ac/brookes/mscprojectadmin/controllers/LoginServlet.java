@@ -26,13 +26,17 @@ import uk.ac.brookes.mscprojectadmin.helpers.LoginControlerHelper;
  */
 public class LoginServlet extends HttpServlet {
 
-    
-    
-
-    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        request.getRequestDispatcher("/common/login.jsp").forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
         //System.out.println("1");
         Boolean registered = false; // Flag for user existence, false means user dosen't exist in the system
         String result = ""; //Result of not valid idnumber or password, user not registred 
@@ -46,19 +50,18 @@ public class LoginServlet extends HttpServlet {
         //user = new User(request.getParameter("username"),request.getParameter("password"));
         errors = lch.validateLoginDetails(idNumber, password);
         //System.out.println("3");
-        if(errors.isEmpty()){
+        if (errors.isEmpty()) {
             try {
                 User user = new User();
                 user.setIdNumber(idNumber);
                 user.setPassword(password);
                 registered = lch.isRegistered(user);
                 //System.out.println("3");
-                if(registered){ // Login successful
-                    nextPage = "/dashboards"+lch.dashboardURL(user);
+                if (registered) { // Login successful
+                    nextPage = "/dashboards" + lch.dashboardURL(user);
                     request.getSession().setAttribute("user", user);
                     System.out.println("4");
-                }
-                else {
+                } else {
                     result = "Your ID number or password is incorrect, or you're not registered yet, please try again.";
                     request.setAttribute("result", result);
                     nextPage = "/common/login.jsp";
@@ -67,8 +70,7 @@ public class LoginServlet extends HttpServlet {
             } catch (SQLException ex) {
                 Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        else{
+        } else {
             //result = "Your username or password is not valid.";
             //request.setAttribute("result", result);
             request.setAttribute("errors", errors);
@@ -77,21 +79,7 @@ public class LoginServlet extends HttpServlet {
         }
         System.out.println("Login Successful");
         RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
-                dispatcher.forward(request, response);
+        dispatcher.forward(request, response);
     }
-
-    
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        doGet(request, response);
-    }
-
-    
-    @Override
-    public String getServletInfo() {
-        
-        return "Short description";
-    }// </editor-fold>
 
 }

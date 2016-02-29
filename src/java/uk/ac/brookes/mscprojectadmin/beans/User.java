@@ -10,23 +10,27 @@ package uk.ac.brookes.mscprojectadmin.beans;
  * @author oussamak
  */
 public class User {
-    
+
     private String username;
-    private String password;
-    private String email;
-    private String occupation;
+    private String idNumber;
     private String firstName;
     private String lastName;
-    private String idNumber;
-    
-    public User(String idNumber, String password){
+    private String courseCode;
+    private String courseTitle;
+    private String courseMode;
+    private String password;
+    private String email;
+    private boolean access;
+    private String occupation;
+
+    public User() {
+
+    }
+
+    public User(String idNumber, String password) {
         this.idNumber = idNumber;
         this.password = password;
         //this.email = email;
-        
-    }
-    public User(){
-        
     }
 
     public String getUsername() {
@@ -84,7 +88,37 @@ public class User {
     public void setIdNumber(String idNumber) {
         this.idNumber = idNumber;
     }
-    
-    
-    
+
+    public String getCourseCode() {
+        return courseCode;
+    }
+
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
+    }
+
+    public String getCourseTitle() {
+        return courseTitle;
+    }
+
+    public void setCourseTitle(String courseTitle) {
+        this.courseTitle = courseTitle;
+    }
+
+    public String getCourseMode() {
+        return courseMode;
+    }
+
+    public void setCourseMode(String courseMode) {
+        this.courseMode = courseMode;
+    }
+
+    public boolean getAccess() {
+        return access;
+    }
+
+    public void setAccess(boolean access) {
+        this.access = access;
+    }
+
 }

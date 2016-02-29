@@ -5,7 +5,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Register</title>
-         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/includes/css/header.css">
         <link rel="stylesheet" href="<%=application.getContextPath()%>/includes/css/default.css">
     </head>
@@ -37,6 +37,24 @@
                     <label for="idNumber">Student Number <span class="required">*</span> </label>
                     <input type="number" class="form-control" name="idNumber" value="<c:out value="${idNumber}" />" />
                     <span class="error"> ${errors['idNumber']} </span>
+                </div>
+
+                <div class="form-group">
+                    <label for="courseCode">Course Code <span class="required">*</span> </label>
+                    <input type="text" class="form-control" name="courseCode" value="<c:out value="${courseCode}" />" />
+                    <span class="error"> ${errors['courseCode']} </span>
+                </div>
+
+                <div class="form-group">
+                    <label for="courseTitle">Course Title <span class="required">*</span> </label>
+                    <input type="text" class="form-control" name="courseTitle" value="<c:out value="${courseTitle}" />" />
+                    <span class="error"> ${errors['courseTitle']} </span>
+                </div>
+
+                <div class="form-group">
+                    <label for="courseMode">Course Mode <span class="required">*</span> </label>
+                    <input type="text" class="form-control" name="courseMode" value="<c:out value="${courseMode}" />" />
+                    <span class="error"> ${errors['courseMode']} </span>
                 </div>
 
                 <div class="form-group">

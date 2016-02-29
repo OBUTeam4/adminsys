@@ -7,6 +7,11 @@ package uk.ac.brookes.mscprojectadmin.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,52 +26,56 @@ import uk.ac.brookes.mscprojectadmin.helpers.LoginControlerHelper;
  */
 public class LoginServlet extends HttpServlet {
 
-    LoginControlerHelper lch;
-    User user;
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
+    
+    
 
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-        
-        Boolean valid = false; // Flag for data validation, false means username or passowrd or both of them is empty
+        //System.out.println("1");
         Boolean registered = false; // Flag for user existence, false means user dosen't exist in the system
-        String nextPage = "/Login.jsp"; //Url of next page to be displayed 
-        lch = new LoginControlerHelper();
-        user = new User(request.getParameter("username"),request.getParameter("password"));
-        valid = lch.validateLoginDetails(user);
-        if(valid){
-            registered = lch.isRegistered(user);
-            
-            if(registered){ // Login successful
-                nextPage = lch.dashboardURL(user);
-                request.getSession().setAttribute("user", user);
-            }
-            else {
-                request.setAttribute("notRegistered", "Your login details are both incorrect or you're not registered yet");
+        String result = ""; //Result of not valid idnumber or password, user not registred 
+        String nextPage = null; //Url of next page to be displayed 
+        LoginControlerHelper lch = new LoginControlerHelper();
+        Map<String, String> errors = new HashMap<String, String>();
+        //System.out.println("2");
+
+        String idNumber = request.getParameter("idNumber").trim();
+        String password = request.getParameter("password").trim();
+        //user = new User(request.getParameter("username"),request.getParameter("password"));
+        errors = lch.validateLoginDetails(idNumber, password);
+        //System.out.println("3");
+        if(errors.isEmpty()){
+            try {
+                User user = new User();
+                user.setIdNumber(idNumber);
+                user.setPassword(password);
+                registered = lch.isRegistered(user);
+                //System.out.println("3");
+                if(registered){ // Login successful
+                    nextPage = "/dashboards"+lch.dashboardURL(user);
+                    request.getSession().setAttribute("user", user);
+                    System.out.println("4");
+                }
+                else {
+                    result = "Your ID number or password is incorrect, or you're not registered yet, please try again.";
+                    request.setAttribute("result", result);
+                    nextPage = "/common/login.jsp";
+                    System.out.println("5");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         else{
-            request.setAttribute("notValid", "Your username or password is incorrect.");
+            //result = "Your username or password is not valid.";
+            //request.setAttribute("result", result);
+            request.setAttribute("errors", errors);
+            nextPage = "/common/login.jsp";
+            System.out.println("6");
         }
-        
+        System.out.println("Login Successful");
         RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
                 dispatcher.forward(request, response);
     }
@@ -75,12 +84,13 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        doGet(request, response);
     }
 
     
     @Override
     public String getServletInfo() {
+        
         return "Short description";
     }// </editor-fold>
 

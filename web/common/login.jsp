@@ -21,7 +21,7 @@
 
             <h1> Login </h1>
 
-            <form method="POST">
+            <form method="POSt" action="login">
 
                 <div class="form-group">
                     <label for="idNumber">ID Number <span class="required">*</span> </label>

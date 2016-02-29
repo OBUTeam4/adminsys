@@ -19,10 +19,13 @@ public class User {
     private String lastName;
     private String idNumber;
     
-    public User(String username, String password){
-        this.username = username;
+    public User(String idNumber, String password){
+        this.idNumber = idNumber;
         this.password = password;
         //this.email = email;
+        
+    }
+    public User(){
         
     }
 

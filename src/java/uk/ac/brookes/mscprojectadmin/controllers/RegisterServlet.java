@@ -6,8 +6,11 @@
 package uk.ac.brookes.mscprojectadmin.controllers;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -82,30 +85,34 @@ public class RegisterServlet extends HttpServlet {
         // inputs are all correct
         if (errors.isEmpty()) {
 
+            try {
                 user.setFirstName(firstname);
                 user.setLastName(lastname);
                 user.setEmail(emailAddress);
                 user.setPassword(password);
                 user.setIdNumber(idNumber);
                 
-            // searching existing ID number in DB
-            if ((lch.isRegistered(user)) == true) {
-
-                alert = "ID number already in use!";
-                request.setAttribute("alert", alert);
-
-                this.getServletContext().getRequestDispatcher("/jsp/register.jsp").forward(request, response);
-            } else {
-                //User user = new User();
-               // UserDAO.addUser(user);
-                
-                // session storage
-                HttpSession session = request.getSession();
-                session.setAttribute("idNumber", idNumber);
-                //session.setAttribute("isAdmin", "false");
-
-                response.sendRedirect(request.getContextPath() + "/index");
-                //response.sendRedirect(request.getContextPath() + "/auth/contact");
+                // searching existing ID number in DB
+                if ((lch.isRegistered(user)) == true) {
+                    
+                    alert = "ID number already in use!";
+                    request.setAttribute("alert", alert);
+                    
+                    this.getServletContext().getRequestDispatcher("/jsp/register.jsp").forward(request, response);
+                } else {
+                    //User user = new User();
+                    // UserDAO.addUser(user);
+                    
+                    // session storage
+                    HttpSession session = request.getSession();
+                    session.setAttribute("idNumber", idNumber);
+                    //session.setAttribute("isAdmin", "false");
+                    
+                    response.sendRedirect(request.getContextPath() + "/index");
+                    //response.sendRedirect(request.getContextPath() + "/auth/contact");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         } else {

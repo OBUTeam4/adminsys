@@ -38,6 +38,7 @@
                 <input type="submit" value="Log-In" class="btn btn-default" />
 
                 <p class="${empty errors ? 'success' : 'error'}">${result}</p>	
+                <a href="common/register.jsp">Register</a>
 
             </form>
         </div>

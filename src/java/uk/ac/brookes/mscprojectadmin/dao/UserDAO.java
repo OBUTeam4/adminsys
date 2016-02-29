@@ -35,7 +35,7 @@ public class UserDAO {
      */
     public boolean findUserByLoginDetails(User user) throws SQLException {
         boolean found = false;
-        query = "select * from user where IdNumber = '" + user.getIdNumber() + "'";
+        query = "select * from user where idNumber = '" + user.getIdNumber() + "' and pw = '"+user.getPassword()+"'";
         System.out.println("begining");
         try {
             stmt = con.createStatement();
@@ -44,11 +44,10 @@ public class UserDAO {
 
             if (rs.next()) {
                 System.out.println("Next OK");
-                if (user.getPassword().equals(rs.getString("pw"))) {
-                    found = true;
-                    setUserData(user, rs.getString("fName"), rs.getString("lName"), rs.getString("email"), rs.getString("occupation"));
-                    System.out.println("after ");
-                }
+                found = true;
+                setUserData(user, rs.getString("fName"), rs.getString("lName"), rs.getString("email"), rs.getString("occupation"));
+                System.out.println("after ");
+                
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -60,6 +59,33 @@ public class UserDAO {
 
         return found;
     }
+    
+    public boolean findUserByID(User user) throws SQLException {
+        boolean found = false;
+        query = "select * from user where idNumber = '" + user.getIdNumber() + "'";
+        System.out.println("begining");
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+            System.out.println("111");
+
+            if (rs.next()) {
+                System.out.println("Next OK");
+                found = true;
+                setUserData(user, rs.getString("fName"), rs.getString("lName"), rs.getString("email"), rs.getString("occupation"));
+                System.out.println("after ");
+                
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (stmt != null) {
+                stmt.close();
+            }
+        }
+        return found;
+    }
+
 
     private void setUserData(User user, String fName, String lName, String email, String occupation) {
         user.setFirstName(fName);

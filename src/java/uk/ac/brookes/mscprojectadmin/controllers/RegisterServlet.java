@@ -75,6 +75,7 @@ public class RegisterServlet extends HttpServlet {
 
                 // searching existing ID number in DB
                 if (registerControlerHelper.isRegistered(user)) {
+                    System.out.println("Here");
                     alert = "ID number already in use!";
                     request.setAttribute("alert", alert);
                     this.getServletContext().getRequestDispatcher("/common/register.jsp").forward(request, response);

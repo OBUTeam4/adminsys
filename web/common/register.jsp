@@ -14,7 +14,7 @@
         <div> 
             <h1>Register</h1>
 
-            <form method="POST"  role="form">
+            <form method="POST"  action="register" role="form">
                 <div class="form-group">
                     <label for="firstname" >Firstname <span class="required">*</span></label>
                     <input type="text" class="form-control" name="firstname"  value="<c:out value="${firstname}" />" />

@@ -34,7 +34,7 @@ public class RegisterControlerHelper {
     
     public boolean isRegistered(User user) throws SQLException {
         boolean userExist = false;
-        userExist = userdao.findUserByLoginDetails(user);
+        userExist = userdao.findUserByID(user);
         return userExist;
     }
 

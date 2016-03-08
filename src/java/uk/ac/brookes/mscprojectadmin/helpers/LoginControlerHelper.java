@@ -17,7 +17,7 @@ import uk.ac.brookes.mscprojectadmin.dao.UserDAO;
  */
 public class LoginControlerHelper {
     UserDAO userdao;
-    String[] dashboardURLs = {"/studdash.jsp", "/supdash.jsp", "/assedash.jsp", "/admindash.jsp", "/mldash.jsp", "/eedash.jsp"};
+    String[] dashboardURLs = {"/studdash.jsp", "/supdash.jsp", "/assdash.jsp", "/admindash.jsp", "/mldash.jsp", "/eedash.jsp"};
     Map<String, String> loginErrors;
     
     public LoginControlerHelper() {
@@ -71,7 +71,7 @@ public class LoginControlerHelper {
             case "administrator":
                 url = dashboardURLs[3];
                 break;
-            case "moduleleader":
+            case "leader":
                 url = dashboardURLs[4];
                 break;
             case "examiner":
@@ -83,10 +83,10 @@ public class LoginControlerHelper {
     }
 
     private void checkIDNumber(String idNumber) throws Exception {
-        if (idNumber != null && idNumber.trim().length() != 0) {
+        if (idNumber != null) {
             // regex digits
-            if (idNumber.trim().length() < 3) {
-                //!idNumber.matches("-?\\d+(\\.\\d+)?")) {
+            if (!idNumber.matches("[a-zA-Z]?-?\\d+(\\.\\d+)?") || idNumber.length() < 8) {
+                // {
                 throw new Exception("ID number error.");
             }
         } else {
@@ -95,9 +95,9 @@ public class LoginControlerHelper {
     }
 
     private void checkPassword(String password) throws Exception {
-        if (password != null && password.trim().length() != 0) {
-            if (password.trim().length() < 3) {
-                throw new Exception("The password need to have at least 3 characters");
+        if (password != null) {
+            if (password.trim().length() < 8) {
+                throw new Exception("Incorrect password");
             }
         } else {
             throw new Exception("Enter the password");

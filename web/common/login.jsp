@@ -35,9 +35,10 @@
                     <span class="error"> ${errors['password']} </span>
                 </div>
 
-                <input type="submit" value="Log-In" class="btn btn-default" />
+                <input type="submit" value="Log-In" class="btn btn-default" /><br>
 
-                <p class="${empty errors ? 'success' : 'error'}">${result}</p>	
+                <!--<p class="${empty errors ? 'success' : 'error'}">${result}</p>-->
+                <span class="error"> ${errors['result']} </span><br>
                 <a href="common/register.jsp">Register</a>
 
             </form>

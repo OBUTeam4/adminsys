@@ -58,7 +58,7 @@ public class RegisterServlet extends HttpServlet {
         String courseTitle = request.getParameter("courseTitle").trim();
         String courseMode = request.getParameter("courseMode").trim();
 
-        errors = registerControlerHelper.validateRegisterDetails(idNumber, emailAddress, firstname, lastname, password, confirm);
+        errors = registerControlerHelper.validateRegisterDetails(idNumber, emailAddress, firstname, lastname, courseTitle, courseCode, courseMode, password, confirm);
         // inputs are all correct
         if (errors.isEmpty()) {
             try {
@@ -76,8 +76,8 @@ public class RegisterServlet extends HttpServlet {
                 // searching existing ID number in DB
                 if (registerControlerHelper.isRegistered(user)) {
                     System.out.println("Here");
-                    alert = "ID number already in use!";
-                    request.setAttribute("alert", alert);
+                    errors.put("idNumber", "ID number already in use!");
+                    request.setAttribute("errors", errors);
                     this.getServletContext().getRequestDispatcher("/common/register.jsp").forward(request, response);
                 } else {
                     // add user to DB

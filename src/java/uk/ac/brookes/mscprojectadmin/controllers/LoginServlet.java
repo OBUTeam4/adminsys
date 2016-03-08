@@ -62,8 +62,8 @@ public class LoginServlet extends HttpServlet {
                     request.getSession().setAttribute("user", user);
                     System.out.println("4");
                 } else {
-                    result = "Your ID number or password is incorrect, or you're not registered yet, please try again.";
-                    request.setAttribute("result", result);
+                    errors.put("result", "Your ID number or password is incorrect, or you're not registered yet, please try again.");
+                    request.setAttribute("errors", errors);
                     nextPage = "/common/login.jsp";
                     System.out.println("5");
                 }

@@ -38,7 +38,7 @@ public class RegisterControlerHelper {
         return userExist;
     }
 
-    public Map validateRegisterDetails(String idNumber, String emailAddress, String firstname, String lastname, String password, String confirm) {
+    public Map validateRegisterDetails(String idNumber, String emailAddress, String firstname, String lastname, String cTitle, String cCode, String cMode, String password, String confirm) {
         registerErrors = new HashMap<String, String>();
         try {
             checkEmail(emailAddress);
@@ -47,11 +47,25 @@ public class RegisterControlerHelper {
         }
 
         try {
+            checkPassword(password);
             checkPasswordAndConfirm(password, confirm);
         } catch (Exception e) {
             registerErrors.put("password", e.getMessage());
         }
 
+        try {
+            checkCTitle(cTitle);
+        } catch (Exception e) {
+            registerErrors.put("courseTitle", e.getMessage());
+        }
+        
+        try {
+            checkCCode(cCode);
+        } catch (Exception e) {
+            registerErrors.put("courseCode", e.getMessage());
+        }
+        
+         
         try {
             checkFname(firstname);
         } catch (Exception e) {
@@ -74,11 +88,11 @@ public class RegisterControlerHelper {
     }
 
     private void checkIDNumber(String idNumber) throws Exception {
-        if (idNumber != null && idNumber.trim().length() != 0) {
+        if (idNumber != null) {
             // regex digits
-            if (idNumber.trim().length() < 3) {
-                //!idNumber.matches("-?\\d+(\\.\\d+)?")) {
-                throw new Exception("ID number error.");
+            if (!idNumber.matches("-?\\d+(\\.\\d+)?") || idNumber.length() < 8) {
+                // {
+                throw new Exception("Invalid ID number.");
             }
         } else {
             throw new Exception("ID number required.");
@@ -86,12 +100,11 @@ public class RegisterControlerHelper {
     }
 
     private void checkPassword(String password) throws Exception {
-        if (password != null && password.trim().length() != 0) {
-            if (password.trim().length() < 3) {
-                throw new Exception("The password need to have at least 3 characters");
-            }
-        } else {
-            throw new Exception("Enter the password");
+        if (password == ""){
+            throw new Exception("Password is required.");
+        }
+        else if (password.length() < 8){
+            throw new Exception("Invalid password.");
         }
     }
 
@@ -106,34 +119,55 @@ public class RegisterControlerHelper {
     }
 
     private void checkPasswordAndConfirm(String password, String confirm) throws Exception {
-        if (password != null && password.trim().length() != 0 && confirm != null && confirm.trim().length() != 0) {
-            if (!password.equals(confirm)) {
-                throw new Exception("Password and confirm are differ!");
-            } else if (password.trim().length() < 3) {
-                throw new Exception("Password cannot be inferior to 3 chars.");
-            }
-        } else {
-            throw new Exception("Enter a password and a confirm.");
+        if (confirm == ""){
+            throw new Exception("Enter your password again.");
+        }
+        else if (!password.equals(confirm)){
+            throw new Exception("Password and confirm are differ.");
         }
     }
 
     private void checkFname(String fname) throws Exception {
-        if (fname != null && fname.trim().length() != 0) {
-            if (fname.trim().length() < 3) {
-                throw new Exception("Firstname cannot be inferior to 3 chars.");
-            }
-        } else {
-            throw new Exception("Enter a firstname.");
+        if (fname == "") {
+            throw new Exception("First name is required.");
+        }
+        else if (!fname.matches("([a-zA-Z])+")){
+            throw new Exception("Invalid first name.");
+        }
+        else if (fname.length() < 2){
+            throw new Exception("Invalid first name.");
         }
     }
+    
+    private void checkCTitle(String ctitle) throws Exception {
+        if (ctitle == "") {
+            throw new Exception("Title is required.");
+        }
+        else if (!ctitle.matches("([a-zA-Z\\s])+")){
+            throw new Exception("Invalid title.");
+        }
+        else if (ctitle.length() < 2){
+            throw new Exception("Invalid title.");
+        }
+    }
+    
+    private void checkCCode(String ccode) throws Exception {
+        if (ccode == "") {
+            
+            throw new Exception("Enter a course code.");
+        }
+    }
+    
 
     private void checkLname(String lname) throws Exception {
-        if (lname != null && lname.trim().length() != 0) {
-            if (lname.trim().length() < 3) {
-                throw new Exception("Lastname cannot be inferior to 3 chars.");
-            }
-        } else {
-            throw new Exception("Enter a lastname.");
+        if (lname == "") {
+            throw new Exception("Last name is required.");
+        }
+        else if (!lname.matches("([a-zA-Z])+")){
+            throw new Exception("Invalid last name.");
+        }
+        else if (lname.length() < 2){
+            throw new Exception("Invalid last name.");
         }
     }
 

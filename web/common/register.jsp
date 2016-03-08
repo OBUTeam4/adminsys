@@ -53,7 +53,11 @@
 
                 <div class="form-group">
                     <label for="courseMode">Course Mode <span class="required">*</span> </label>
-                    <input type="text" class="form-control" name="courseMode" value="<c:out value="${courseMode}" />" />
+                    <select name="courseMode">
+                        <option value="FT">Full-Time</option>
+                        <option value="PT">Part-Time</option>
+                        <option value="SW">Sandwitch</option>
+                    </select>
                     <span class="error"> ${errors['courseMode']} </span>
                 </div>
 

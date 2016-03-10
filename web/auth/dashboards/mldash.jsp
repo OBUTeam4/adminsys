@@ -18,7 +18,7 @@
     <body>
         <%@ include file="/includes/menu.jsp" %>
 
-        <h1> Welcome! You are connected as a module leader </h1>
+        <h1> Welcome to your Module Leader Dashboard!</h1>
 
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -27,9 +27,16 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-sm-8 ">
-                        
-                        <a href="<%=request.getContextPath()%>/dashboard?role=leader">Supervision dashboard</a>
-                        
+
+                        <ul>
+                            <li><a class="btn btn-info" href="<%=application.getContextPath()%>/">Dissertation Registration</a></li>
+                            <li><a class="btn btn-info" href="<%=application.getContextPath()%>/">Proposal </a></li>
+                            <li><a class="btn btn-info" href="<%=application.getContextPath()%>/">Demonstration and Presentation </a></li>
+                            <li><a class="btn btn-info" href="<%=application.getContextPath()%>/">Final Report </a></li>
+                            <li><a class="btn btn-info" href="<%=application.getContextPath()%>/">Short Paper </a></li>
+
+                        </ul>
+
                     </div>
                 </div>
             </div>

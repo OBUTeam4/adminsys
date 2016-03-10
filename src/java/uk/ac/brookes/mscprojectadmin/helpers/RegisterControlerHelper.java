@@ -24,21 +24,21 @@ public class RegisterControlerHelper {
     public RegisterControlerHelper() {
         userdao = new UserDAO();
     }
-    
-    public void addUser(User u) throws SQLException{
+
+    public void addUser(User u) throws SQLException {
         //boolean added = false;
         userdao.addUser(u);
-        
+
         //return added;
     }
-    
+
     public boolean isRegistered(User user) throws SQLException {
         boolean userExist = false;
         userExist = userdao.findUserByID(user);
         return userExist;
     }
 
-    public Map validateRegisterDetails(String idNumber, String emailAddress, String firstname, String lastname, String cTitle, String cCode, String cMode, String password, String confirm) {
+    public Map validateRegisterDetails(String idNumber, String emailAddress, String firstname, String lastname, String courseTitle, String courseCode, String courseMode, String password, String confirm) {
         registerErrors = new HashMap<String, String>();
         try {
             checkEmail(emailAddress);
@@ -54,13 +54,13 @@ public class RegisterControlerHelper {
         }
 
         try {
-            checkCTitle(cTitle);
+            checkCTitle(courseTitle);
         } catch (Exception e) {
             registerErrors.put("courseTitle", e.getMessage());
         }
         
         try {
-            checkCCode(cCode);
+            checkCourseCode(courseCode);
         } catch (Exception e) {
             registerErrors.put("courseCode", e.getMessage());
         }
@@ -83,6 +83,13 @@ public class RegisterControlerHelper {
         } catch (Exception e) {
             registerErrors.put("idNumber", e.getMessage());
         }
+
+        try {
+            checkCourseCode(courseCode);
+        } catch (Exception e) {
+            registerErrors.put("courseCode", e.getMessage());
+        }
+
 
         return registerErrors;
     }
@@ -128,6 +135,7 @@ public class RegisterControlerHelper {
     }
 
     private void checkFname(String fname) throws Exception {
+
         if (fname == "") {
             throw new Exception("First name is required.");
         }
@@ -151,13 +159,6 @@ public class RegisterControlerHelper {
         }
     }
     
-    private void checkCCode(String ccode) throws Exception {
-        if (ccode == "") {
-            
-            throw new Exception("Enter a course code.");
-        }
-    }
-    
 
     private void checkLname(String lname) throws Exception {
         if (lname == "") {
@@ -171,5 +172,14 @@ public class RegisterControlerHelper {
         }
     }
 
+    private void checkCourseCode(String courseCode) throws Exception {
+        if (courseCode != null && courseCode.trim().length() != 0) {
+            if (!courseCode.matches("^[a-zA-Z][a-zA-Z0-9_]+$")) {
+                throw new Exception("Invalid Course Code.");
+            }
+        } else {
+            throw new Exception("Enter a course code.");
+        }
+    }
 
 }

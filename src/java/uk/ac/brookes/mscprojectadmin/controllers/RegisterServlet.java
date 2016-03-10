@@ -59,6 +59,7 @@ public class RegisterServlet extends HttpServlet {
         String courseMode = request.getParameter("courseMode").trim();
 
         errors = registerControlerHelper.validateRegisterDetails(idNumber, emailAddress, firstname, lastname, courseTitle, courseCode, courseMode, password, confirm);
+     
         // inputs are all correct
         if (errors.isEmpty()) {
             try {
@@ -88,17 +89,17 @@ public class RegisterServlet extends HttpServlet {
 
                     // redirection
                     //nextPage = "/dashboards" + lch.dashboardURL(user);
-                    this.getServletContext().getRequestDispatcher("/dashboards/studdash.jsp").forward(request, response);
+                    this.getServletContext().getRequestDispatcher("/auth/dashboards/studdash.jsp").forward(request, response);
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         } else {
-            request.setAttribute("firstname", firstname);
-            request.setAttribute("lastname", lastname);
-            request.setAttribute("email", emailAddress);
-            request.setAttribute("idNumber", idNumber);
+            //request.setAttribute("firstname", firstname);
+            //request.setAttribute("lastname", lastname);
+            //request.setAttribute("email", emailAddress);
+            //request.setAttribute("idNumber", idNumber);
 
             result = "Registering fail...";
 

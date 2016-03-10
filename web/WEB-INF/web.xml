@@ -8,28 +8,20 @@
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>uk.ac.brookes.mscprojectadmin.controllers.RegisterServlet</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>DashboardServlet</servlet-name>
-        <servlet-class>uk.ac.brookes.mscprojectadmin.controllers.DashboardServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
+    <!-- <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DashboardServlet</servlet-name>
-        <url-pattern>/dashboard</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping> -->
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>/common/login.jsp</welcome-file>
+        <welcome-file>/common/index.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

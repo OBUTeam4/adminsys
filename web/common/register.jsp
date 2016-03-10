@@ -41,7 +41,7 @@
 
                 <div class="form-group">
                     <label for="courseCode">Course Code <span class="required">*</span> </label>
-                    <input type="text" class="form-control" name="courseCode" value="<c:out value="${courseCode}" />" />
+                    <input type="text" class="form-control" name="courseCode" value="<c:out value="${courseCode}" />" placeholder="P00666" />
                     <span class="error"> ${errors['courseCode']} </span>
                 </div>
 
@@ -53,10 +53,11 @@
 
                 <div class="form-group">
                     <label for="courseMode">Course Mode <span class="required">*</span> </label>
-                    <select name="courseMode">
-                        <option value="FT">Full-Time</option>
-                        <option value="PT">Part-Time</option>
-                        <option value="SW">Sandwitch</option>
+                    <c:out value="${courseMode}" />
+                    <select name="courseMode" class="form-control">
+                        <option value="full">Full Time</option>
+                        <option value="part">Part Time</option>
+                        <option value="sandwitch">Sandwitch</option>
                     </select>
                     <span class="error"> ${errors['courseMode']} </span>
                 </div>
@@ -73,8 +74,11 @@
                     <span class="erreur"> ${errors['confirm']} </span>
                 </div>     
                 <input type="submit" value="Register" class="btn btn-default"  />
-
+                
+                <p class="${empty errors ? 'success' : 'error'}">${result}</p>	
+                
             </form>
+                <a href="<%=application.getContextPath()%>/login">Login</a>
         </div>
     </body>
 </html>

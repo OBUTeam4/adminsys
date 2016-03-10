@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +25,7 @@ import uk.ac.brookes.mscprojectadmin.helpers.LoginControlerHelper;
  *
  * @author oussamak
  */
+@WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
 
     @Override
@@ -58,7 +60,7 @@ public class LoginServlet extends HttpServlet {
                 registered = lch.isRegistered(user);
                 //System.out.println("3");
                 if (registered) { // Login successful
-                    nextPage = "/dashboards" + lch.dashboardURL(user);
+                    nextPage = "/auth/dashboards" + lch.dashboardURL(user);
                     request.getSession().setAttribute("user", user);
                     System.out.println("4");
                 } else {

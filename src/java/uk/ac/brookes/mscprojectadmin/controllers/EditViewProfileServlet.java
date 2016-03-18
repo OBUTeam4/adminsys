@@ -16,8 +16,6 @@ import uk.ac.brookes.mscprojectadmin.helpers.ProfileControlerHelper;
 @WebServlet(name = "EditViewProfileServlet", urlPatterns = {"/auth/profile"})
 public class EditViewProfileServlet extends HttpServlet {
 
-    private User user;
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -32,6 +30,22 @@ public class EditViewProfileServlet extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(EditViewProfileServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+          // display infos
+        request.setAttribute("lastname", u.getLastName());
+        request.setAttribute("firstname", u.getFirstName());
+        request.setAttribute("email", u.getEmail());
+        request.setAttribute("IdNumber", u.getIdNumber());
+        request.setAttribute("occupation", u.getOccupation());
+
+        // display courseCode/Mode/title if user is a student
+        if (u.getOccupation().equals("student")) {
+            request.setAttribute("courseCode", u.getCourseCode());
+            request.setAttribute("courseMode", u.getCourseMode());
+            request.setAttribute("courseTitle", u.getCourseTitle());
+        }
+
+        // frwd req and resp
 
         request.getRequestDispatcher(profileURL).forward(request, response);
     }

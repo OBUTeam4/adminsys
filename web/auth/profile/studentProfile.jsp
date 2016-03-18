@@ -22,12 +22,26 @@
             <p> Lastname : <c:out value="${lastname}" /> </p>
             <p> Email : <c:out value="${email}" /> </p>
             <p> ID Number  : <c:out value="${IdNumber}" /> </p>
+            <p> Occupation  : <c:out value="${occupation}" /> </p>
             <p> Course Code : <c:out value="${courseCode}" /> </p>
             <p> Course Mode : <c:out value="${courseMode}" /> </p>
             <p> Course Title : <c:out value="${courseTitle}" /> </p>
 
             <h2> Edit profile </h2>
             <form method="POST">
+
+                <div class="form-group">
+                    <label for="courseMode">Occupation /!\FOR TESTING PURPOSE ONLY <span class="required">*</span> </label>
+                    <select name="occupationChange" class="form-control">
+                        <option value="student">Student</option>
+                        <option value="moduleLeader">Module Leader </option>
+                        <option value="assessor">Assessor</option>
+                        <option value="supervisor">Supervisor </option>
+                        <option value="ee">External Exa </option>
+                    </select>
+
+                </div>
+
 
                 <div class="form-group">
                     <label for="courseCode">Course Code <span class="required">*</span> </label>
@@ -43,7 +57,7 @@
 
                 <div class="form-group">
                     <label for="courseMode">Course Mode <span class="required">*</span> </label>
-                    <c:out value="${courseMode}" />
+                    
                     <select name="courseMode" class="form-control">
                         <option value="full">Full Time</option>
                         <option value="part">Part Time</option>

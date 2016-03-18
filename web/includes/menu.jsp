@@ -5,6 +5,7 @@
     <h1>
         <% if (session.getAttribute("user") != null) {%>
         Connected as, <a href="<%=application.getContextPath()%>/auth/profile"> <c:out value="${user.getFirstName()}"/> <c:out value="${user.getLastName()}"/> (<c:out value="${user.getIdNumber()})" /> </a> !
+        <c:out value="${user.getOccupation()}" />
         <% } else {%>
         MSc Projects 2016
         <% }%>	
@@ -12,17 +13,17 @@
 
     <ul>
         <li><a class="btn btn-info" href="<%=application.getContextPath()%>/">Home</a></li>
-
-        <% if (session.getAttribute("user") != null) {%>
+        <li><a class="btn btn-info" href="<%=application.getContextPath()%>/auth/forms/formsTesting.jsp">Forms</a></li>
+        
+            <% if (session.getAttribute("user") != null) {%>
         <li><a class="btn btn-info" href="<%=application.getContextPath()%>/auth/message">Messages </a></li>
-
-        <!-- FOR TESTs 
-        <li><a class="btn btn-info" href="<%=application.getContextPath()%>/dashboard">Dashboard</a></li> -->
+        <li><a class="btn btn-info" href="<%=application.getContextPath()%>/auth/dashboard">Dashboard</a></li> 
         <li><a class="btn btn-info" href="<%=application.getContextPath()%>/logout">Log out</a></li>
+
         <% } else {%>
         <li><a class="btn btn-info" href="<%=application.getContextPath()%>/login">Login</a></li>
         <li><a class="btn btn-info" href="<%=application.getContextPath()%>/register">Register</a></li>
-        <% }%>	
+            <% }%>	
 
     </ul>
 

@@ -15,23 +15,22 @@ import uk.ac.brookes.mscprojectadmin.dao.UserDAO;
  * @author Quentin
  */
 public class ProfileControlerHelper {
-    
-       UserDAO userdao;
+
+    UserDAO userdao;
     String[] dashboardURLs = {"/studdash.jsp", "/supdash.jsp", "/assedash.jsp", "/admindash.jsp", "/mldash.jsp", "/eedash.jsp"};
     Map<String, String> loginErrors;
-    
+
     public ProfileControlerHelper() {
         userdao = new UserDAO();
     }
-    
-    
-    public String getProfilePageFromUserOccupation(User u) throws SQLException{
+
+    public String getProfilePageFromUserOccupation(User u) throws SQLException {
         String userOccupation;
         String profileUrl = "";
-        
+
         userdao.findUserByLoginDetails(u);
         userOccupation = u.getOccupation();
-        
+
         switch (userOccupation) {
             case "student":
                 profileUrl = "/auth/profile/studentProfile.jsp";
@@ -45,13 +44,18 @@ public class ProfileControlerHelper {
             case "administrator":
                 profileUrl = "/auth/profile/administratorProfile.jsp";
                 break;
-            case "moduleleader":
-                profileUrl = "/auth/profile/moduleleaderProfile.jsp";
+            case "leader":
+                profileUrl = "/auth/profile/leaderProfile.jsp";
                 break;
             case "examiner":
                 profileUrl = "/auth/profile/examinerProfile.jsp";
                 break;
         }
         return profileUrl;
+    }
+
+    // 
+    public void updateUser(User u) throws SQLException {
+        userdao.updateUser(u);
     }
 }

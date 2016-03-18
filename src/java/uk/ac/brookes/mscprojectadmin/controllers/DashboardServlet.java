@@ -38,7 +38,7 @@ public class DashboardServlet extends HttpServlet {
         try {
             dashboardURL = dashControlerHelper.getDashboardFromUserOccupation(u);
         } catch (SQLException ex) {
-            Logger.getLogger(EditViewProfileServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DashboardServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         request.getRequestDispatcher(dashboardURL).forward(request, response);

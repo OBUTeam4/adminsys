@@ -1,6 +1,12 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package uk.ac.brookes.mscprojectadmin.controllers;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,13 +19,19 @@ import javax.servlet.http.HttpSession;
 import uk.ac.brookes.mscprojectadmin.beans.User;
 import uk.ac.brookes.mscprojectadmin.helpers.ProfileControlerHelper;
 
-@WebServlet(name = "EditViewProfileServlet", urlPatterns = {"/auth/profile"})
+/**
+ *
+ * @author Quentin
+ */
+@WebServlet(name = "EditViewProfileServlet", urlPatterns = {"/auth/profile/"})
 public class EditViewProfileServlet extends HttpServlet {
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String profileURL = "";
+       
+         String profileURL = "";
         // recuperation phone Number depuis la session
         HttpSession session = request.getSession();
         User u = (User) session.getAttribute("user");
@@ -48,13 +60,16 @@ public class EditViewProfileServlet extends HttpServlet {
         // frwd req and resp
 
         request.getRequestDispatcher(profileURL).forward(request, response);
+        
     }
 
+  
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        this.getServletContext().getRequestDispatcher("/jsp/auth/profile.jsp").forward(request, response);
+        
     }
+
+   
 
 }

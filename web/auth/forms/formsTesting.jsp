@@ -26,7 +26,7 @@
             <a href="<%=application.getContextPath()%>/auth/forms/finalReportAssessment.jsp"> Final report Assessment</a> </br>
             <a href="<%=application.getContextPath()%>/auth/forms/shortPaperAssessment.jsp"> Short paper Assessment</a> </br>
             <a href="<%=application.getContextPath()%>/auth/forms/feedbacks.jsp"> PRESENTATION/DEMONSTRATION & FINAL REPORT – QUALITATIVE STUDENT FEEDBACK</a> </br>
-
+<a href="<%=application.getContextPath()%>/auth/forms/registrationForm.jsp"> registration form </a> </br>
         </div>
     </body>
 </html>

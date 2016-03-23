@@ -29,11 +29,11 @@
                     <div class="col-sm-8 ">
 
                         <ul>
-                            <li><a class="btn btn-info" href="<%=application.getContextPath()%>/">Dissertation Registration</a></li>
-                            <li><a class="btn btn-info" href="<%=application.getContextPath()%>/">Proposal </a></li>
-                            <li><a class="btn btn-info" href="<%=application.getContextPath()%>/">Demonstration and Presentation </a></li>
-                            <li><a class="btn btn-info" href="<%=application.getContextPath()%>/">Final Report </a></li>
-                            <li><a class="btn btn-info" href="<%=application.getContextPath()%>/">Short Paper </a></li>
+                            <li><a class="" href="<%=application.getContextPath()%>/"> Registration Forms <span class="badge">5</span> </a> </li>
+                            <li><a class="" href="<%=application.getContextPath()%>/">Proposal </a> <span class="badge">5</span> </li>
+                            <li><a class="" href="<%=application.getContextPath()%>/">Demonstration and Presentation </a> <span class="badge">5</span> </li>
+                            <li><a class="" href="<%=application.getContextPath()%>/">Final Report </a> <span class="badge">5</span> </li>
+                            <li><a class="" href="<%=application.getContextPath()%>/">Short Paper </a> <span class="badge">5</span> </li>
 
                         </ul>
 

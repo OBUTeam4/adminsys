@@ -6,7 +6,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Dashboard</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/includes/css/header.css">
+        <link rel="stylesheet" href="<%=application.getContextPath()%>/includes/css/header.css">
         <link rel="stylesheet" href="<%=application.getContextPath()%>/includes/css/default.css">
     </head>
     <body>
@@ -22,7 +22,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-sm-8 ">
-                        <p> Not Submitted Yet! <strong> ${studentRegistrationForm} </strong>	</p>
+                        <a href="<%=application.getContextPath()%>${studentRegistrationFormURL}"> ${studentRegistrationFormText} </a>
                     </div>
                 </div>
             </div>

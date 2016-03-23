@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package uk.ac.brookes.mscprojectadmin.controllers;
+package uk.ac.brookes.mscprojectadmin.controllers.dashboards;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -41,6 +41,17 @@ public class DashboardServlet extends HttpServlet {
             Logger.getLogger(DashboardServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        if(u.getOccupation().equals("student")){
+            
+            // check if existing registration in db
+            String addRegistrationFormURL = "/auth/addRegistrationForm";
+            String addRegistrationFormText= "Registration Form not submitted yet!";
+            request.setAttribute("studentRegistrationFormURL", addRegistrationFormURL);
+            request.setAttribute("studentRegistrationFormText", addRegistrationFormText);
+            // else display link
+            
+        }
+        
         request.getRequestDispatcher(dashboardURL).forward(request, response);
     }
 

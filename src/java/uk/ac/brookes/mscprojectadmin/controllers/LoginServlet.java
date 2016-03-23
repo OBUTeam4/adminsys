@@ -60,13 +60,18 @@ public class LoginServlet extends HttpServlet {
                 registered = lch.isRegistered(user);
                 //System.out.println("3");
                 if (registered) { // Login successful
-                    nextPage = "/auth/dashboards" + lch.dashboardURL(user);
+                    //nextPage = "/auth/dashboards" + lch.dashboardURL(user);
+                    
+                    // nextPage is dashboard servlet
+                    nextPage = "/auth/dashboard";
                     request.getSession().setAttribute("user", user);
                     System.out.println("4");
                 } else {
                     errors.put("result", "Your ID number or password is incorrect, or you're not registered yet, please try again.");
                     request.setAttribute("errors", errors);
-                    nextPage = "/common/login.jsp";
+                    //nextPage = "/common/login.jsp";
+                    // nextPage is login servlet
+                    nextPage = "/login";
                     System.out.println("5");
                 }
             } catch (SQLException ex) {
@@ -76,12 +81,16 @@ public class LoginServlet extends HttpServlet {
             //result = "Your username or password is not valid.";
             //request.setAttribute("result", result);
             request.setAttribute("errors", errors);
-            nextPage = "/common/login.jsp";
+            nextPage = "/login";
             System.out.println("6");
         }
         System.out.println("Login Successful");
-        RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
-        dispatcher.forward(request, response);
+
+        // redirection to nextPage 
+        response.sendRedirect(request.getContextPath() + nextPage);
+
+       // RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
+       // dispatcher.forward(request, response);
     }
 
 }

@@ -16,9 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import uk.ac.brookes.mscprojectadmin.beans.User;
-import uk.ac.brookes.mscprojectadmin.dao.UserDAO;
 import uk.ac.brookes.mscprojectadmin.helpers.LoginControlerHelper;
 import uk.ac.brookes.mscprojectadmin.helpers.RegisterControlerHelper;
 
@@ -41,13 +39,13 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // inputs validation 
         String result, nextPage;
         nextPage = null;
         String alert;
         Map<String, String> errors = new HashMap<>();
         RegisterControlerHelper registerControlerHelper = new RegisterControlerHelper();
 
+        // retrieve all inputs from register.jsp
         String firstname = request.getParameter("firstname").trim();
         String lastname = request.getParameter("lastname").trim();
         String emailAddress = request.getParameter("email").trim();
@@ -58,6 +56,7 @@ public class RegisterServlet extends HttpServlet {
         String courseTitle = request.getParameter("courseTitle").trim();
         String courseMode = request.getParameter("courseMode").trim();
 
+        // inputs validation 
         errors = registerControlerHelper.validateRegisterDetails(idNumber, emailAddress, firstname, lastname, courseTitle, courseCode, courseMode, password, confirm);
      
         // inputs are all correct
@@ -88,8 +87,8 @@ public class RegisterServlet extends HttpServlet {
                     request.getSession().setAttribute("user", user);
 
                     // redirection
-                    //nextPage = "/dashboards" + lch.dashboardURL(user);
-                    this.getServletContext().getRequestDispatcher("/auth/dashboards/studdash.jsp").forward(request, response);
+                    response.sendRedirect(request.getContextPath() + "/auth/dashboard");
+                    //this.getServletContext().getRequestDispatcher("/auth/dashboard/").forward(request, response);
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -103,9 +102,11 @@ public class RegisterServlet extends HttpServlet {
 
             result = "Registering fail...";
 
+            // show errors
             request.setAttribute("errors", errors);
             request.setAttribute("result", result);
 
+            // stay on same page
             this.getServletContext().getRequestDispatcher("/common/register.jsp").forward(request, response);
         }
     }

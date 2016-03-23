@@ -26,6 +26,7 @@
             <h1>Proposal Assessment (10% of mark) </h1>
             <p> To be completed by supervisor and returned as feedback to student: </p>
 
+            <form>
             <div class="panel-group">
 
                 <div class="panel panel-default">
@@ -177,6 +178,13 @@
                 </div>
 
             </div>
+            
+            <input type="submit" value="Submit" class="btn btn-default"  />
+                <br/>
+                <br/>
+                <br/>
+                
+        </form>
         </div>
     </body>
 </html>

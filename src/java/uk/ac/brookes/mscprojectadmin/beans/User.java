@@ -9,10 +9,11 @@ package uk.ac.brookes.mscprojectadmin.beans;
  *
  * @author oussamak
  */
+
 public class User {
 
-    private String username;
     private String idNumber;
+    private String username;
     private String firstName;
     private String lastName;
     private String courseCode;
@@ -27,10 +28,18 @@ public class User {
 
     }
 
-    public User(String idNumber, String password) {
+    public User(String idNumber, String username, String firstName, String lastName, String courseCode, String courseTitle, String courseMode, String password, String email, boolean access, String occupation) {
         this.idNumber = idNumber;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.courseCode = courseCode;
+        this.courseTitle = courseTitle;
+        this.courseMode = courseMode;
         this.password = password;
-        //this.email = email;
+        this.email = email;
+        this.access = access;
+        this.occupation = occupation;
     }
 
     public String getUsername() {

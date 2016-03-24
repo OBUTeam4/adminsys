@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import uk.ac.brookes.mscprojectadmin.beans.User;
 import uk.ac.brookes.mscprojectadmin.tools.DBConnection;
 
@@ -136,7 +138,7 @@ public class UserDAO {
     public boolean updateUser(User user) throws SQLException {
         boolean updated = false;
 
-        String updateQuery = "UPDATE user SET occupation = " + user.getOccupation() + " WHERE `idNumber` = " + user.getIdNumber() ;
+        String updateQuery = "UPDATE user SET occupation = " + user.getOccupation() + " WHERE `idNumber` = " + user.getIdNumber();
         System.out.println("Updating user");
         System.out.println(updateQuery);
 
@@ -185,6 +187,55 @@ public class UserDAO {
     private void createConnection() {
         connect = DBConnection.getInstance();
         con = connect.getConnection();
+    }
+
+    // return assesors, supervisor, leader
+    public List<User> getStaffMembersWithoutAdmin() throws SQLException {
+        List<User> listing = new ArrayList<User>();
+        Statement statement = con.createStatement();
+        final String query = "SELECT `idNumber`, `fName`,`lName`,`occupation` FROM `user` WHERE `occupation` != 'student' AND `occupation` != 'administrator' ";
+        ResultSet rs = statement.executeQuery(query);
+        while (rs.next()) {
+            User u = new User();
+            u.setIdNumber(rs.getString("idNumber"));
+            u.setFirstName(rs.getString("fName"));
+            u.setLastName(rs.getString("lName"));
+            u.setOccupation(rs.getString("occupation"));
+            listing.add(u);
+        }
+        return listing;
+    }
+
+    public List<User> getSupervisors() throws SQLException {
+        List<User> listing = new ArrayList<User>();
+        Statement statement = con.createStatement();
+        final String query = "SELECT * FROM `user` WHERE `isSupervisor` = true ";
+        ResultSet rs = statement.executeQuery(query);
+        while (rs.next()) {
+            User u = new User();
+            u.setIdNumber(rs.getString("idNumber"));
+            u.setFirstName(rs.getString("fName"));
+            u.setLastName(rs.getString("lName"));
+            u.setOccupation(rs.getString("occupation"));
+            listing.add(u);
+        }
+        return listing;
+    }
+
+    public List<User> getAssessors() throws SQLException {
+        List<User> listing = new ArrayList<User>();
+        Statement statement = con.createStatement();
+        final String query = "SELECT * FROM `user` WHERE `isAssessor` = true ";
+        ResultSet rs = statement.executeQuery(query);
+        while (rs.next()) {
+            User u = new User();
+            u.setIdNumber(rs.getString("idNumber"));
+            u.setFirstName(rs.getString("fName"));
+            u.setLastName(rs.getString("lName"));
+            u.setOccupation(rs.getString("occupation"));
+            listing.add(u);
+        }
+        return listing;
     }
 
 }

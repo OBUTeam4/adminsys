@@ -34,7 +34,7 @@
                             <li><a class="" href="<%=application.getContextPath()%>/">Demonstration and Presentation </a> <span class="badge">5</span> </li>
                             <li><a class="" href="<%=application.getContextPath()%>/">Final Report </a> <span class="badge">5</span> </li>
                             <li><a class="" href="<%=application.getContextPath()%>/">Short Paper </a> <span class="badge">5</span> </li>
-
+                            <li><a class="" href="<%=application.getContextPath()%>/">Turnitin Checks </a> <span class="badge">5</span> </li>
                         </ul>
 
                     </div>

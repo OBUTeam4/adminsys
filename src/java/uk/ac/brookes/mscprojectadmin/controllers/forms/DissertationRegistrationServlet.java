@@ -21,8 +21,8 @@ import uk.ac.brookes.mscprojectadmin.helpers.FormsControlerHelper;
  *
  * @author Quentin
  */
-@WebServlet(name = "RegistrationFormServlet", urlPatterns = {"/auth/addRegistrationForm"})
-public class AddRegistrationFormServlet extends HttpServlet {
+@WebServlet(name = "DissertationRegistrationServlet", urlPatterns = {"/auth/dissertationRegistration"})
+public class DissertationRegistrationServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -33,16 +33,18 @@ public class AddRegistrationFormServlet extends HttpServlet {
             request.setAttribute("supervisors", formsControlerHelper.getSupervisors());
             request.setAttribute("assessors", formsControlerHelper.getAssessors());
         } catch (SQLException ex) {
-            Logger.getLogger(AddRegistrationFormServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DissertationRegistrationServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        this.getServletContext().getRequestDispatcher("/auth/forms/registrationForm.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/auth/forms/AddRegistrationForm.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        
+        
         String dissertationCode = request.getParameter("diss_mod_code").trim();
         String dissertationTitle = request.getParameter("diss_title").trim();
         String supervisor = request.getParameter("supervisor").trim();
@@ -54,6 +56,9 @@ public class AddRegistrationFormServlet extends HttpServlet {
         String hypothesis = request.getParameter("diss_hypothesis").trim();
         String deliverables = request.getParameter("diss_deliverables").trim();
 
+        FormsControlerHelper formsControlerHelper = new FormsControlerHelper();
+        formsControlerHelper.validateForm(literature, dissertationTitle, supervisor, assessor, hypothesis, subjectArea, projectAim, literature, hypothesis, deliverables);
+        
         if(assessor != supervisor){
             
         } else {

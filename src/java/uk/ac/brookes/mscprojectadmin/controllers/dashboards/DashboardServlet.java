@@ -44,7 +44,7 @@ public class DashboardServlet extends HttpServlet {
         if(u.getOccupation().equals("student")){
             
             // check if existing registration in db
-            String addRegistrationFormURL = "/auth/addRegistrationForm";
+            String addRegistrationFormURL = "/auth/dissertationRegistration";
             String addRegistrationFormText= "Registration Form not submitted yet!";
             request.setAttribute("studentRegistrationFormURL", addRegistrationFormURL);
             request.setAttribute("studentRegistrationFormText", addRegistrationFormText);

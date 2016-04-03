@@ -1,7 +1,7 @@
 <%-- 
-    Document   : ViewRegistrationForm
-    Created on : 25 mars 2016, 12:26:44
-    Author     : Quentin
+    Document   : processRegistrationPage.jsp
+    Created on : 01-Apr-2016, 14:49:04
+    Author     : oussamak
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title> View Registration Form</title>
+        <title> Registration Form</title>
         <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"> -->
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/includes/css/header.css">
@@ -20,10 +20,7 @@
 
     </head>
     <body>
-        
         <%@ include file="/includes/menu.jsp" %>  
-        
-        
+        <h2><c:out value="${success}"/></h2>
     </body>
 </html>
-

@@ -23,11 +23,11 @@ public class AdminFilter implements Filter{
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest rq = (HttpServletRequest) request;
-        if (rq.getSession().getAttribute("user") != null) {
+        /*if (rq.getSession().getAttribute("user") != null) {
             chain.doFilter(request, response);
         } else {
             request.getRequestDispatcher("/login").forward(request, response);
-        }
+        }*/
     }
 
     @Override

@@ -49,7 +49,7 @@ public class RegisterServlet extends HttpServlet {
         String firstname = request.getParameter("firstname").trim();
         String lastname = request.getParameter("lastname").trim();
         String emailAddress = request.getParameter("email").trim();
-        String idNumber = request.getParameter("idNumber").trim();
+        String userId = request.getParameter("userId").trim();
         String password = request.getParameter("password").trim();
         String confirm = request.getParameter("confirm").trim();
         String courseCode = request.getParameter("courseCode").trim();
@@ -57,17 +57,17 @@ public class RegisterServlet extends HttpServlet {
         String courseMode = request.getParameter("courseMode").trim();
 
         // inputs validation 
-        errors = registerControlerHelper.validateRegisterDetails(idNumber, emailAddress, firstname, lastname, courseTitle, courseCode, courseMode, password, confirm);
+        errors = registerControlerHelper.validateRegisterDetails(userId, emailAddress, firstname, lastname, courseTitle, courseCode, courseMode, password, confirm);
      
         // inputs are all correct
         if (errors.isEmpty()) {
             try {
                 User user = new User();
-                user.setFirstName(firstname);
-                user.setLastName(lastname);
+                user.setfName(firstname);
+                user.setlName(lastname);
                 user.setEmail(emailAddress);
                 user.setPassword(password);
-                user.setIdNumber(idNumber);
+                user.setUserId(userId);
                 user.setOccupation("student");
                 user.setCourseCode(courseCode);
                 user.setCourseMode(courseMode);
@@ -76,7 +76,7 @@ public class RegisterServlet extends HttpServlet {
                 // searching existing ID number in DB
                 if (registerControlerHelper.isRegistered(user)) {
                     System.out.println("Here");
-                    errors.put("idNumber", "ID number already in use!");
+                    errors.put("userId", "User ID already in use!");
                     request.setAttribute("errors", errors);
                     this.getServletContext().getRequestDispatcher("/common/register.jsp").forward(request, response);
                 } else {

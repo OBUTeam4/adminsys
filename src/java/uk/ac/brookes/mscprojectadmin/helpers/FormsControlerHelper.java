@@ -5,13 +5,26 @@
  */
 package uk.ac.brookes.mscprojectadmin.helpers;
 
+import java.lang.annotation.Documented;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import uk.ac.brookes.mscprojectadmin.beans.Ethics1;
+import uk.ac.brookes.mscprojectadmin.beans.Ethics2;
+import uk.ac.brookes.mscprojectadmin.beans.Event;
+import uk.ac.brookes.mscprojectadmin.beans.Project;
+import uk.ac.brookes.mscprojectadmin.beans.RegistrationForm;
+import uk.ac.brookes.mscprojectadmin.beans.Semester;
 import uk.ac.brookes.mscprojectadmin.beans.User;
+import uk.ac.brookes.mscprojectadmin.dao.DissRegistrationDAO;
 import uk.ac.brookes.mscprojectadmin.dao.UserDAO;
 
 /**
@@ -21,10 +34,13 @@ import uk.ac.brookes.mscprojectadmin.dao.UserDAO;
 public class FormsControlerHelper {
 
     UserDAO userdao;
+    DissRegistrationDAO diss;
     Map<String, String> formErrors;
 
     public FormsControlerHelper() {
         userdao = new UserDAO();
+        diss = new DissRegistrationDAO();
+        
     }
 
     public List<User> getSupervisors() throws SQLException {
@@ -34,10 +50,23 @@ public class FormsControlerHelper {
     public List<User> getAssessors() throws SQLException {
         return userdao.getAssessors();
     }
-
-    public Map validateForm(String moduleCode, String dissertationTitle, String supervisor, String assessor, String parties, String subjectArea, String aim, String literature, String hypothesis, String deliverables) {
+    
+    public Semester getDissSemester(int semesterId) throws SQLException {
+        return diss.getDissSemester(semesterId);
+    }
+    
+    public Event getRegistrationEvent(int semesterId, String flag){
+        return diss.getRegistrationEvent(semesterId, flag);
+    }
+    
+    public List<Semester> getModuleCodes(){
+        return diss.getModuleCodes();
+    }
+    
+    public Map validateRegInputs(String moduleCode, String dissertationTitle, String supervisor, String assessor, String parties, 
+                        String subjectArea, String aim, String literature, String hypothesis, String deliverables) {
+        
         formErrors = new HashMap<String, String>();
-
         try {
             checkModuleCode(moduleCode);
         } catch (Exception e) {
@@ -89,23 +118,57 @@ public class FormsControlerHelper {
         } catch (Exception e) {
             formErrors.put("diss_deliverables", e.getMessage());
         }
+        
+        try{
+            checkSupervisor(supervisor);
+        } catch (Exception e){
+            formErrors.put("supervisor", e.getMessage());
+        }
+        try{
+            checkAssessor(assessor);
+        } catch (Exception e){
+            formErrors.put("assessor", e.getMessage());
+        }
+        
+        try{
+            compareSupervisorAssessor(supervisor, assessor);
+        } catch (Exception e){
+            formErrors.put("same", e.getMessage());
+        }
 
         return formErrors;
     }
 
+    boolean checkRegSubmissionDeadline() throws ParseException{
+        Date deadline = parseStringToDate(diss.getRegistrationEvent(3, "registration").getDueDate());
+        Date today = getTodayDate();
+
+        if(deadline.after(today)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    private Date getTodayDate(){
+        return new Date();
+    }
+    
+    private Date parseStringToDate(String date) throws ParseException{
+        DateFormat originalFormat = new SimpleDateFormat("EEEE dd MMMM yyyy", Locale.ENGLISH);
+        Date newDate = originalFormat.parse(date);
+        return newDate;
+    }
     private void checkModuleCode(String courseCode) throws Exception {
-        if (courseCode != null && courseCode.trim().length() != 0) {
-            if (!courseCode.matches("^[a-zA-Z][a-zA-Z0-9_]+$")) {
-                throw new Exception("Invalid dissertation module code.");
-            }
-        } else {
-            throw new Exception("Enter a dissertation module code.");
+        if (courseCode.equals("0")){
+            throw new Exception("Choose a dissertation module code.");
         }
     }
 
     private void checkDissertationTitle(String dissertationTitle) throws Exception {
         if (dissertationTitle != null && dissertationTitle.trim().length() != 0) {
-            if (!dissertationTitle.matches("^[a-zA-Z][a-zA-Z0-9_]+$")) {
+            if (!dissertationTitle.matches("^[a-zA-Z0-9][A-Za-z\\s]+$")) {
                 throw new Exception("Invalid dissertation title.");
             }
         } else {
@@ -115,7 +178,7 @@ public class FormsControlerHelper {
 
     private void checkParties(String relatedParties) throws Exception {
         if (relatedParties.trim().length() > 0) {
-            if (!relatedParties.matches("^[a-zA-Z][a-zA-Z0-9_]+$")) {
+            if (!relatedParties.matches("^[a-zA-Z][a-zA-Z0-9\\s]+$")) {
                 throw new Exception("Invalid related parties.");
             }
         }
@@ -123,7 +186,7 @@ public class FormsControlerHelper {
 
     private void checkSubjectArea(String subjectArea) throws Exception {
         if (subjectArea != null && subjectArea.trim().length() != 0) {
-            if (!subjectArea.matches("^[a-zA-Z][a-zA-Z0-9_]+$")) {
+            if (!subjectArea.matches("^[a-zA-Z][a-zA-Z0-9\\s]+$")) {
                 throw new Exception("Invalid subject area.");
             }
         } else {
@@ -133,7 +196,7 @@ public class FormsControlerHelper {
 
     private void checkObjectives(String objectives) throws Exception {
         if (objectives != null && objectives.trim().length() != 0) {
-            if (!objectives.matches("^[a-zA-Z][a-zA-Z0-9_]+$")) {
+            if (!objectives.matches("^[a-zA-Z][a-zA-Z0-9\\s]+$")) {
                 throw new Exception("Invalid objectives");
             }
         } else {
@@ -143,7 +206,7 @@ public class FormsControlerHelper {
 
     private void checkLiterature(String literature) throws Exception {
         if (literature != null && literature.trim().length() != 0) {
-            if (!literature.matches("^[a-zA-Z][a-zA-Z0-9_]+$")) {
+            if (!literature.matches("^[a-zA-Z][a-zA-Z0-9\\s]+$")) {
                 throw new Exception("Invalid literature");
             }
         } else {
@@ -153,7 +216,7 @@ public class FormsControlerHelper {
 
     private void checkHypothesis(String hypothesis) throws Exception {
         if (hypothesis != null && hypothesis.trim().length() != 0) {
-            if (!hypothesis.matches("^[a-zA-Z][a-zA-Z0-9_]+$")) {
+            if (!hypothesis.matches("^[a-zA-Z][a-zA-Z0-9\\s]+$")) {
                 throw new Exception("Invalid hypothesis");
             }
         } else {
@@ -163,16 +226,103 @@ public class FormsControlerHelper {
 
     private void checkDeliverables(String deliverables) throws Exception {
         if (deliverables != null && deliverables.trim().length() != 0) {
-            if (!deliverables.matches("^[a-zA-Z][a-zA-Z0-9_]+$")) {
+            if (!deliverables.matches("^[a-zA-Z][a-zA-Z0-9\\s]+$")) {
                 throw new Exception("Invalid deliverables");
             }
         } else {
             throw new Exception("Enter deliverables.");
         }
     }
+    private void checkSupervisor(String supervisorId) throws Exception{
+        if(supervisorId.equals("0")){
+                throw new Exception("Choose your supervisor.");
+        }
+    }
     
-    private void checkSupervisorAssessor(String supervisorId, String assessorId) {
+    private void checkAssessor(String assessorId) throws Exception{
+        if(assessorId.equals("0")){
+            throw new Exception("Choose your assessor.");
+        }
+    }
+    private void compareSupervisorAssessor(String supervisorId, String assessorId) throws Exception {
+            
+            
+            if (supervisorId.equals(assessorId)){
+                if (!supervisorId.equals("0") && !assessorId.equals("0")){
+                    throw new Exception("Your Supervisor must not be your second assessor.");
+                }
+            }
+            
+    }
+    
+    
+    
+    
+    
+    //This function will check three things : First, compare the deadline with the submission date.
+    //Seconde, check if the student already submitted a registration form.
+    //Third, if yes it then checks the status of the approval.
+    //Two cases when the student can submit: First, when he first time register his dissertation before the deadline.
+    //Second, when his first registration has a disaproval. 
+    
+    public String canSubmit(User user) throws ParseException{
+        String message = null;
+        if(checkRegSubmissionDeadline()){ //True means submission date is valid. 
+            Project p = diss.getStudentProject(user.getUserId());
+            
+            if(p!=null){
+                System.out.println("has project");
+                String decision = diss.getRegistrationApproval(p.getRegistrationForm().getRegistrationFormId());
+                if(decision.equals("approved")){
+                    message = "You can't submit another registration as you "
+                            + "already submitted a registration form and your project is approved by the supervisor.";
+                }
+                else if(decision.equals("")){
+                    message = "You can't submit another resgistration as you already submitted your project and is waiting decision.";
+                }
+                
+            }
+            
+        }
+        else{
+            message = "You can't submit, deadline is now passed.";
+        }
+        System.out.println(message);
+        return message;
+    }
+    
+    
+    public Project getDissProject(String studentId){
+        if(studentId != null){
+            return diss.getStudentProject(studentId);
+        }
+        else{
+            return null;
+        }
         
+    }
+    
+    
+    public int addNewProjectRegistration(User student, Project p, String supervisorName, String assessorName, String moduleCode){
+        int success = diss.addProjectRegistration(student, p,supervisorName,assessorName,moduleCode);
         
+        if(success == 1){
+            System.out.println("You have done it man!!!");
+            return 1;
+        }
+        else{
+            return 0;
+        }
+        
+    }
+    
+    public static void main(String [] args) throws ParseException{
+        /*Date date = new Date();
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");*/
+        /*FormsControlerHelper forms = new FormsControlerHelper();
+        DissRegistrationDAO diss = new DissRegistrationDAO();
+        Event event = diss.getEvent(3, 2);
+        System.out.println(event.getDueDate());
+        System.out.println(forms.checkRegSubmissionDeadline(event));*/
     }
 }

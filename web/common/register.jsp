@@ -17,13 +17,13 @@
             <form method="POST"  action="register" role="form">
                 <div class="form-group">
                     <label for="firstname" >Firstname <span class="required">*</span></label>
-                    <input type="text" class="form-control" name="firstname"  value="<c:out value="${firstname}" />" />
+                    <input type="text" class="form-control" name="firstname"  value="<c:out value="${fName}" />" />
                     <span class="error"> ${errors['fname']} </span>
                 </div>
 
                 <div class="form-group">
                     <label for="lastname" >Lastname <span class="required">*</span> </label>
-                    <input type="text" class="form-control" name="lastname" value="<c:out value="${lastname}" />" />
+                    <input type="text" class="form-control" name="lastname" value="<c:out value="${lName}" />" />
                     <span class="error"> ${errors['lname']} </span>
                 </div>
 
@@ -34,9 +34,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="idNumber">Student Number <span class="required">*</span> </label>
-                    <input type="number" class="form-control" name="idNumber" value="<c:out value="${idNumber}" />" />
-                    <span class="error"> ${errors['idNumber']} </span>
+                    <label for="userId">Student Number <span class="required">*</span> </label>
+                    <input type="number" class="form-control" name="userId" value="<c:out value="${userId}" />" />
+                    <span class="error"> ${errors['userId']} </span>
                 </div>
 
                 <div class="form-group">

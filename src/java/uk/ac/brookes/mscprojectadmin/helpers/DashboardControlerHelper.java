@@ -6,8 +6,11 @@
 package uk.ac.brookes.mscprojectadmin.helpers;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
+import uk.ac.brookes.mscprojectadmin.beans.Event;
 import uk.ac.brookes.mscprojectadmin.beans.User;
+import uk.ac.brookes.mscprojectadmin.dao.DashboardDAO;
 import uk.ac.brookes.mscprojectadmin.dao.UserDAO;
 
 /**
@@ -19,9 +22,13 @@ public class DashboardControlerHelper {
     UserDAO userdao;
     String[] dashboardURLs = {"/studdash.jsp", "/supdash.jsp", "/assedash.jsp", "/admindash.jsp", "/mldash.jsp", "/eedash.jsp"};
     Map<String, String> loginErrors;
+    DashboardDAO ddao;
+    List<Event> events;
 
     public DashboardControlerHelper() {
         userdao = new UserDAO();
+        ddao = new DashboardDAO();
+        events = getUpcomingEvent(3);
     }
 
     public String getDashboardFromUserOccupation(User u) throws SQLException {
@@ -53,4 +60,25 @@ public class DashboardControlerHelper {
         }
         return profileUrl;
     }
+    private List<Event> getUpcomingEvent(int semId){
+        events = ddao.getDissSemesterEvents(3);
+        return events;
+    }
+    
+    public Event getAnEvent(String flag){
+        Event e = null;
+        for (int i=0; i<events.size(); i++){
+            e = events.get(i);
+            if (e.getFlag().equals(flag)){
+                return e;
+                
+            }
+        }
+        return e;
+    }
+    
+    
+    
+    
+    
 }

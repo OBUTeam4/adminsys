@@ -12,38 +12,64 @@ package uk.ac.brookes.mscprojectadmin.beans;
 
 public class User {
 
-    private String idNumber;
-    private String username;
-    private String firstName;
-    private String lastName;
+    private String userId;
+    private String fName;
+    private String lName;
+    private String initial;
     private String courseCode;
     private String courseTitle;
     private String courseMode;
     private String password;
     private String email;
-    private boolean access;
     private String occupation;
 
     public User() {
 
     }
+    
+    public User(String userId){
+        this.userId = userId;
+    }
 
-    public User(String idNumber, String username, String firstName, String lastName, String courseCode, String courseTitle, String courseMode, String password, String email, boolean access, String occupation) {
-        this.idNumber = idNumber;
-        this.username = username;
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(String userId, String fName, String lName, String initial, String courseCode, String courseTitle, String courseMode, String password, String email, String occupation) {
+        this.userId = userId;
+        this.fName = fName;
+        this.lName = lName;
+        this.initial = initial;
         this.courseCode = courseCode;
         this.courseTitle = courseTitle;
         this.courseMode = courseMode;
         this.password = password;
         this.email = email;
-        this.access = access;
         this.occupation = occupation;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserId() {
+        return userId;
+    }
+
+    public String getfName() {
+        return fName;
+    }
+
+    public String getlName() {
+        return lName;
+    }
+
+    public String getInitial() {
+        return initial;
+    }
+
+    public String getCourseCode() {
+        return courseCode;
+    }
+
+    public String getCourseTitle() {
+        return courseTitle;
+    }
+
+    public String getCourseMode() {
+        return courseMode;
     }
 
     public String getPassword() {
@@ -58,20 +84,32 @@ public class User {
         return occupation;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getLastName() {
-        return lastName;
+    public void setfName(String fName) {
+        this.fName = fName;
     }
 
-    public String getIdNumber() {
-        return idNumber;
+    public void setlName(String lName) {
+        this.lName = lName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setInitial(String initial) {
+        this.initial = initial;
+    }
+
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
+    }
+
+    public void setCourseTitle(String courseTitle) {
+        this.courseTitle = courseTitle;
+    }
+
+    public void setCourseMode(String courseMode) {
+        this.courseMode = courseMode;
     }
 
     public void setPassword(String password) {
@@ -85,49 +123,10 @@ public class User {
     public void setOccupation(String occupation) {
         this.occupation = occupation;
     }
+    
+    
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+    
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setIdNumber(String idNumber) {
-        this.idNumber = idNumber;
-    }
-
-    public String getCourseCode() {
-        return courseCode;
-    }
-
-    public void setCourseCode(String courseCode) {
-        this.courseCode = courseCode;
-    }
-
-    public String getCourseTitle() {
-        return courseTitle;
-    }
-
-    public void setCourseTitle(String courseTitle) {
-        this.courseTitle = courseTitle;
-    }
-
-    public String getCourseMode() {
-        return courseMode;
-    }
-
-    public void setCourseMode(String courseMode) {
-        this.courseMode = courseMode;
-    }
-
-    public boolean getAccess() {
-        return access;
-    }
-
-    public void setAccess(boolean access) {
-        this.access = access;
-    }
-
+    
 }

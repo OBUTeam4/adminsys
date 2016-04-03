@@ -44,10 +44,10 @@ public class EditViewProfileServlet extends HttpServlet {
         }
         
           // display infos
-        request.setAttribute("lastname", u.getLastName());
-        request.setAttribute("firstname", u.getFirstName());
+        request.setAttribute("lastname", u.getlName());
+        request.setAttribute("firstname", u.getfName());
         request.setAttribute("email", u.getEmail());
-        request.setAttribute("IdNumber", u.getIdNumber());
+        request.setAttribute("IdNumber", u.getUserId());
         request.setAttribute("occupation", u.getOccupation());
 
         // display courseCode/Mode/title if user is a student

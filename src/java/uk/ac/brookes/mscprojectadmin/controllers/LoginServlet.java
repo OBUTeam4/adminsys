@@ -41,21 +41,20 @@ public class LoginServlet extends HttpServlet {
 
         //System.out.println("1");
         Boolean registered = false; // Flag for user existence, false means user dosen't exist in the system
-        String result = ""; //Result of not valid idnumber or password, user not registred 
         String nextPage = null; //Url of next page to be displayed 
         LoginControlerHelper lch = new LoginControlerHelper();
         Map<String, String> errors = new HashMap<String, String>();
         //System.out.println("2");
 
-        String idNumber = request.getParameter("idNumber").trim();
+        String userId = request.getParameter("userId").trim();
         String password = request.getParameter("password").trim();
         //user = new User(request.getParameter("username"),request.getParameter("password"));
-        errors = lch.validateLoginDetails(idNumber, password);
+        errors = lch.validateLoginDetails(userId, password);
         //System.out.println("3");
         if (errors.isEmpty()) {
             try {
                 User user = new User();
-                user.setIdNumber(idNumber);
+                user.setUserId(userId);
                 user.setPassword(password);
                 registered = lch.isRegistered(user);
                 //System.out.println("3");
@@ -67,7 +66,7 @@ public class LoginServlet extends HttpServlet {
                     request.getSession().setAttribute("user", user);
                     System.out.println("4");
                 } else {
-                    errors.put("result", "Your ID number or password is incorrect, or you're not registered yet, please try again.");
+                    errors.put("result", "Your User ID or password is incorrect, or you're not registered yet, please try again.");
                     request.setAttribute("errors", errors);
                     //nextPage = "/common/login.jsp";
                     // nextPage is login servlet

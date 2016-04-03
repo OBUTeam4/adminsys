@@ -24,9 +24,9 @@
             <form method="POSt" action="login">
 
                 <div class="form-group">
-                    <label for="idNumber">ID Number <span class="required">*</span> </label>
-                    <input type="text" name="idNumber" class="form-control" value="<c:out value="${idNumber}" />" />
-                    <span class="error"> ${errors['idNumber']} </span>
+                    <label for="uderId">User ID <span class="required">*</span> </label>
+                    <input type="text" name="userId" class="form-control" value="<c:out value="${userId}" />" />
+                    <span class="error"> ${errors['userId']} </span>
                 </div>
 
                 <div class="form-group">

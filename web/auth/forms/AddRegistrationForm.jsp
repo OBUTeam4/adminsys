@@ -32,75 +32,97 @@
                 <li><a data-toggle="tab" href="#menu2">Ethics 2</a></li>
             </ul>
 
-            <p> Complete the registration form and the ethic form and then submit.</p>
             <div class="tab-content">
                 <div id="home" class="tab-pane fade in active">
 
                     <div class="container">
-                        <h3>Registration form</h3>
-                        <form method="POST"  action="register" role="form">
+                        <h3>Registration: due semester <c:out value="${semester.semesterId}" />, <c:out value="${event.dueDate}" /></h3>
+                        <form method="POST"  action="dissertationRegistration?reg=1" role="form">
+                            <div class="form-group">
+                                <label>Start Date: <c:out value="${semester.startDate}" /></label> 
+                                <label>Completion Date: <c:out value="${semester.completionDate}" /></label><br />
+                            </div>
+                            <hr>
                             <div class="form-group">
                                 <label for="diss_mod_code" >Dissertation Module Code: <span class="required">*</span></label>
-                                <input type="text" class="form-control" name="diss_mod_code"  value="<c:out value="${diss_mod_code}" />"  placeholder="P0099?" />
+                                <c:out value="${dissertationCode}" />
+                                <select name="diss_mod_code" class="form-control">
+                                    <option value="0">Select ...</option>
+                                    <c:forEach items="${codes}" var="semester">
+                                        <option value="<c:out value="${semester.moduleCode}" />"><c:out value="${semester.moduleCode}" /></option>
+                                    </c:forEach>
+                                </select>        
                                 <span class="error"> ${errors['diss_mod_code']} </span>
                             </div>
 
                             <div class="form-group">
                                 <label for="diss_title" >Dissertation Title: <span class="required">*</span> </label>
-                                <input type="text" class="form-control" name="diss_title" value="<c:out value="${diss_title}" />" />
+                                <input type="text" class="form-control" name="diss_title" value="<c:out value="${project.dissertationTitle}" />" />
                                 <span class="error"> ${errors['diss_title']} </span>
                             </div>
 
                             <div class="form-group">
                                 <label for="supervisor">Supervisor  <span class="required">*</span> </label>
-                                <c:out value="${supervisor}" />
                                 <select name="supervisor" class="form-control">
+                                    <option value="0">Select ...</option>
                                     <c:forEach items="${supervisors}" var="supervisorList">
-                                        <option value="<c:out value="${supervisorList.idNumber}" />"><c:out value="${supervisorList.firstName} ${supervisorList.lastName}" /></option>
+                                        <option value="<c:out value="${supervisorList.fName} ${supervisorList.lName}" />"><c:out value="${supervisorList.fName} ${supervisorList.lName}" /></option>
                                     </c:forEach>
                                 </select>
-                                <span class="error"> ${errors['supervisor']} </span>
+                                <span class="error"> ${errors['supervisor']} </span><span class="error"> ${errors['same']} </span>
+                            </div>
+                            <div class="form-group">
+                                <label for="assessor">Second Assessor  <span class="required">*</span> </label>
+                                <select name="assessor" class="form-control">
+                                    <option value="0">Select ...</option>
+                                    <c:forEach items="${assessors}" var="assessorList">
+                                        <option value="<c:out value="${assessorList.fName} ${assessorList.lName}" />"><c:out value="${assessorList.fName} ${assessorList.lName}" /></option>
+                                    </c:forEach>
+                                </select>
+                                <span class="error"> ${errors['assessor']} </span>
                             </div>
 
                             <div class="form-group">
                                 <label for="diss_parties">Related Parties: <span class="required">*</span> </label>
-                                <input type="text" class="form-control" name="diss_parties" value="<c:out value="${diss_parties}" />" />
+                                <input type="text" class="form-control" name="diss_parties" value="<c:out value="${project.relatedParties}" />" />
                                 <span class="error"> ${errors['diss_parties']} </span>
                             </div>
 
                             <div class="form-group">
                                 <label for="subjectArea">Subject area and relationship to course <span class="required">*</span> </label>
-                                <input type="text" class="form-control" name="subjectArea" value="<c:out value="${subjectArea}" />" />
+                                <input type="text" class="form-control" name="subjectArea" value="<c:out value="${project.subjectArea}" />" />
                                 <span class="error"> ${errors['subjectArea']} </span>
                             </div>
 
                             <div class="form-group">
                                 <label for="projectAim">Project aim and objectives <span class="required">*</span> </label>
-                                <input type="text" class="form-control" name="projectAim" value="<c:out value="${projectAim}" />"  />
+                                <input type="text" class="form-control" name="projectAim" value="<c:out value="${project.projectAim}" />"  />
                                 <span class="error"> ${errors['projectAim']} </span>
                             </div>
 
                             <div class="form-group">
                                 <label for="literature">Literature influencing work: <span class="required">*</span> </label>
-                                <input type="text" class="form-control" name="literature" value="<c:out value="${literature}" />" />
+                                <input type="text" class="form-control" name="literature" value="<c:out value="${project.literature}" />" />
                                 <span class="error"> ${errors['literature']} </span>
                             </div>
 
                             <div class="form-group">
                                 <label for="diss_hypothesis">Hypothesis, proposition, research question or outline specification:<span class="required">*</span> </label>
-                                <input type="text" class="form-control" name="diss_hypothesis" value="<c:out value="${diss_hypothesis}" />" placeholder="" />
+                                <input type="text" class="form-control" name="diss_hypothesis" value="<c:out value="${project.hypothesis}" />" placeholder="" />
                                 <span class="error"> ${errors['diss_hypothesis']} </span>
                             </div>
 
                             <div class="form-group">
                                 <label for="diss_deliverables">Proposed Deliverables: <span class="required">*</span> </label>
-                                <input type="text" class="form-control" name="diss_deliverables" value="<c:out value="${diss_deliverables}" />" />
+                                <input type="text" class="form-control" name="diss_deliverables" value="<c:out value="${project.deliverables}" />" />
                                 <span class="error"> ${errors['diss_deliverables']} </span>
                             </div>
 
-
+                            <input   class="btn btn-default" type="submit" name="Submit" value="submit"/>
+                            <input   class="btn btn-default" type="reset" name="Cancel"/>
 
                             <p class="${empty errors ? 'success' : 'error'}">${result}</p>	
+                            
 
                         </form>
 
@@ -108,23 +130,7 @@
 
 
                 </div>
-                <div id="menu1" class="tab-pane fade">
-                    <h3>Ethics 1</h3>
-                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                </div>
-                <div id="menu2" class="tab-pane fade">
-                    <h3>Ethics 2</h3>
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-                </div>
-
-
-
             </div>
-
-
-
-            <input   class="btn btn-default" type="submit" name="Submit" value="submit"/>
-            <input   class="btn btn-default" type="reset" name="Cancel"/>
 
         </div>
 

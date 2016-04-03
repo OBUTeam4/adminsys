@@ -10,10 +10,10 @@ public class DBConnection {
     private DBConnection(){
         // JDBC driver name and database URL
         String dbDriver = "com.mysql.jdbc.Driver";
-        String url = "jdbc:mysql://localhost:3306/mscproject_adminsys_db";
+        String url = "jdbc:mysql://localhost:3306/mscprojectadmin";
         //  Database credentials
-        String username= "team4";
-        String password = "team4";
+        String username= "root";
+        String password = "root";
         
         try{
             Class.forName( dbDriver);

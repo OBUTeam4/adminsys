@@ -38,7 +38,7 @@ public class RegisterControlerHelper {
         return userExist;
     }
 
-    public Map validateRegisterDetails(String idNumber, String emailAddress, String firstname, String lastname, String courseTitle, String courseCode, String courseMode, String password, String confirm) {
+    public Map validateRegisterDetails(String userId, String emailAddress, String firstname, String lastname, String courseTitle, String courseCode, String courseMode, String password, String confirm) {
         registerErrors = new HashMap<String, String>();
         try {
             checkEmail(emailAddress);
@@ -78,9 +78,9 @@ public class RegisterControlerHelper {
         }
 
         try {
-            checkIDNumber(idNumber);
+            checkUserId(userId);
         } catch (Exception e) {
-            registerErrors.put("idNumber", e.getMessage());
+            registerErrors.put("userId", e.getMessage());
         }
 
         try {
@@ -92,15 +92,15 @@ public class RegisterControlerHelper {
         return registerErrors;
     }
 
-    private void checkIDNumber(String idNumber) throws Exception {
-        if (idNumber != null) {
+    private void checkUserId(String userId) throws Exception {
+        if (userId != null) {
             // regex digits
-            if (!idNumber.matches("-?\\d+(\\.\\d+)?") || idNumber.length() < 8) {
+            if (!userId.matches("-?\\d+(\\.\\d+)?") || userId.length() < 8) {
                 // {
-                throw new Exception("Invalid ID number.");
+                throw new Exception("Invalid User ID.");
             }
         } else {
-            throw new Exception("ID number required.");
+            throw new Exception("User ID required.");
         }
     }
 

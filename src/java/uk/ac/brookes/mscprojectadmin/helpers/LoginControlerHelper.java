@@ -31,7 +31,7 @@ public class LoginControlerHelper {
             System.out.println("Check1 OK");
 
         } catch (Exception e) {
-            loginErrors.put("idNumber", e.getMessage());
+            loginErrors.put("userId", e.getMessage());
         }
 
         try {
@@ -82,15 +82,15 @@ public class LoginControlerHelper {
         return url;
     }
 
-    private void checkIDNumber(String idNumber) throws Exception {
-        if (idNumber != null) {
+    private void checkIDNumber(String userId) throws Exception {
+        if (userId != null) {
             // regex digits
-            if (!idNumber.matches("[a-zA-Z]?-?\\d+(\\.\\d+)?") || idNumber.length() < 8) {
+            if (!userId.matches("[a-zA-Z]?-?\\d+(\\.\\d+)?") || userId.length() < 8) {
                 // {
-                throw new Exception("ID number error.");
+                throw new Exception("User ID error.");
             }
         } else {
-            throw new Exception("ID number required.");
+            throw new Exception("User ID required.");
         }
     }
 

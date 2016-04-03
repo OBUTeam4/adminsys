@@ -4,7 +4,7 @@
 
     <h1>
         <% if (session.getAttribute("user") != null) {%>
-        Connected as, <a href="<%=application.getContextPath()%>/auth/profile"> <c:out value="${user.getFirstName()}"/> <c:out value="${user.getLastName()}"/> (<c:out value="${user.getIdNumber()})" /> </a> !
+        Connected as, <a href="<%=application.getContextPath()%>/auth/profile"> <c:out value="${user.getfName()}"/> <c:out value="${user.getlName()}"/> (<c:out value="${user.getUserId()})" /> </a> !
         <c:out value="${user.getOccupation()}" />
         <% } else {%>
         MSc Projects 2016

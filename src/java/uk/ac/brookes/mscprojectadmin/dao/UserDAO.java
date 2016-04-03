@@ -18,17 +18,11 @@ import uk.ac.brookes.mscprojectadmin.tools.DBConnection;
  *
  * @author oussamak
  */
-public class UserDAO {
-
-    DBConnection connect;
-    Connection con;
-    Statement stmt;
-    ResultSet rs;
-    String query;
+public class UserDAO extends ClassDAO{
 
     public UserDAO() {
-        createConnection();
         // System.out.println(con);
+        super();
     }
 
     /*
@@ -37,7 +31,7 @@ public class UserDAO {
      */
     public boolean findUserByLoginDetails(User user) throws SQLException {
         boolean found = false;
-        query = "select * from user where idNumber = '" + user.getIdNumber() + "' and pw = '" + user.getPassword() + "'";
+        query = "select * from user where userId = '" + user.getUserId()+ "' and password = '" + user.getPassword() + "'";
         System.out.println("begining");
         try {
             stmt = con.createStatement();
@@ -47,9 +41,15 @@ public class UserDAO {
             if (rs.next()) {
                 System.out.println("Next OK");
                 found = true;
-                setUserData(user, rs.getString("fName"), rs.getString("lName"), rs.getString("email"), rs.getString("occupation"), rs.getString("courseCode"),
-                        rs.getString("courseMode"),
-                        rs.getString("courseTitle"));
+                String occupation = setUserOccupation(rs.getInt("isSupervisor"), 
+                        rs.getInt("isModuleLeader"), rs.getInt("isExaminer"),
+                        rs.getInt("isAdministrator"), rs.getInt("isAssessor"),
+                        rs.getInt("isStudent"));
+                
+                setUserData(user, rs.getString("fName"), rs.getString("lName"), 
+                        rs.getString("initial"), rs.getString("email"), 
+                        rs.getString("courseCode"),rs.getString("courseMode"),
+                        rs.getString("courseTitle"), occupation);
                 System.out.println("after ");
 
             }
@@ -66,7 +66,7 @@ public class UserDAO {
 
     public boolean findUserByID(User user) throws SQLException {
         boolean found = false;
-        query = "select * from user where idNumber = '" + user.getIdNumber() + "'";
+        query = "select * from user where userId = '" + user.getUserId()+ "'";
         System.out.println("begining");
         try {
             stmt = con.createStatement();
@@ -76,9 +76,15 @@ public class UserDAO {
             if (rs.next()) {
                 System.out.println("Next OK");
                 found = true;
-                setUserData(user, rs.getString("fName"), rs.getString("lName"), rs.getString("email"), rs.getString("occupation"), rs.getString("courseCode"),
-                        rs.getString("courseMode"),
-                        rs.getString("courseTitle"));
+                String occupation = setUserOccupation(rs.getInt("isSupervisor"), 
+                        rs.getInt("isModuleLeader"), rs.getInt("isExaminer"),
+                        rs.getInt("isAdministrator"), rs.getInt("isAssessor"),
+                        rs.getInt("isStudent"));
+                
+                setUserData(user, rs.getString("fName"), rs.getString("lName"), 
+                        rs.getString("initial"), rs.getString("email"), 
+                        rs.getString("courseCode"),rs.getString("courseMode"),
+                        rs.getString("courseTitle"), occupation);
                 System.out.println("after ");
 
             }
@@ -91,10 +97,43 @@ public class UserDAO {
         }
         return found;
     }
-
-    private void setUserData(User user, String fName, String lName, String email, String occupation, String courseCode, String courseMode, String courseTitle) {
-        user.setFirstName(fName);
-        user.setLastName(lName);
+    
+    private String setUserOccupation(int a,int b, int c, int d, int e, int f){
+     String occupation = null;
+        if(a == 1){ // User is a supervisor
+            occupation = "supervisor";
+        }
+        else if (b == 1){ // User is module leader
+            occupation = "module leader";
+        }
+        else if (c == 1){ //User is an examiner
+            occupation = "examiner";
+        }
+        else if (d == 1){ //User is an administrator
+            occupation = "administrator";
+        }
+        else if (e == 1){ // User is an assessor
+            occupation = "assessor";
+        }
+        else if (f == 1){
+            occupation = "student";
+        }
+     return occupation;
+    }
+    
+    private String getUserOccupationColumn(String occupation){
+        String column = null;
+        if (occupation.equals("student")){
+            column = "isStudent";
+        }
+        return column;
+    }
+    private void setUserData(User user, String fName, String lName, String initial, 
+            String email,  String courseCode, String courseMode, String courseTitle,
+            String occupation) {
+        user.setfName(fName);
+        user.setlName(lName);
+        user.setInitial(initial);
         user.setEmail(email);
         user.setOccupation(occupation);
         user.setCourseCode(courseCode);
@@ -105,16 +144,17 @@ public class UserDAO {
     // add USER
     public boolean addUser(User user) throws SQLException {
         boolean added = false;
-        String insertQuery = "INSERT INTO `User`(`IdNumber`, `fName`, `lName`, `courseCode`, `courseTitle`, `courseMode`, `email`, `pw`, `occupation`) "
-                + "VALUES ( '" + user.getIdNumber() + "', "
-                + "'" + user.getFirstName() + "', "
-                + "'" + user.getLastName() + "', "
+        String insertQuery = "INSERT INTO `user`(`userId`, `fName`, `lName`, `initial`, `email`, `password`, `courseCode`, `courseTitle`, `courseMode`, `"+getUserOccupationColumn(user.getOccupation())+"`)"
+                + "VALUES ( '" + user.getUserId()+ "', "
+                + "'" + user.getfName()+ "', "
+                + "'" + user.getlName()+ "', "
+                + "'" + user.getInitial()+ "', "
+                + "'" + user.getEmail() + "', "
+                + "'" + user.getPassword()+ "', "
                 + "'" + user.getCourseCode() + "', "
                 + "'" + user.getCourseTitle() + "', "
-                + "'" + user.getCourseMode() + "', "
-                + "'" + user.getEmail() + "', "
-                + "'" + user.getPassword() + "', "
-                + "'" + user.getOccupation() + "'"
+                + "'" + user.getCourseMode() + "', "    
+                + "'1'"
                 + ")";
         System.out.println("Inserting a new user");
         System.out.println(insertQuery);
@@ -138,7 +178,7 @@ public class UserDAO {
     public boolean updateUser(User user) throws SQLException {
         boolean updated = false;
 
-        String updateQuery = "UPDATE user SET occupation = " + user.getOccupation() + " WHERE `idNumber` = " + user.getIdNumber();
+        String updateQuery = "UPDATE user SET occupation = " + user.getOccupation() + " WHERE `idNumber` = " + user.getUserId();
         System.out.println("Updating user");
         System.out.println(updateQuery);
 
@@ -184,10 +224,7 @@ public class UserDAO {
          */
     }
 
-    private void createConnection() {
-        connect = DBConnection.getInstance();
-        con = connect.getConnection();
-    }
+   
 
     // return assesors, supervisor, leader
     public List<User> getStaffMembersWithoutAdmin() throws SQLException {
@@ -197,9 +234,9 @@ public class UserDAO {
         ResultSet rs = statement.executeQuery(query);
         while (rs.next()) {
             User u = new User();
-            u.setIdNumber(rs.getString("idNumber"));
-            u.setFirstName(rs.getString("fName"));
-            u.setLastName(rs.getString("lName"));
+            u.setUserId(rs.getString("userId"));
+            u.setfName(rs.getString("fName"));
+            u.setlName(rs.getString("lName"));
             u.setOccupation(rs.getString("occupation"));
             listing.add(u);
         }
@@ -209,14 +246,14 @@ public class UserDAO {
     public List<User> getSupervisors() throws SQLException {
         List<User> listing = new ArrayList<User>();
         Statement statement = con.createStatement();
-        final String query = "SELECT * FROM `user` WHERE `isSupervisor` = true ";
+        final String query = "SELECT * FROM `user` WHERE `isSupervisor` = 1 ";
         ResultSet rs = statement.executeQuery(query);
         while (rs.next()) {
             User u = new User();
-            u.setIdNumber(rs.getString("idNumber"));
-            u.setFirstName(rs.getString("fName"));
-            u.setLastName(rs.getString("lName"));
-            u.setOccupation(rs.getString("occupation"));
+            u.setUserId(rs.getString("userId"));
+            u.setfName(rs.getString("fName"));
+            u.setlName(rs.getString("lName"));
+            u.setOccupation("supervisor");
             listing.add(u);
         }
         return listing;
@@ -225,17 +262,29 @@ public class UserDAO {
     public List<User> getAssessors() throws SQLException {
         List<User> listing = new ArrayList<User>();
         Statement statement = con.createStatement();
-        final String query = "SELECT * FROM `user` WHERE `isAssessor` = true ";
+        final String query = "SELECT * FROM `user` WHERE `isAssessor` = 1 ";
         ResultSet rs = statement.executeQuery(query);
         while (rs.next()) {
             User u = new User();
-            u.setIdNumber(rs.getString("idNumber"));
-            u.setFirstName(rs.getString("fName"));
-            u.setLastName(rs.getString("lName"));
-            u.setOccupation(rs.getString("occupation"));
+            u.setUserId(rs.getString("userId"));
+            u.setfName(rs.getString("fName"));
+            u.setlName(rs.getString("lName"));
+            u.setOccupation("assessor");
             listing.add(u);
         }
         return listing;
+    }
+    
+    public static void main (String [] args) throws SQLException{
+        User user = new User("15005017", "Ayoub", "Kaoui", "", "TDI", "Development Informatique", "FULL", "ak123981", "k.ayoub@ntic.com", "student");
+        UserDAO udao = new UserDAO();
+        //udao.addUser(user);
+        user = new User();
+        user.setUserId("15025017");
+        user.setPassword("123.@pol");
+        //udao.findUserByID(user);
+        udao.findUserByLoginDetails(user);
+        System.out.println(user.getOccupation());
     }
 
 }

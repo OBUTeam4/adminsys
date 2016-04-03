@@ -11,153 +11,103 @@ package uk.ac.brookes.mscprojectadmin.beans;
  */
 public class RegistrationForm {
 
-    private int registrationId;
+    private int registrationFormId;
     private String registrationDate;
-    private int supervisorId;
-    private int assessorId;
-    private int moduleLeaderId;
-    private int approvalId;
-    private int ethicsFormE1Id;
-    private int ethicsFormE2Id;
-    private int SemesterId;
+    private User supervisor;
+    private User assessor;
+    private Approval supervisorApproval;
+    private Approval moduleLeaderApproval;
+    private String status;
+    private Semester semester;
 
-    
-    public RegistrationForm(int registrationId, String registrationDate, int supervisorId, int assessorId, int moduleLeaderId, int approvalId, int ethicsFormE1Id, int ethicsFormE2Id, int SemesterId) {
-        this.registrationId = registrationId;
+    public RegistrationForm(int registrationFormId, String registrationDate, User supervisor, User assessor,
+            Approval supervisorApproval, Approval moduleLeaderApproval, String status, Semester semester) {
+        this.registrationFormId = registrationFormId;
         this.registrationDate = registrationDate;
-        this.supervisorId = supervisorId;
-        this.assessorId = assessorId;
-        this.moduleLeaderId = moduleLeaderId;
-        this.approvalId = approvalId;
-        this.ethicsFormE1Id = ethicsFormE1Id;
-        this.ethicsFormE2Id = ethicsFormE2Id;
-        this.SemesterId = SemesterId;
+        this.supervisor = supervisor;
+        this.assessor = assessor;
+        this.supervisorApproval = supervisorApproval;
+        this.moduleLeaderApproval = moduleLeaderApproval;
+        this.status = status;
+        this.semester = semester;
     }
 
-    /**
-     * @return the registrationId
-     */
-    public int getRegistrationId() {
-        return registrationId;
+    public RegistrationForm(int registrationFormId) {
+        this.registrationFormId = registrationFormId;
+    }
+    
+    public RegistrationForm() {
+        
     }
 
-    /**
-     * @param registrationId the registrationId to set
-     */
-    public void setRegistrationId(int registrationId) {
-        this.registrationId = registrationId;
+    public int getRegistrationFormId() {
+        return registrationFormId;
     }
 
-    /**
-     * @return the registrationDate
-     */
+    public void setRegistrationFormId(int registrationFormId) {
+        this.registrationFormId = registrationFormId;
+    }
+
     public String getRegistrationDate() {
         return registrationDate;
     }
 
-    /**
-     * @param registrationDate the registrationDate to set
-     */
     public void setRegistrationDate(String registrationDate) {
         this.registrationDate = registrationDate;
     }
 
-    /**
-     * @return the supervisorId
-     */
-    public int getSupervisorId() {
-        return supervisorId;
+    public User getSupervisor() {
+        return supervisor;
     }
 
-    /**
-     * @param supervisorId the supervisorId to set
-     */
-    public void setSupervisorId(int supervisorId) {
-        this.supervisorId = supervisorId;
+    public void setSupervisor(User supervisor) {
+        this.supervisor = supervisor;
     }
 
-    /**
-     * @return the assessorId
-     */
-    public int getAssessorId() {
-        return assessorId;
+    public User getAssessor() {
+        return assessor;
     }
 
-    /**
-     * @param assessorId the assessorId to set
-     */
-    public void setAssessorId(int assessorId) {
-        this.assessorId = assessorId;
+    public void setAssessor(User assessor) {
+        this.assessor = assessor;
     }
 
-    /**
-     * @return the moduleLeaderId
-     */
-    public int getModuleLeaderId() {
-        return moduleLeaderId;
+    public Approval getSupervisorApproval() {
+        return supervisorApproval;
     }
 
-    /**
-     * @param moduleLeaderId the moduleLeaderId to set
-     */
-    public void setModuleLeaderId(int moduleLeaderId) {
-        this.moduleLeaderId = moduleLeaderId;
+    public void setSupervisorApproval(Approval supervisorApproval) {
+        this.supervisorApproval = supervisorApproval;
     }
 
-    /**
-     * @return the approvalId
-     */
-    public int getApprovalId() {
-        return approvalId;
+    public Approval getModuleLeaderApproval() {
+        return moduleLeaderApproval;
     }
 
-    /**
-     * @param approvalId the approvalId to set
-     */
-    public void setApprovalId(int approvalId) {
-        this.approvalId = approvalId;
+    public void setModuleLeaderApproval(Approval moduleLeaderApproval) {
+        this.moduleLeaderApproval = moduleLeaderApproval;
     }
 
-    /**
-     * @return the ethicsFormE1Id
-     */
-    public int getEthicsFormE1Id() {
-        return ethicsFormE1Id;
+    public String getStatus() {
+        return status;
     }
 
-    /**
-     * @param ethicsFormE1Id the ethicsFormE1Id to set
-     */
-    public void setEthicsFormE1Id(int ethicsFormE1Id) {
-        this.ethicsFormE1Id = ethicsFormE1Id;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    /**
-     * @return the ethicsFormE2Id
-     */
-    public int getEthicsFormE2Id() {
-        return ethicsFormE2Id;
+    public Semester getSemester() {
+        return semester;
     }
 
-    /**
-     * @param ethicsFormE2Id the ethicsFormE2Id to set
-     */
-    public void setEthicsFormE2Id(int ethicsFormE2Id) {
-        this.ethicsFormE2Id = ethicsFormE2Id;
+    public void setSemester(Semester semester) {
+        this.semester = semester;
     }
+    
+    
 
     /**
-     * @return the SemesterId
+     * @return the registrationId
      */
-    public int getSemesterId() {
-        return SemesterId;
-    }
-
-    /**
-     * @param SemesterId the SemesterId to set
-     */
-    public void setSemesterId(int SemesterId) {
-        this.SemesterId = SemesterId;
-    }
-
+   
 }

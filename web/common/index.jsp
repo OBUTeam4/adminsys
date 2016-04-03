@@ -42,7 +42,9 @@
                             <li> Bla bla bla </li>
                         </ul>
                         <p> As a member of the Staff, your account is already created and you need to connect with the credentials provided by the administration. 
-                            <a href="<%=application.getContextPath()%>/login">Login</a>  </p>
+                            <a href="<%=application.getContextPath()%>/login">Login</a>
+                            <a href="<%=application.getContextPath()%>/auth/forms/proposalAssessment.jsp">Proposal Assessment </a>
+                        </p>
                     </div>
                 </div>
             </div>

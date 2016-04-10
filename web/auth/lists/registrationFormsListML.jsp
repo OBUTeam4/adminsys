@@ -1,6 +1,6 @@
 <%-- 
-    Document   : proposalList
-    Created on : 22 mars 2016, 23:18:51
+    Document   : registrationList
+    Created on : 25 mars 2016, 12:34:35
     Author     : Quentin
 --%>
 
@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title> Proposal List</title>
+        <title> Registration Forms</title>
         <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"> -->
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/includes/css/header.css">
@@ -24,20 +24,20 @@
 
         <div class="container">
 
-            <h1> List of proposal assessments </h1>
+            <h1> List of Dissertation Registration Forms </h1>
             <br/>
-            
-            <p> <a href="<%=application.getContextPath()%>/auth/addProposalServlet"> Add a new Proposal </a></p>
-            <h2> Proposal assessments waiting for review</h2>
+            <h2> Registration forms waiting for review</h2>
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Student <br/> Firstname</th>
-                        <th>Student <br/> Lastname</th>
-                        <th>Student ID </th>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>StudentID </th>
                         <th>Dissertation Title </th>
                         <th>Supervisor ID </th>
-                        <th>Proposal Status </th>
+                        <th>Assessor ID </th>
+                        <th>Supervisor Status </th>
+                        <th>Module Leader Status </th>
                         <th>Action </th>
                     </tr>
                 </thead>
@@ -51,8 +51,22 @@
                             <td>${waiting.dissertationTitle}</td>
                             <td>${waiting.registrationForm.supervisor.userId}</td>
                             <td>${waiting.registrationForm.assessor.userId}</td>
-                            <td> Add  </td>
-                                
+                            <td>
+                                <c:if test="${waiting.registrationForm.supervisorApproval.approvalId !='0'}">
+                                    <a href="<%=application.getContextPath()%>/auth/approveRegistrationSupervisor?id=${waiting.registrationForm.registrationFormId}"> ${waiting.registrationForm.supervisorApproval.approvalStatus} <br/> (View) </a>
+                                    </c:if>
+
+                                <c:if test="${waiting.registrationForm.supervisorApproval.approvalId =='0'}">
+                                    Pending
+                                </c:if>
+                            </td>
+
+
+                            <td>${waiting.registrationForm.moduleLeaderApproval.approvalId == 0 ? 'Pending...' : waiting.registrationForm.moduleLeaderApproval.approvalId}</td>
+                            <td> 
+                                <c:if test="${waiting.registrationForm.supervisorApproval.approvalId !='0'}">
+                                    <a href="<%=application.getContextPath()%>/auth/approveRegistrationModuleLeader?id=${waiting.registrationForm.registrationFormId}"> Edit / Approve </a></td>
+                                </c:if>
                         </tr>
                     </c:forEach>
                 </tbody>
@@ -62,17 +76,19 @@
 
         <hr>
         <div class="container">
-            <h2> Proposal assessments reviewed</h2>
+            <h2> Registration forms reviewed</h2>
             <table class="table">
                 <thead>
-                   <tr>
+                    <tr>
                         <th>Firstname</th>
                         <th>Lastname</th>
                         <th>StudentID </th>
                         <th>Dissertation Title </th>
                         <th>Supervisor ID </th>
-                        <th>Proposal Status </th>
-                        <th>Action </th>
+                        <th>Assessor ID </th>
+                        <th>Supervisor Status </th>
+                        <th>Module Leader Status </th>
+                        <th>Registration Form Status </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -103,6 +119,5 @@
 
     </body>
 </html>
-
 
 

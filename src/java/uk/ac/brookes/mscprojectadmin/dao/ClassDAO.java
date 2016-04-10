@@ -6,6 +6,7 @@
 package uk.ac.brookes.mscprojectadmin.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -23,6 +24,7 @@ public class ClassDAO {
     protected Statement stmt;
     protected ResultSet rs;
     protected String query;
+    protected PreparedStatement preparedStatement;
     
     protected ClassDAO(){
         createConnection();

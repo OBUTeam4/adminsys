@@ -51,7 +51,7 @@ public class DashboardControlerHelper {
             case "administrator":
                 profileUrl = "/auth/dashboards/admindash.jsp";
                 break;
-            case "leader":
+            case "module leader":
                 profileUrl = "/auth/dashboards/mldash.jsp";
                 break;
             case "examiner":

@@ -124,7 +124,7 @@
                                 <input type="radio" name="answer13" value="yes" required="true"> Yes
                                 <input type="radio" name="answer13" value="no"> No<br>
                             </div>
-                            <br />
+                            <br /> <br /><br />
                             <div class="form-group">
                                 <label>Will the study involve NHS patients, staff, carers or premises?<span class="required">*</span> </label>
                                 <input type="radio" name="answer14" value="yes" required="true"> Yes

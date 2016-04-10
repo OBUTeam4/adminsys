@@ -21,12 +21,19 @@
         <div>
             <a href="<%=application.getContextPath()%>/auth/forms/proposalAssessment.jsp"> Proposal Assessment</a> </br>
             <a href="<%=application.getContextPath()%>/auth/forms/proposalAssessmentv2.jsp"> Proposal Assessment V2</a> </br>
-           
+
             <a href="<%=application.getContextPath()%>/auth/forms/presentationAssessment.jsp"> Presentation & demo Assessment</a> </br>
             <a href="<%=application.getContextPath()%>/auth/forms/finalReportAssessment.jsp"> Final report Assessment</a> </br>
             <a href="<%=application.getContextPath()%>/auth/forms/shortPaperAssessment.jsp"> Short paper Assessment</a> </br>
             <a href="<%=application.getContextPath()%>/auth/forms/feedbacks.jsp"> PRESENTATION/DEMONSTRATION & FINAL REPORT – QUALITATIVE STUDENT FEEDBACK</a> </br>
-<a href="<%=application.getContextPath()%>/auth/forms/registrationForm.jsp"> registration form </a> </br>
+            <a href="<%=application.getContextPath()%>/auth/forms/registrationForm.jsp"> registration form </a> </br>
+
+
+            <a href="<%=application.getContextPath()%>/auth/roger/ethicsFormOnev2.jsp"> e1 form </a> </br>
+            <a href="<%=application.getContextPath()%>/auth/roger/ethicsFormTwov2.jsp"> e2 form </a> </br>
+
+            <a href="<%=application.getContextPath()%>/auth/forms/EthicsForm1.jsp"> e1 form </a> </br>
+            <a href="<%=application.getContextPath()%>/auth/forms/EthicsForm2.jsp"> e2 form </a> </br>
         </div>
     </body>
 </html>

@@ -34,10 +34,11 @@
                     <label for="courseMode">Occupation /!\FOR TESTING PURPOSE ONLY <span class="required">*</span> </label>
                     <select name="occupationChange" class="form-control">
                         <option value="student">Student</option>
-                        <option value="moduleLeader">Module Leader </option>
+                        <option value="module leader">Module Leader </option>
                         <option value="assessor">Assessor</option>
                         <option value="supervisor">Supervisor </option>
-                        <option value="ee">External Exa </option>
+                        <option value="examiner">External Examiner </option>
+                        <option value="administrator"> Admin </option>
                     </select>
 
                 </div>
@@ -57,7 +58,7 @@
 
                 <div class="form-group">
                     <label for="courseMode">Course Mode <span class="required">*</span> </label>
-                    
+
                     <select name="courseMode" class="form-control">
                         <option value="full">Full Time</option>
                         <option value="part">Part Time</option>

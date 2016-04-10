@@ -10,7 +10,7 @@ package uk.ac.brookes.mscprojectadmin.beans;
  * @author oussamak
  */
 public class Ethics1 {
-    
+
     private int ethics1Id;
     private RegistrationForm rf;
     private String submissionDate;
@@ -29,11 +29,27 @@ public class Ethics1 {
     private String answer13;
     private String answer14;
 
-    public Ethics1(int ethics1Id) {
-        this.ethics1Id = ethics1Id;
+    public Ethics1() {
     }
 
-    public Ethics1() {
+    public Ethics1(int ethics1Id, RegistrationForm rf, String submissionDate, String answer1, String answer2, String answer3, String answer4, String answer5, String answer6, String answer7, String answer8, String answer9, String answer10, String answer11, String answer12, String answer13, String answer14) {
+        this.ethics1Id = ethics1Id;
+        this.rf = rf;
+        this.submissionDate = submissionDate;
+        this.answer1 = answer1;
+        this.answer2 = answer2;
+        this.answer3 = answer3;
+        this.answer4 = answer4;
+        this.answer5 = answer5;
+        this.answer6 = answer6;
+        this.answer7 = answer7;
+        this.answer8 = answer8;
+        this.answer9 = answer9;
+        this.answer10 = answer10;
+        this.answer11 = answer11;
+        this.answer12 = answer12;
+        this.answer13 = answer13;
+        this.answer14 = answer14;
     }
 
     public int getEthics1Id() {
@@ -139,6 +155,7 @@ public class Ethics1 {
     public void setAnswer11(String answer11) {
         this.answer11 = answer11;
     }
+
     public String getAnswer12() {
         return answer12;
     }
@@ -170,7 +187,5 @@ public class Ethics1 {
     public void setSubmissionDate(String submissionDate) {
         this.submissionDate = submissionDate;
     }
-    
-    
-    
+
 }

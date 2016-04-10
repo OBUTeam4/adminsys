@@ -5,23 +5,17 @@
  */
 package uk.ac.brookes.mscprojectadmin.helpers;
 
-import java.lang.annotation.Documented;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import uk.ac.brookes.mscprojectadmin.beans.Ethics1;
-import uk.ac.brookes.mscprojectadmin.beans.Ethics2;
 import uk.ac.brookes.mscprojectadmin.beans.Event;
 import uk.ac.brookes.mscprojectadmin.beans.Project;
-import uk.ac.brookes.mscprojectadmin.beans.RegistrationForm;
 import uk.ac.brookes.mscprojectadmin.beans.Semester;
 import uk.ac.brookes.mscprojectadmin.beans.User;
 import uk.ac.brookes.mscprojectadmin.dao.DissRegistrationDAO;
@@ -40,7 +34,7 @@ public class FormsControlerHelper {
     public FormsControlerHelper() {
         userdao = new UserDAO();
         diss = new DissRegistrationDAO();
-        
+
     }
 
     public List<User> getSupervisors() throws SQLException {
@@ -50,39 +44,38 @@ public class FormsControlerHelper {
     public List<User> getAssessors() throws SQLException {
         return userdao.getAssessors();
     }
-    
+
     public Semester getDissSemester(int semesterId) throws SQLException {
         return diss.getDissSemester(semesterId);
     }
-    
-    public Event getRegistrationEvent(int semesterId, String flag){
+
+    public Event getRegistrationEvent(int semesterId, String flag) {
         return diss.getRegistrationEvent(semesterId, flag);
     }
-    
-    public List<Semester> getModuleCodes(){
+
+    public List<Semester> getModuleCodes() {
         return diss.getModuleCodes();
     }
-    
-    public Map validateRegInputs(String moduleCode, String dissertationTitle, String supervisor, String assessor, String parties, 
-                        String subjectArea, String aim, String literature, String hypothesis, String deliverables) {
-        
+
+    public Map validateRegInputs(String moduleCode, String dissertationTitle, String supervisor, String assessor, String parties,
+            String subjectArea, String aim, String literature, String hypothesis, String deliverables) {
+
         formErrors = new HashMap<String, String>();
         try {
             checkModuleCode(moduleCode);
         } catch (Exception e) {
             formErrors.put("diss_mod_code", e.getMessage());
         }
-        
+
         //String supervisor = request.getParameter("supervisor").trim();
         // String assessor = request.getParameter("assessor").trim();
         // TO DO test if supervisor is != assessor
-
         try {
             checkDissertationTitle(dissertationTitle);
         } catch (Exception e) {
             formErrors.put("diss_title", e.getMessage());
         }
-        
+
         try {
             checkParties(parties);
         } catch (Exception e) {
@@ -100,7 +93,7 @@ public class FormsControlerHelper {
         } catch (Exception e) {
             formErrors.put("projectAim", e.getMessage());
         }
-        
+
         try {
             checkLiterature(literature);
         } catch (Exception e) {
@@ -118,50 +111,50 @@ public class FormsControlerHelper {
         } catch (Exception e) {
             formErrors.put("diss_deliverables", e.getMessage());
         }
-        
-        try{
+
+        try {
             checkSupervisor(supervisor);
-        } catch (Exception e){
+        } catch (Exception e) {
             formErrors.put("supervisor", e.getMessage());
         }
-        try{
+        try {
             checkAssessor(assessor);
-        } catch (Exception e){
+        } catch (Exception e) {
             formErrors.put("assessor", e.getMessage());
         }
-        
-        try{
+
+        try {
             compareSupervisorAssessor(supervisor, assessor);
-        } catch (Exception e){
+        } catch (Exception e) {
             formErrors.put("same", e.getMessage());
         }
 
         return formErrors;
     }
 
-    boolean checkRegSubmissionDeadline() throws ParseException{
+    boolean checkRegSubmissionDeadline() throws ParseException {
         Date deadline = parseStringToDate(diss.getRegistrationEvent(3, "registration").getDueDate());
         Date today = getTodayDate();
 
-        if(deadline.after(today)){
+        if (deadline.after(today)) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
-    
-    private Date getTodayDate(){
+
+    private Date getTodayDate() {
         return new Date();
     }
-    
-    private Date parseStringToDate(String date) throws ParseException{
+
+    private Date parseStringToDate(String date) throws ParseException {
         DateFormat originalFormat = new SimpleDateFormat("EEEE dd MMMM yyyy", Locale.ENGLISH);
         Date newDate = originalFormat.parse(date);
         return newDate;
     }
+
     private void checkModuleCode(String courseCode) throws Exception {
-        if (courseCode.equals("0")){
+        if (courseCode.equals("0")) {
             throw new Exception("Choose a dissertation module code.");
         }
     }
@@ -233,93 +226,87 @@ public class FormsControlerHelper {
             throw new Exception("Enter deliverables.");
         }
     }
-    private void checkSupervisor(String supervisorId) throws Exception{
-        if(supervisorId.equals("0")){
-                throw new Exception("Choose your supervisor.");
+
+    private void checkSupervisor(String supervisorId) throws Exception {
+        if (supervisorId.equals("0")) {
+            throw new Exception("Choose your supervisor.");
         }
     }
-    
-    private void checkAssessor(String assessorId) throws Exception{
-        if(assessorId.equals("0")){
+
+    private void checkAssessor(String assessorId) throws Exception {
+        if (assessorId.equals("0")) {
             throw new Exception("Choose your assessor.");
         }
     }
+
     private void compareSupervisorAssessor(String supervisorId, String assessorId) throws Exception {
-            
-            
-            if (supervisorId.equals(assessorId)){
-                if (!supervisorId.equals("0") && !assessorId.equals("0")){
-                    throw new Exception("Your Supervisor must not be your second assessor.");
-                }
+
+        if (supervisorId.equals(assessorId)) {
+            if (!supervisorId.equals("0") && !assessorId.equals("0")) {
+                throw new Exception("Your Supervisor must not be your second assessor.");
             }
-            
+        }
+
     }
-    
-    
-    
-    
-    
+
     //This function will check three things : First, compare the deadline with the submission date.
     //Seconde, check if the student already submitted a registration form.
     //Third, if yes it then checks the status of the approval.
     //Two cases when the student can submit: First, when he first time register his dissertation before the deadline.
     //Second, when his first registration has a disaproval. 
-    
-    public String canSubmit(User user) throws ParseException{
+    public String canSubmit(User user) throws ParseException {
         String message = null;
-        if(checkRegSubmissionDeadline()){ //True means submission date is valid. 
+        if (checkRegSubmissionDeadline()) { //True means submission date is valid. 
             Project p = diss.getStudentProject(user.getUserId());
-            
-            if(p!=null){
+
+            if (p != null) {
                 System.out.println("has project");
                 String decision = diss.getRegistrationApproval(p.getRegistrationForm().getRegistrationFormId());
-                if(decision.equals("approved")){
+                if (decision.equals("approved")) {
                     message = "You can't submit another registration as you "
                             + "already submitted a registration form and your project is approved by the supervisor.";
-                }
-                else if(decision.equals("")){
+                } else if (decision.equals("")) {
                     message = "You can't submit another resgistration as you already submitted your project and is waiting decision.";
                 }
-                
+
             }
-            
-        }
-        else{
+
+        } else {
             message = "You can't submit, deadline is now passed.";
         }
         System.out.println(message);
         return message;
     }
-    
-    
-    public Project getDissProject(String studentId){
-        if(studentId != null){
+
+    public Project getDissProject(String studentId) {
+        if (studentId != null) {
             return diss.getStudentProject(studentId);
-        }
-        else{
+        } else {
             return null;
         }
-        
+
     }
-    
-    
-    public int addNewProjectRegistration(User student, Project p, String supervisorName, String assessorName, String moduleCode){
-        int success = diss.addProjectRegistration(student, p,supervisorName,assessorName,moduleCode);
-        
-        if(success == 1){
+
+    public int addNewProjectRegistration(User student, Project p, String supervisorName, String assessorName, String moduleCode) {
+        int success = diss.addProjectRegistration(student, p, supervisorName, assessorName, moduleCode);
+
+        if (success == 1) {
             System.out.println("You have done it man!!!");
             return 1;
-        }
-        else{
+        } else {
             return 0;
         }
-        
+
+    }
+
+    public Project getProjectRegistrationFromId(int id){
+        return diss.getProjectRegistrationFromId(id);
     }
     
-    public static void main(String [] args) throws ParseException{
+    public static void main(String[] args) throws ParseException {
         /*Date date = new Date();
         DateFormat format = new SimpleDateFormat("dd/MM/yyyy");*/
-        /*FormsControlerHelper forms = new FormsControlerHelper();
+ /*FormsControlerHelper forms = new FormsControlerHelper();
         DissRegistrationDAO diss = new DissRegistrationDAO();
         Event event = diss.getEvent(3, 2);
         System.out.println(event.getDueDate());

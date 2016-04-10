@@ -10,7 +10,7 @@ package uk.ac.brookes.mscprojectadmin.beans;
  * @author oussamak
  */
 public class Ethics2 {
-    
+
     private int ethics2Id;
     private RegistrationForm rf;
     private String submissionDate;
@@ -23,11 +23,21 @@ public class Ethics2 {
     private String plan;
     private String steps;
 
-    public Ethics2(int ethics2Id) {
-        this.ethics2Id = ethics2Id;
+    public Ethics2() {
     }
 
-    public Ethics2() {
+    public Ethics2(int ethics2Id, RegistrationForm rf, String submissionDate, String ptype, String funded, String summary, String participants, String estimate, String details, String plan, String steps) {
+        this.ethics2Id = ethics2Id;
+        this.rf = rf;
+        this.submissionDate = submissionDate;
+        this.ptype = ptype;
+        this.funded = funded;
+        this.summary = summary;
+        this.participants = participants;
+        this.estimate = estimate;
+        this.details = details;
+        this.plan = plan;
+        this.steps = steps;
     }
 
     public int getEthics2Id() {
@@ -118,6 +128,4 @@ public class Ethics2 {
         this.steps = steps;
     }
 
-    
-    
 }

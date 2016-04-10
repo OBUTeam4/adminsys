@@ -18,30 +18,34 @@
     <body>
         <%@ include file="/includes/menu.jsp" %>
 
-        <h1> Welcome to your Supervisor Dashboard!</h1>
+        <div class="container">
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Marks and Comments</h3>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-sm-8 ">
+            <h1> Welcome to your Supervisor Dashboard!</h1>
 
-                        <ul>
-                            <li><a class="" href="<%=application.getContextPath()%>/"> Registration Forms <span class="badge">5</span> </a> </li>
-                            <li><a class="" href="<%=application.getContextPath()%>/">Proposal </a> <span class="badge">5</span> </li>
-                            <li><a class="" href="<%=application.getContextPath()%>/">Demonstration and Presentation </a> <span class="badge">5</span> </li>
-                            <li><a class="" href="<%=application.getContextPath()%>/">Final Report </a> <span class="badge">5</span> </li>
-                            <li><a class="" href="<%=application.getContextPath()%>/">Short Paper </a> <span class="badge">5</span> </li>
-                            <li><a class="" href="<%=application.getContextPath()%>/">Turnitin Checks </a> <span class="badge">5</span> </li>
-                        </ul>
+            <div class="panel panel-default">
 
+                <div class="panel-heading">
+                    <h3 class="panel-title">Marks and Comments</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-8 ">
+
+                            <ul>
+                                <li><a class="" href="<%=application.getContextPath()%>/auth/listRegistrationForms"> Registration Forms <span class="badge"> <%%></span> </a> </li>
+                                <li><a class="" href="<%=application.getContextPath()%>/auth/listProposal">Proposal </a> <span class="badge">5</span> </li>
+                                <li><a class="" href="<%=application.getContextPath()%>/auth/listDemo">Demonstration and Presentation </a> <span class="badge">5</span> </li>
+                                <li><a class="" href="<%=application.getContextPath()%>/auth/listFinalReport">Final Report </a> <span class="badge">5</span> </li>
+                                <li><a class="" href="<%=application.getContextPath()%>/auth/listShortPaper">Short Paper </a> <span class="badge">5</span> </li>
+                                <li><a class="" href="<%=application.getContextPath()%>/auth/listTurnitin">Turnitin Checks </a> <span class="badge">5</span> </li>
+                            </ul>
+
+                        </div>
                     </div>
                 </div>
+
             </div>
-
         </div>
-
+                            
     </body>
 </html>

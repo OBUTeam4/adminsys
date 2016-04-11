@@ -19,13 +19,28 @@ public class Approval {
     private String approvalStatus;
     private String feedbacks;
 
+    /**
+     *
+     */
     public Approval() {
     }
     
+    /**
+     *
+     * @param id
+     */
     public Approval(int id){
         this.approvalId = id;
     }
     
+    /**
+     *
+     * @param approvalId
+     * @param userId
+     * @param approvalDate
+     * @param approvalStatus
+     * @param feedback
+     */
     public Approval(int approvalId, String userId, String approvalDate, String approvalStatus, String feedback) {
         this.approvalId = approvalId;
         this.userId = userId;
@@ -34,42 +49,82 @@ public class Approval {
         this.feedbacks = feedback;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getApprovalId() {
         return approvalId;
     }
 
+    /**
+     *
+     * @param approvalId
+     */
     public void setApprovalId(int approvalId) {
         this.approvalId = approvalId;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getUserId() {
         return userId;
     }
 
+    /**
+     *
+     * @param userId
+     */
     public void setUserId(String userId) {
         this.userId = userId;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getApprovalDate() {
         return approvalDate;
     }
 
+    /**
+     *
+     * @param approvalDate
+     */
     public void setApprovalDate(String approvalDate) {
         this.approvalDate = approvalDate;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getApprovalStatus() {
         return approvalStatus;
     }
 
+    /**
+     *
+     * @param approvalStatus
+     */
     public void setApprovalStatus(String approvalStatus) {
         this.approvalStatus = approvalStatus;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getFeedbacks() {
         return feedbacks;
     }
 
+    /**
+     *
+     * @param feedbacks
+     */
     public void setFeedbacks(String feedbacks) {
         this.feedbacks = feedbacks;
     }

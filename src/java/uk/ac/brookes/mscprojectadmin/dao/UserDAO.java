@@ -194,10 +194,14 @@ public class UserDAO extends ClassDAO {
 
         String updateQuery = "";
         if (user.getOccupation().equals("student")) {
-            updateQuery = "UPDATE user SET courseCode = '" + user.getCourseCode() + "', courseMode = '" + user.getCourseMode()
-                    + "', courseTitle = '" + user.getCourseTitle() + "', " + getUserOccupationColumn(currentOccupation) + " = 0, " + getUserOccupationColumn(user.getOccupation()) + " = 1 WHERE `userId` = '" + user.getUserId() + "'";
+            // updateQuery = "UPDATE user SET courseCode = '" + user.getCourseCode() + "', courseMode = '" + user.getCourseMode()
+            //         + "', courseTitle = '" + user.getCourseTitle() + "', " + getUserOccupationColumn(currentOccupation) + " = 0, " + getUserOccupationColumn(user.getOccupation()) + " = 1 WHERE `userId` = '" + user.getUserId() + "'";
+            updateQuery = "UPDATE user SET password = '" + user.getPassword() + "', courseCode = '" + user.getCourseCode() + "', courseMode = '" + user.getCourseMode()
+                    + "', courseTitle = '" + user.getCourseTitle() + "' WHERE `userId` = '" + user.getUserId() + "'";
+
         } else {
-            updateQuery = "UPDATE user SET " + getUserOccupationColumn(currentOccupation) + " = 0, " + getUserOccupationColumn(user.getOccupation()) + " = 1 WHERE `userId` = '" + user.getUserId() + "'";
+            //updateQuery = "UPDATE user SET " + getUserOccupationColumn(currentOccupation) + " = 0, " + getUserOccupationColumn(user.getOccupation()) + " = 1 WHERE `userId` = '" + user.getUserId() + "'";
+            updateQuery = "UPDATE user SET password = '" + user.getPassword() + "' WHERE `userId` = '" + user.getUserId() + "'";
         }
 
         System.out.println("Updating user");
@@ -293,7 +297,7 @@ public class UserDAO extends ClassDAO {
             if (stmt != null) {
                 stmt.close();
             }
-            
+
         }
         return u;
     }

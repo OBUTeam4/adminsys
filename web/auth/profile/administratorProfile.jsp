@@ -29,18 +29,6 @@
             <form method="POST">
 
                 <div class="form-group">
-                    <label for="courseMode">Occupation /!\FOR TESTING PURPOSE ONLY <span class="required">*</span> </label>
-                    <select name="occupationChange" class="form-control">
-                        <option value="student">Student</option>
-                        <option value="moduleLeader">Module Leader </option>
-                        <option value="assessor">Assessor</option>
-                        <option value="supervisor">Supervisor </option>
-                        <option value="ee">External Exa </option>
-                    </select>
-
-                </div>
-                
-                <div class="form-group">
                     <label for="password">New Password:</label>
                     <input type="password"  class="form-control" name="password"  />
                     <span class="error"> ${errors['password']} </span>
@@ -53,7 +41,7 @@
                 </div>
 
                 <input type="submit" value="Submit"  class="btn btn-default" />
-
+                <p class="${empty errors ? 'success' : 'error'}">${result}</p>
             </form>
 
             <br/>

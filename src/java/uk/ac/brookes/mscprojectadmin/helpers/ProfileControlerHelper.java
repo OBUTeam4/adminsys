@@ -57,19 +57,21 @@ public class ProfileControlerHelper {
 
     // 
     public boolean updateUser(User u, String currentOccupation) throws SQLException {
-       return userdao.updateUser(u, currentOccupation);
+        return userdao.updateUser(u, currentOccupation);
     }
-    
-    
-    public Map validateProfileDetailsStaff(String currentOccupation, String occupation, String password, String confirm) {
+
+    public Map validateProfileDetailsStaff(String password, String confirm) {
         profileErrors = new HashMap<String, String>();
 
-        try {
+        /*
+                try {
             checkOccupation(currentOccupation, occupation);
         } catch (Exception e) {
             profileErrors.put("occupation", e.getMessage());
         }
         
+        
+         */
         try {
             checkPassword(password);
             checkPasswordAndConfirm(password, confirm);
@@ -79,16 +81,17 @@ public class ProfileControlerHelper {
         return profileErrors;
     }
 
-    
-    public Map validateProfileDetailsStudent(String currentOccupation, String occupation, String courseTitle, String courseCode, String courseMode, String password, String confirm) {
+    public Map validateProfileDetailsStudent(String courseTitle, String courseCode, String courseMode, String password, String confirm) {
         profileErrors = new HashMap<String, String>();
 
-        try {
+        /*
+                try {
             checkOccupation(currentOccupation, occupation);
         } catch (Exception e) {
             profileErrors.put("occupation", e.getMessage());
         }
         
+         */
         try {
             checkPassword(password);
             checkPasswordAndConfirm(password, confirm);
@@ -146,9 +149,10 @@ public class ProfileControlerHelper {
             throw new Exception("Enter a course code.");
         }
     }
-    
-    private void checkOccupation(String currentOccupation, String occupation) throws Exception{
-        if(currentOccupation.equals(occupation))
+
+    private void checkOccupation(String currentOccupation, String occupation) throws Exception {
+        if (currentOccupation.equals(occupation)) {
             throw new Exception("Same occupation");
+        }
     }
 }

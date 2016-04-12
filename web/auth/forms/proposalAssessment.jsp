@@ -23,6 +23,10 @@
         <%@ include file="/includes/menu.jsp" %>  
 
         <div class="container">
+            
+            <h1> Dissertation and Student infos </h1>
+            
+            
             <h1>Proposal Assessment (10% of mark) </h1>
             <p> To be completed by supervisor and returned as feedback to student: </p>
 

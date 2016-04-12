@@ -28,7 +28,7 @@ import uk.ac.brookes.mscprojectadmin.helpers.RegisterControlerHelper;
  */
 @WebServlet(name = "EditViewProfileServlet", urlPatterns = {"/auth/profile/"})
 public class EditViewProfileServlet extends HttpServlet {
-    
+
     private String profileURL = "";
 
     //private ProfileControlerHelper profileControlerHelper;
@@ -39,7 +39,7 @@ public class EditViewProfileServlet extends HttpServlet {
         // recuperation phone Number depuis la session
         HttpSession session = request.getSession();
         User u = (User) session.getAttribute("user");
-        
+
         ProfileControlerHelper profilControlerHelper = new ProfileControlerHelper();
         try {
             profileURL = profilControlerHelper.getProfilePageFromUserOccupation(u);
@@ -59,13 +59,14 @@ public class EditViewProfileServlet extends HttpServlet {
             request.setAttribute("courseCode", u.getCourseCode());
             request.setAttribute("courseMode", u.getCourseMode());
             request.setAttribute("courseTitle", u.getCourseTitle());
+            
         }
 
         // frwd req and resp
         request.getRequestDispatcher(profileURL).forward(request, response);
-        
+
     }
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -79,37 +80,37 @@ public class EditViewProfileServlet extends HttpServlet {
         String currentOccupation = u.getOccupation();
 
         // retrieve all inputs
-        String occupation = request.getParameter("occupationChange").trim();
+        // String occupation = request.getParameter("occupationChange").trim();
         String password = request.getParameter("password").trim();
         String confirm = request.getParameter("confirm").trim();
-        
+
         String courseCode = "";
         String courseTitle = "";
         String courseMode = "";
 
         // inputs validations
         ProfileControlerHelper profilControlerHelper = new ProfileControlerHelper();
-        
+
         if (u.getOccupation().equals("student")) {
             courseCode = request.getParameter("courseCode").trim();
             courseTitle = request.getParameter("courseTitle").trim();
             courseMode = request.getParameter("courseMode").trim();
-            
-            errors = profilControlerHelper.validateProfileDetailsStudent(currentOccupation, occupation, courseTitle, courseCode, courseMode, password, confirm);
+
+            errors = profilControlerHelper.validateProfileDetailsStudent(courseTitle, courseCode, courseMode, password, confirm);
         } else {
-            errors = profilControlerHelper.validateProfileDetailsStaff(currentOccupation, occupation, password, confirm);
+            errors = profilControlerHelper.validateProfileDetailsStaff(password, confirm);
         }
 
         // no errors
         if (errors.isEmpty()) {
             try {
 
-                // update user
+                if (u.getOccupation().equals("student")) {
+                    u.setCourseMode(courseMode);
+                    u.setCourseCode(courseCode);
+                    u.setCourseTitle(courseTitle);
+                }
                 u.setPassword(password);
-                u.setCourseMode(courseMode);
-                u.setCourseCode(courseCode);
-                u.setCourseTitle(courseTitle);
-                u.setOccupation(occupation);
 
                 // update db
                 updateResult = profilControlerHelper.updateUser(u, currentOccupation);
@@ -117,8 +118,12 @@ public class EditViewProfileServlet extends HttpServlet {
                 // update session
                 request.getSession().setAttribute("user", u);
                 System.out.println("Update status : " + updateResult);
+
+                result = "Profile updated!";
+                request.setAttribute("result", result);
                 
-                response.sendRedirect(request.getContextPath() + "/auth/dashboard");
+                doGet(request, response);
+                //response.sendRedirect(request.getContextPath() + "/auth/dashboard");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -129,19 +134,9 @@ public class EditViewProfileServlet extends HttpServlet {
             request.setAttribute("errors", errors);
             request.setAttribute("result", result);
 
-            // stay on same page
-            // this.getServletContext().getRequestDispatcher("/auth/profile/").forward(request, response);
-            // redirection
-            try {
-                profileURL = profilControlerHelper.getProfilePageFromUserOccupation(u);
-            } catch (SQLException ex) {
-                Logger.getLogger(EditViewProfileServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            // frwd req and resp
-            //request.getRequestDispatcher(profileURL).forward(request, response);
             doGet(request, response);
         }
-        
+
     }
-    
+
 }

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import uk.ac.brookes.mscprojectadmin.beans.Project;
 import uk.ac.brookes.mscprojectadmin.beans.RegistrationForm;
+import uk.ac.brookes.mscprojectadmin.dao.DissProposalDAO;
 import uk.ac.brookes.mscprojectadmin.dao.DissRegistrationDAO;
 
 /**
@@ -17,32 +18,61 @@ import uk.ac.brookes.mscprojectadmin.dao.DissRegistrationDAO;
  */
 public class ListsControlerHelper {
 
-    DissRegistrationDAO diss;
+    DissRegistrationDAO dissRegistrationDAO;
+    DissProposalDAO dissProposalDAO;
 
     public ListsControlerHelper() {
-        diss = new DissRegistrationDAO();
+        dissRegistrationDAO = new DissRegistrationDAO();
+        dissProposalDAO = new DissProposalDAO();
     }
 
     public List<Project> getSubmittedRegistrationForms() {
-        return diss.getSubmittedRegistrationForms();
+        return dissRegistrationDAO.getSubmittedRegistrationForms();
     }
 
+    // 
+    /*
+        ================================
+        ====== REGISTRATION FORMS ======
+        ================================
+     */
     public List<Project> getSubmittedRegFormsForSupervisor(String supervisorId) {
-        return diss.getSubmittedRegFormsForSupervisor(supervisorId);
+        return dissRegistrationDAO.getSubmittedRegFormsForSupervisor(supervisorId);
     }
 
     public List<Project> getReviewedRegFormsForSupervisor(String supervisorId) {
-        return diss.getReviewedRegFormsForSupervisor(supervisorId);
+        return dissRegistrationDAO.getReviewedRegFormsForSupervisor(supervisorId);
     }
 
     public List<Project> getSubmittedRegFormsForML(String moduleLeaderId) {
-        return diss.getSubmittedRegFormsForML(moduleLeaderId);
+        return dissRegistrationDAO.getSubmittedRegFormsForML(moduleLeaderId);
     }
 
     public List<Project> getReviewedRegFormsForML(String moduleLeaderId) {
-        return diss.getReviewedRegFormsForML(moduleLeaderId);
+        return dissRegistrationDAO.getReviewedRegFormsForML(moduleLeaderId);
     }
 
-    
-    
+    /*
+        ================================
+        ==== END REGISTRATION FORMS ====
+        ================================
+     */
+ /*
+        =============================
+        ====== PROPOSAL FORMS ======
+        ============================
+     */
+    public List<Project> getProposalForSupervisor(String supervisorId) {
+        return dissProposalDAO.getProposalForSupervisor(supervisorId);
+    }
+
+    public List<Project> getProposalReviewedBySupervisor(String supervisorId) {
+        return dissProposalDAO.getProposalReviewedBySupervisor(supervisorId);
+    }
+
+    /*
+        ============================
+        ==== END PROPOSAL FORMS ====
+        ============================
+     */
 }

@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package uk.ac.brookes.mscprojectadmin.beans;
+package uk.ac.brookes.mscprojectadmin.dao;
 
 /**
  *
  * @author Quentin
  */
-public class Proposal {
+public class CriteriaDAO {
     
     
-    private int proposalId;
-    // private String 
+    
 }

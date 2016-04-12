@@ -444,9 +444,9 @@ public class DissRegistrationDAO extends ClassDAO {
             String query = "SELECT u.fName, u.lName, u.userId as studentId, p.dissertationTitle, rf.registrationFormId, rf.assessorId, rf.supervisorId, rf.supervisorApprovalID, rf.moduleLeaderApprovalID FROM registrationform rf "
                     + "INNER JOIN project p ON p.registrationFormId = rf.registrationFormId "
                     + "INNER JOIN User u on p.studentId = u.userId "
-                    + "WHERE rf.supervisorApprovalID IS NULL AND rf.supervisorId = " + supervisorId;
+                    + "WHERE rf.supervisorApprovalID IS NULL AND rf.supervisorId = '" + supervisorId + "'";
 
-            //System.out.println(query);
+            System.out.println(query);
             rs = stmt.executeQuery(query);
             while (rs.next()) {
                 Project p = new Project();
@@ -501,6 +501,7 @@ public class DissRegistrationDAO extends ClassDAO {
                     + "LEFT JOIN User u on p.studentId = u.userId "
                     + "LEFT JOIN Approval a on a.userId = rf.supervisorId "
                     + "WHERE a.approvalId = rf.supervisorApprovalID AND rf.supervisorId = '" + supervisorId+"'";
+
 
             //System.out.println(query);
             rs = stmt.executeQuery(query);

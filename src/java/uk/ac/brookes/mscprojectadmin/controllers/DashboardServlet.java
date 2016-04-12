@@ -70,15 +70,15 @@ public class DashboardServlet extends HttpServlet {
                     Ethics1 e1 = eforms.getEthics1Form(p.getRegistrationForm().getRegistrationFormId());
                     Ethics2 e2 = eforms.getEthics2Form(p.getRegistrationForm().getRegistrationFormId());
                     
-                    request.setAttribute("registration", p.getRegistrationForm());
-                    request.setAttribute("project", p);
+                    session.setAttribute("registration", p.getRegistrationForm());
+                    session.setAttribute("project", p);
                     
                     if(e1 != null){
-                        request.setAttribute("ethics1", e1);
+                        session.setAttribute("ethics1", e1);
                     }
             
                     if(e2 != null){
-                        request.setAttribute("ethics2", e2);
+                        session.setAttribute("ethics2", e2);
                     }
                 }
                 else{

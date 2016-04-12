@@ -5,24 +5,14 @@
  */
 package uk.ac.brookes.mscprojectadmin.dao;
 
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
+
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import uk.ac.brookes.mscprojectadmin.beans.Semester;
 import uk.ac.brookes.mscprojectadmin.beans.User;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import org.eclipse.jdt.internal.compiler.ast.SuperReference;
 import uk.ac.brookes.mscprojectadmin.beans.Approval;
-import uk.ac.brookes.mscprojectadmin.beans.Ethics1;
-import uk.ac.brookes.mscprojectadmin.beans.Ethics2;
 import uk.ac.brookes.mscprojectadmin.beans.Event;
 import uk.ac.brookes.mscprojectadmin.beans.Project;
 import uk.ac.brookes.mscprojectadmin.beans.RegistrationForm;
@@ -504,12 +494,14 @@ public class DissRegistrationDAO extends ClassDAO {
         List<Project> list = new ArrayList<Project>();
         try {
             stmt = con.createStatement();
-            String query = "SELECT u.fName, u.lName, u.userId as studentId, p.dissertationTitle, rf.registrationFormId, rf.assessorId, rf.supervisorId, rf.supervisorApprovalID, rf.moduleLeaderApprovalID, a.userId as userApproving, a.status, a.feedbacks, a.date "
+            String query = "SELECT u.fName, u.lName, u.userId as studentId, p.dissertationTitle, rf.registrationFormId, rf.assessorId, "
+                    + "rf.supervisorId, rf.supervisorApprovalID, rf.moduleLeaderApprovalID, a.userId as userApproving, a.status, a.feedbacks, a.date "
                     + "FROM registrationform rf  "
                     + "LEFT JOIN project p ON p.registrationFormId = rf.registrationFormId  "
                     + "LEFT JOIN User u on p.studentId = u.userId "
                     + "LEFT JOIN Approval a on a.userId = rf.supervisorId "
-                    + "WHERE a.approvalId = rf.supervisorApprovalID AND rf.supervisorId = '" + supervisorId + "'";
+                    + "WHERE a.approvalId = rf.supervisorApprovalID AND rf.supervisorId = '" + supervisorId+"'";
+
 
             //System.out.println(query);
             rs = stmt.executeQuery(query);
@@ -526,6 +518,7 @@ public class DissRegistrationDAO extends ClassDAO {
                 supervisorApproval.setApprovalStatus(rs.getString("status"));
                 supervisorApproval.setFeedbacks(rs.getString("feedbacks"));
                 supervisorApproval.setApprovalDate(rs.getString("date"));
+                
 
                 p.setDissertationTitle(rs.getString("dissertationTitle"));
                 p.setStudentId(rs.getString("studentId"));

@@ -34,6 +34,7 @@ public class UserDAO extends ClassDAO {
         query = "select * from user where userId = '" + user.getUserId() + "' and password = '" + user.getPassword() + "'";
         System.out.println("begining");
         try {
+            System.out.println(con);
             stmt = con.createStatement();
             rs = stmt.executeQuery(query);
             System.out.println("111");
@@ -60,7 +61,6 @@ public class UserDAO extends ClassDAO {
                 stmt.close();
             }
         }
-
         return found;
     }
 

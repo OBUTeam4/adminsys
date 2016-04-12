@@ -57,7 +57,7 @@ public class FormsControlerHelper {
         return diss.getModuleCodes();
     }
 
-    public Map validateRegInputs(String moduleCode, String dissertationTitle, String supervisor, String assessor, String parties,
+    public Map validateRegInputs(String moduleCode, String dissertationTitle, String supervisorName, String assessorName, String parties,
             String subjectArea, String aim, String literature, String hypothesis, String deliverables) {
 
         formErrors = new HashMap<String, String>();
@@ -113,18 +113,18 @@ public class FormsControlerHelper {
         }
 
         try {
-            checkSupervisor(supervisor);
+            checkSupervisor(supervisorName);
         } catch (Exception e) {
             formErrors.put("supervisor", e.getMessage());
         }
         try {
-            checkAssessor(assessor);
+            checkAssessor(assessorName);
         } catch (Exception e) {
             formErrors.put("assessor", e.getMessage());
         }
 
         try {
-            compareSupervisorAssessor(supervisor, assessor);
+            compareSupervisorAssessor(supervisorName, assessorName);
         } catch (Exception e) {
             formErrors.put("same", e.getMessage());
         }
@@ -227,22 +227,22 @@ public class FormsControlerHelper {
         }
     }
 
-    private void checkSupervisor(String supervisorId) throws Exception {
-        if (supervisorId.equals("0")) {
+    private void checkSupervisor(String supervisorName) throws Exception {
+        if (supervisorName.equals("0")) {
             throw new Exception("Choose your supervisor.");
         }
     }
 
-    private void checkAssessor(String assessorId) throws Exception {
-        if (assessorId.equals("0")) {
+    private void checkAssessor(String assessorName) throws Exception {
+        if (assessorName.equals("0")) {
             throw new Exception("Choose your assessor.");
         }
     }
 
-    private void compareSupervisorAssessor(String supervisorId, String assessorId) throws Exception {
+    private void compareSupervisorAssessor(String supervisorName, String assessorName) throws Exception {
 
-        if (supervisorId.equals(assessorId)) {
-            if (!supervisorId.equals("0") && !assessorId.equals("0")) {
+        if (supervisorName.equals(assessorName)) {
+            if (!supervisorName.equals("0") && !assessorName.equals("0")) {
                 throw new Exception("Your Supervisor must not be your second assessor.");
             }
         }

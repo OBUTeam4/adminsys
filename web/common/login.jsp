@@ -34,7 +34,6 @@
                     <input type="password" class="form-control" name="password" />
                     <span class="error"> ${errors['password']} </span>
                 </div>
-
                 <input type="submit" value="Log-In" class="btn btn-default" /><br>
 
                 <!--<p class="${empty errors ? 'success' : 'error'}">${result}</p>-->

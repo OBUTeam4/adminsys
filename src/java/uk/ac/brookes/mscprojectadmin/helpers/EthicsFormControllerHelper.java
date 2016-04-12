@@ -98,8 +98,11 @@ public class EthicsFormControllerHelper {
             if(e1 != null){
                  e2 = edao.getEthics2(rfId);
             }
-            else if(e1 != null && rfId != 0){
+            else if(e1 == null && rfId != 0){
                 message = "Submit Ethics Form 1 before Ethics Form 2.";
+            }
+            else if(e1 == null && rfId == 0){
+                message = "Submit the Registration form and ethics form 1 before Ethics Form 2.";
             }
         
             if (e2 != null){

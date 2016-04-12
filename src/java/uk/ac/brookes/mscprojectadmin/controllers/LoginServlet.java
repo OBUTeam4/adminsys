@@ -64,32 +64,31 @@ public class LoginServlet extends HttpServlet {
                     // nextPage is dashboard servlet
                     nextPage = "/auth/dashboard";
                     request.getSession().setAttribute("user", user);
-                    System.out.println("4");
+                    System.out.println("Login Successful");
                 } else {
                     errors.put("result", "Your User ID or password is incorrect, or you're not registered yet, please try again.");
                     request.setAttribute("errors", errors);
                     //nextPage = "/common/login.jsp";
                     // nextPage is login servlet
-                    nextPage = "/login";
+                    nextPage = "/common/login.jsp";
                     System.out.println("5");
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
+        
         } else {
             //result = "Your username or password is not valid.";
             //request.setAttribute("result", result);
             request.setAttribute("errors", errors);
-            nextPage = "/login";
+            nextPage = "/common/login.jsp";
             System.out.println("6");
         }
-        System.out.println("Login Successful");
+        
 
-        // redirection to nextPage 
-        response.sendRedirect(request.getContextPath() + nextPage);
-
-       // RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
-       // dispatcher.forward(request, response);
+        this.getServletContext().getRequestDispatcher(nextPage).forward(request, response);
+       //RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
+       //dispatcher.forward(request, response);
     }
 
 }

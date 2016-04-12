@@ -27,6 +27,8 @@
             <h1> List of demonstration assessments </h1>
             <br/>
             
+            <a href="<%=application.getContextPath()%>/auth/forms/presentationAssessment.jsp"> Add Presentation & demonstration Assessment</a> </br>
+            
             <h2> Demonstration assessments waiting for review</h2>
             <table class="table">
                 <thead>

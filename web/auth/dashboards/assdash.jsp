@@ -29,12 +29,12 @@
                     <div class="col-sm-8 ">
 
                         <ul>
-                            <li><a class="" href="<%=application.getContextPath()%>/auth/listRegistrationForms"> Registration Forms <span class="badge"> <%%></span> </a> </li>
-                            <li><a class="" href="<%=application.getContextPath()%>/auth/listProposal">Proposal </a> <span class="badge">5</span> </li>
-                            <li><a class="" href="<%=application.getContextPath()%>/auth/listDemo">Demonstration and Presentation </a> <span class="badge">5</span> </li>
-                            <li><a class="" href="<%=application.getContextPath()%>/auth/listFinalReport">Final Report </a> <span class="badge">5</span> </li>
-                            <li><a class="" href="<%=application.getContextPath()%>/auth/listShortPaper">Short Paper </a> <span class="badge">5</span> </li>
-                            <li><a class="" href="<%=application.getContextPath()%>/auth/listTurnitin">Turnitin Checks </a> <span class="badge">5</span> </li>
+                          <!--   <li><a class="" href="<%=application.getContextPath()%>/auth/listRegistrationForms"> Registration Forms <span class="badge"> </span> </a> </li>
+                            <li><a class="" href="<%=application.getContextPath()%>/auth/listProposal">Proposal </a> <span class="badge">5</span> </li> -->
+                            <li><a class="" href="<%=application.getContextPath()%>/auth/listDemo">Demonstration and Presentation </a> </li>
+                            <li><a class="" href="<%=application.getContextPath()%>/auth/listFinalReport">Final Report </a> </li>
+                            <li><a class="" href="<%=application.getContextPath()%>/auth/listShortPaper">Short Paper </a>  </li>
+                            <li><a class="" href="<%=application.getContextPath()%>/auth/listTurnitin">Turnitin Checks </a> </li>
                         </ul>
 
                     </div>

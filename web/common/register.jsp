@@ -74,11 +74,16 @@
                     <span class="erreur"> ${errors['confirm']} </span>
                 </div>     
                 <input type="submit" value="Register" class="btn btn-default"  />
-                
+
                 <p class="${empty errors ? 'success' : 'error'}">${result}</p>	
-                
+
             </form>
-                <a href="<%=application.getContextPath()%>/login">Login</a>
+
+            <% if (session.getAttribute("user") == null) {%>
+            <a href="<%=application.getContextPath()%>/login">Login</a>
+            <% }%>
+
+
         </div>
     </body>
 </html>

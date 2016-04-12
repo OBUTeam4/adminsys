@@ -21,12 +21,13 @@ public class Project {
     private String literature;
     private String projectAim;
     private String subjectArea;
+    private Proposal proposalId;
     
 
     public Project() {
     }
 
-    public Project(int projectId, String studentId, RegistrationForm registrationForm, String dissertationTitle, String relatedParties, String deliverables, String hypothesis, String literature, String projectAim, String subjectArea) {
+    public Project(int projectId, String studentId, RegistrationForm registrationForm, String dissertationTitle, String relatedParties, String deliverables, String hypothesis, String literature, String projectAim, String subjectArea, Proposal proposal) {
         this.projectId = projectId;
         this.studentId = studentId;
         this.registrationForm = registrationForm;
@@ -37,6 +38,7 @@ public class Project {
         this.literature = literature;
         this.projectAim = projectAim;
         this.subjectArea = subjectArea;
+        this.proposalId = proposal;
     }
 
     
@@ -120,6 +122,14 @@ public class Project {
 
     public void setSubjectArea(String subjectArea) {
         this.subjectArea = subjectArea;
+    }
+
+    public Proposal getProposalId() {
+        return proposalId;
+    }
+
+    public void setProposalId(Proposal proposalId) {
+        this.proposalId = proposalId;
     }
 
     

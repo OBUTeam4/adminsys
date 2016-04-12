@@ -38,10 +38,15 @@
 
                 <!--<p class="${empty errors ? 'success' : 'error'}">${result}</p>-->
                 <span class="error"> ${errors['result']} </span><br>
+
+                <% if (session.getAttribute("user") == null) {%>
                 <a href="<%=application.getContextPath()%>/register">Register</a>
+                <% }%>
+
+
 
             </form>
-            
+
         </div>
     </body>
 </html>

@@ -32,6 +32,14 @@ public class EditViewProfileServlet extends HttpServlet {
     private String profileURL = "";
 
     //private ProfileControlerHelper profileControlerHelper;
+
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -67,6 +75,13 @@ public class EditViewProfileServlet extends HttpServlet {
 
     }
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

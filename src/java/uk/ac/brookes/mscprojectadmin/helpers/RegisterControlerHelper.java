@@ -21,10 +21,18 @@ public class RegisterControlerHelper {
     String[] dashboardURLs = {"/studdash.jsp", "/supdash.jsp", "/assedash.jsp", "/admindash.jsp", "/mldash.jsp", "/eedash.jsp"};
     Map<String, String> registerErrors;
 
+    /**
+     *
+     */
     public RegisterControlerHelper() {
         userdao = new UserDAO();
     }
 
+    /**
+     *
+     * @param u
+     * @throws SQLException
+     */
     public void addUser(User u) throws SQLException {
         //boolean added = false;
         userdao.addUser(u);
@@ -32,12 +40,31 @@ public class RegisterControlerHelper {
         //return added;
     }
 
+    /**
+     *
+     * @param user
+     * @return
+     * @throws SQLException
+     */
     public boolean isRegistered(User user) throws SQLException {
         boolean userExist = false;
         userExist = userdao.findUserByID(user);
         return userExist;
     }
 
+    /**
+     *
+     * @param userId
+     * @param emailAddress
+     * @param firstname
+     * @param lastname
+     * @param courseTitle
+     * @param courseCode
+     * @param courseMode
+     * @param password
+     * @param confirm
+     * @return
+     */
     public Map validateRegisterDetails(String userId, String emailAddress, String firstname, String lastname, String courseTitle, String courseCode, String courseMode, String password, String confirm) {
         registerErrors = new HashMap<String, String>();
         try {

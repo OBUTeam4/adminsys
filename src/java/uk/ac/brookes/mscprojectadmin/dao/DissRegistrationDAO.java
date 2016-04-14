@@ -23,10 +23,18 @@ import uk.ac.brookes.mscprojectadmin.beans.RegistrationForm;
  */
 public class DissRegistrationDAO extends ClassDAO {
 
+    /**
+     *
+     */
     public DissRegistrationDAO() {
         super();
     }
 
+    /**
+     *
+     * @param semesterId
+     * @return
+     */
     public Semester getDissSemester(int semesterId) {
         Semester semester = null;
         try {
@@ -49,6 +57,12 @@ public class DissRegistrationDAO extends ClassDAO {
         return semester;
     }
 
+    /**
+     *
+     * @param semesterId
+     * @param flag
+     * @return
+     */
     public Event getRegistrationEvent(int semesterId, String flag) {
         Event event = null;
         try {
@@ -75,6 +89,10 @@ public class DissRegistrationDAO extends ClassDAO {
         return event;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Semester> getModuleCodes() {
         ArrayList<Semester> codes = new ArrayList<>();
         try {
@@ -99,6 +117,11 @@ public class DissRegistrationDAO extends ClassDAO {
 
     }
 
+    /**
+     *
+     * @param studentId
+     * @return
+     */
     public Project getStudentProject(String studentId) {
         Project project = null;
 
@@ -148,6 +171,11 @@ public class DissRegistrationDAO extends ClassDAO {
 
     }
 
+    /**
+     *
+     * @param studentId
+     * @return
+     */
     public int getRegistrationFormIdByStudent(String studentId) {
         int regfId = 0;
         System.out.println("studentId = " + studentId);
@@ -169,6 +197,11 @@ public class DissRegistrationDAO extends ClassDAO {
         return regfId;
     }
 
+    /**
+     *
+     * @param registrationId
+     * @return
+     */
     public String getRegistrationApproval(int registrationId) {
         String status = "";
 
@@ -194,6 +227,15 @@ public class DissRegistrationDAO extends ClassDAO {
         return status;
     }
 
+    /**
+     *
+     * @param student
+     * @param p
+     * @param supervisorName
+     * @param assessorName
+     * @param moduleCode
+     * @return
+     */
     public int addProjectRegistration(User student, Project p, String supervisorName, String assessorName, String moduleCode) {
 
         //Registration insert
@@ -298,6 +340,12 @@ public class DissRegistrationDAO extends ClassDAO {
     }
 
     // retrieve dissertation registration forms WAITING for module leader approval 
+
+    /**
+     *
+     * @param moduleLeaderId
+     * @return
+     */
     public List<Project> getSubmittedRegFormsForML(String moduleLeaderId) {
         List<Project> list = new ArrayList<Project>();
         try {
@@ -321,7 +369,7 @@ public class DissRegistrationDAO extends ClassDAO {
                     + "WHERE rf.supervisorApprovalID IS NOT NULL "
                     + "AND rf.moduleLeaderApprovalID IS NULL ";
              */
-            System.out.println(query);
+            System.out.println("getSubmittedRegFormsForML: " + query);
             rs = stmt.executeQuery(query);
             while (rs.next()) {
                 Project p = new Project();
@@ -367,6 +415,12 @@ public class DissRegistrationDAO extends ClassDAO {
     }
 
     // retrieve dissertation registration REVIEWED BY ML 
+
+    /**
+     *
+     * @param moduleLeaderId
+     * @return
+     */
     public List<Project> getReviewedRegFormsForML(String moduleLeaderId) {
         List<Project> list = new ArrayList<Project>();
         try {
@@ -437,6 +491,12 @@ public class DissRegistrationDAO extends ClassDAO {
 
     // retrieve dissertation registration forms WAITING for supervisor approval 
     // a registration form waiting for supervisor approvation got a NULL ID for column supervisorApprovalID
+
+    /**
+     *
+     * @param supervisorId
+     * @return
+     */
     public List<Project> getSubmittedRegFormsForSupervisor(String supervisorId) {
         List<Project> list = new ArrayList<Project>();
         try {
@@ -490,6 +550,12 @@ public class DissRegistrationDAO extends ClassDAO {
     }
 
     // retrieve dissertation registration REVIEWED BY supervisor 
+
+    /**
+     *
+     * @param supervisorId
+     * @return
+     */
     public List<Project> getReviewedRegFormsForSupervisor(String supervisorId) {
         List<Project> list = new ArrayList<Project>();
         try {
@@ -549,6 +615,11 @@ public class DissRegistrationDAO extends ClassDAO {
     }
 
     // retrive all submitted dissertation registration forms
+
+    /**
+     *
+     * @return
+     */
     public List<Project> getSubmittedRegistrationForms() {
         List<Project> list = new ArrayList<Project>();
         try {
@@ -598,6 +669,12 @@ public class DissRegistrationDAO extends ClassDAO {
     }
 
     // get project + registration form from ID
+
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Project getProjectRegistrationFromId(int id) {
         Project project = null;
 
@@ -672,6 +749,12 @@ public class DissRegistrationDAO extends ClassDAO {
         return project;
     }
 
+    /**
+     *
+     * @param registrationFormId
+     * @return
+     * @throws SQLException
+     */
     public boolean findRegistrationByID(int registrationFormId) throws SQLException {
         boolean found = false;
         query = "SELECT * FROM `registrationform` WHERE `registrationFormId` = " + registrationFormId;
@@ -691,6 +774,11 @@ public class DissRegistrationDAO extends ClassDAO {
         return found;
     }
 
+    /**
+     *
+     * @param args
+     * @throws SQLException
+     */
     public static void main(String[] args) throws SQLException {
         DissRegistrationDAO ds = new DissRegistrationDAO();
         /*List<Semester> semesters = ds.getDissSemesters();

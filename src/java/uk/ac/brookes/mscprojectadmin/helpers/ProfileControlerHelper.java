@@ -21,10 +21,19 @@ public class ProfileControlerHelper {
     String[] dashboardURLs = {"/studdash.jsp", "/supdash.jsp", "/assedash.jsp", "/admindash.jsp", "/mldash.jsp", "/eedash.jsp"};
     Map<String, String> profileErrors;
 
+    /**
+     *
+     */
     public ProfileControlerHelper() {
         userdao = new UserDAO();
     }
 
+    /**
+     *
+     * @param u
+     * @return
+     * @throws SQLException
+     */
     public String getProfilePageFromUserOccupation(User u) throws SQLException {
         String userOccupation;
         String profileUrl = "";
@@ -56,10 +65,24 @@ public class ProfileControlerHelper {
     }
 
     // 
+
+    /**
+     *
+     * @param u
+     * @param currentOccupation
+     * @return
+     * @throws SQLException
+     */
     public boolean updateUser(User u, String currentOccupation) throws SQLException {
         return userdao.updateUser(u, currentOccupation);
     }
 
+    /**
+     *
+     * @param password
+     * @param confirm
+     * @return
+     */
     public Map validateProfileDetailsStaff(String password, String confirm) {
         profileErrors = new HashMap<String, String>();
 
@@ -81,6 +104,15 @@ public class ProfileControlerHelper {
         return profileErrors;
     }
 
+    /**
+     *
+     * @param courseTitle
+     * @param courseCode
+     * @param courseMode
+     * @param password
+     * @param confirm
+     * @return
+     */
     public Map validateProfileDetailsStudent(String courseTitle, String courseCode, String courseMode, String password, String confirm) {
         profileErrors = new HashMap<String, String>();
 

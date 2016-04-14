@@ -16,6 +16,11 @@ import uk.ac.brookes.mscprojectadmin.beans.Event;
  */
 public class DashboardDAO extends ClassDAO{
     
+    /**
+     *
+     * @param semesterId
+     * @return
+     */
     public List<Event> getDissSemesterEvents(int semesterId){
         ArrayList<Event> events = new ArrayList<>();
         try{

@@ -20,10 +20,20 @@ public class LoginControlerHelper {
     String[] dashboardURLs = {"/studdash.jsp", "/supdash.jsp", "/assdash.jsp", "/admindash.jsp", "/mldash.jsp", "/eedash.jsp"};
     Map<String, String> loginErrors;
     
+    /**
+     *
+     */
     public LoginControlerHelper() {
         userdao = new UserDAO();
     }
     //This method checks username and password are not empty
+
+    /**
+     *
+     * @param idNumber
+     * @param password
+     * @return
+     */
     public Map validateLoginDetails(String idNumber, String password) {
         loginErrors = new HashMap<String, String>();
         try {
@@ -45,6 +55,13 @@ public class LoginControlerHelper {
     }
     
     //This method checks if the user recognised by the system
+
+    /**
+     *
+     * @param user
+     * @return
+     * @throws SQLException
+     */
     public boolean isRegistered(User user) throws SQLException {
         boolean userExist = false;
         System.out.println("LCH:11");
@@ -53,6 +70,11 @@ public class LoginControlerHelper {
         return userExist;
     }
 
+    /**
+     *
+     * @param user
+     * @return
+     */
     public String dashboardURL(User user) {
         String url = null;
         System.out.println("here");

@@ -21,6 +21,13 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(urlPatterns = {"/auth/listTurnitin"})
 public class ListTurnitin extends HttpServlet {
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -28,7 +35,13 @@ public class ListTurnitin extends HttpServlet {
         this.getServletContext().getRequestDispatcher("/auth/lists/turnitinList.jsp").forward(request, response);
     }
 
-  
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

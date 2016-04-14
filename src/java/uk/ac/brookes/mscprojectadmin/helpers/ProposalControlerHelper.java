@@ -19,16 +19,40 @@ public class ProposalControlerHelper {
 
     private final DissProposalDAO proposalDAO;
 
+    /**
+     *
+     */
     public ProposalControlerHelper() {
         this.proposalDAO = new DissProposalDAO();
     }
     
+    /**
+     *
+     * @param proposalID
+     * @param projectID
+     * @return
+     * @throws SQLException
+     */
     public boolean addProposalAssessmentIdToProject(int proposalID, int projectID) throws SQLException {
-        return this.proposalDAO.addProposalAssessmentIdToProject(proposalID, projectID);
+        return proposalDAO.addProposalAssessmentIdToProject(proposalID, projectID);
     }
     
+    /**
+     *
+     * @param proposal
+     * @param intro
+     * @param methodology
+     * @param progress
+     * @param writtenPresentation
+     * @param projectPlan
+     * @param supervisorApproval
+     * @return
+     * @throws SQLException
+     */
     public int addProposal(Proposal proposal, Criteria intro, Criteria methodology, Criteria progress, Criteria writtenPresentation, Criteria projectPlan, Approval supervisorApproval) throws SQLException {
-        return this.proposalDAO.addProposal(proposal, intro, methodology, progress, writtenPresentation, projectPlan, supervisorApproval);
+        return proposalDAO.addProposal(proposal, intro, methodology, progress, writtenPresentation, projectPlan, supervisorApproval);
     }
+    
+    
     
 }

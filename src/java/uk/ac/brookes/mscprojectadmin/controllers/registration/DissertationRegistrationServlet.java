@@ -31,6 +31,13 @@ import uk.ac.brookes.mscprojectadmin.helpers.FormsControlerHelper;
 @WebServlet(name = "DissertationRegistrationServlet", urlPatterns = {"/auth/dissertationRegistration"})
 public class DissertationRegistrationServlet extends HttpServlet {
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -105,6 +112,13 @@ public class DissertationRegistrationServlet extends HttpServlet {
         
     }
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

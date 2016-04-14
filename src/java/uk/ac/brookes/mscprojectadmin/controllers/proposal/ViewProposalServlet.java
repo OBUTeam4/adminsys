@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package uk.ac.brookes.mscprojectadmin.controllers;
+package uk.ac.brookes.mscprojectadmin.controllers.proposal;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,41 +12,35 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import uk.ac.brookes.mscprojectadmin.helpers.ProposalControlerHelper;
 
 /**
  *
  * @author Quentin
  */
-@WebServlet(name = "HomeServlet", urlPatterns = {"/index"})
-public class HomeServlet extends HttpServlet {
+@WebServlet(name = "ViewProposalServlet", urlPatterns = {"/auth/ViewProposal"})
+public class ViewProposalServlet extends HttpServlet {
 
-    /**
-     *
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
-     */
+    private int projectId;
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        // retrieve registration form id from URL.
+        this.projectId = Integer.parseInt(request.getParameter("id"));
+
+        ProposalControlerHelper proposalControlerHelper = new ProposalControlerHelper();
+        //proposalControlerHelper.
         
-        this.getServletContext().getRequestDispatcher("/common/index.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/auth/forms/proposalAssessment.jsp").forward(request, response);
+
     }
 
-    /**
-     *
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
     }
-
-  
 
 }

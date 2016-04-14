@@ -31,32 +31,75 @@ public class FormsControlerHelper {
     DissRegistrationDAO diss;
     Map<String, String> formErrors;
 
+    /**
+     *
+     */
     public FormsControlerHelper() {
         userdao = new UserDAO();
         diss = new DissRegistrationDAO();
 
     }
 
+    /**
+     *
+     * @return
+     * @throws SQLException
+     */
     public List<User> getSupervisors() throws SQLException {
         return userdao.getSupervisors();
     }
 
+    /**
+     *
+     * @return
+     * @throws SQLException
+     */
     public List<User> getAssessors() throws SQLException {
         return userdao.getAssessors();
     }
 
+    /**
+     *
+     * @param semesterId
+     * @return
+     * @throws SQLException
+     */
     public Semester getDissSemester(int semesterId) throws SQLException {
         return diss.getDissSemester(semesterId);
     }
 
+    /**
+     *
+     * @param semesterId
+     * @param flag
+     * @return
+     */
     public Event getRegistrationEvent(int semesterId, String flag) {
         return diss.getRegistrationEvent(semesterId, flag);
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Semester> getModuleCodes() {
         return diss.getModuleCodes();
     }
 
+    /**
+     *
+     * @param moduleCode
+     * @param dissertationTitle
+     * @param supervisorName
+     * @param assessorName
+     * @param parties
+     * @param subjectArea
+     * @param aim
+     * @param literature
+     * @param hypothesis
+     * @param deliverables
+     * @return
+     */
     public Map validateRegInputs(String moduleCode, String dissertationTitle, String supervisorName, String assessorName, String parties,
             String subjectArea, String aim, String literature, String hypothesis, String deliverables) {
 
@@ -254,6 +297,13 @@ public class FormsControlerHelper {
     //Third, if yes it then checks the status of the approval.
     //Two cases when the student can submit: First, when he first time register his dissertation before the deadline.
     //Second, when his first registration has a disaproval. 
+
+    /**
+     *
+     * @param user
+     * @return
+     * @throws ParseException
+     */
     public String canSubmit(User user) throws ParseException {
         String message = null;
         if (checkRegSubmissionDeadline()) { //True means submission date is valid. 
@@ -278,6 +328,11 @@ public class FormsControlerHelper {
         return message;
     }
 
+    /**
+     *
+     * @param studentId
+     * @return
+     */
     public Project getDissProject(String studentId) {
         if (studentId != null) {
             return diss.getStudentProject(studentId);
@@ -287,6 +342,15 @@ public class FormsControlerHelper {
 
     }
 
+    /**
+     *
+     * @param student
+     * @param p
+     * @param supervisorName
+     * @param assessorName
+     * @param moduleCode
+     * @return
+     */
     public int addNewProjectRegistration(User student, Project p, String supervisorName, String assessorName, String moduleCode) {
         int success = diss.addProjectRegistration(student, p, supervisorName, assessorName, moduleCode);
 
@@ -299,10 +363,20 @@ public class FormsControlerHelper {
 
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Project getProjectRegistrationFromId(int id){
         return diss.getProjectRegistrationFromId(id);
     }
     
+    /**
+     *
+     * @param args
+     * @throws ParseException
+     */
     public static void main(String[] args) throws ParseException {
         /*Date date = new Date();
         DateFormat format = new SimpleDateFormat("dd/MM/yyyy");*/

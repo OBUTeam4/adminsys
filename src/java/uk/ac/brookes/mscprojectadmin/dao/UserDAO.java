@@ -20,6 +20,9 @@ import uk.ac.brookes.mscprojectadmin.tools.DBConnection;
  */
 public class UserDAO extends ClassDAO {
 
+    /**
+     *
+     */
     public UserDAO() {
         // System.out.println(con);
         super();
@@ -29,6 +32,14 @@ public class UserDAO extends ClassDAO {
     * This method will look for a user by his login details, ID number and password. 
     * Once the user is found setUserData will be called to set the user data
      */
+
+    /**
+     *
+     * @param user
+     * @return
+     * @throws SQLException
+     */
+
     public boolean findUserByLoginDetails(User user) throws SQLException {
         boolean found = false;
         query = "select * from user where userId = '" + user.getUserId() + "' and password = '" + user.getPassword() + "'";
@@ -64,6 +75,12 @@ public class UserDAO extends ClassDAO {
         return found;
     }
 
+    /**
+     *
+     * @param user
+     * @return
+     * @throws SQLException
+     */
     public boolean findUserByID(User user) throws SQLException {
         boolean found = false;
         query = "select * from user where userId = '" + user.getUserId() + "'";
@@ -148,6 +165,13 @@ public class UserDAO extends ClassDAO {
     }
 
     // add USER
+
+    /**
+     *
+     * @param user
+     * @return
+     * @throws SQLException
+     */
     public boolean addUser(User user) throws SQLException {
         boolean added = false;
         String insertQuery = "INSERT INTO `user`(`userId`, `fName`, `lName`, `initial`, `email`, `password`, `courseCode`, `courseTitle`, `courseMode`, `" + getUserOccupationColumn(user.getOccupation()) + "`)"
@@ -224,6 +248,12 @@ public class UserDAO extends ClassDAO {
 
     // OLD QUERY! 
     // return assesors, supervisor, leader
+
+    /**
+     *
+     * @return
+     * @throws SQLException
+     */
     public List<User> getStaffMembersWithoutAdmin() throws SQLException {
         List<User> listing = new ArrayList<User>();
         Statement statement = con.createStatement();
@@ -241,6 +271,12 @@ public class UserDAO extends ClassDAO {
     }
 
     // get supervisors users
+
+    /**
+     *
+     * @return
+     * @throws SQLException
+     */
     public List<User> getSupervisors() throws SQLException {
         List<User> listing = new ArrayList<User>();
         Statement statement = con.createStatement();
@@ -258,6 +294,12 @@ public class UserDAO extends ClassDAO {
     }
 
     // get assessors users
+
+    /**
+     *
+     * @return
+     * @throws SQLException
+     */
     public List<User> getAssessors() throws SQLException {
         List<User> listing = new ArrayList<User>();
         Statement statement = con.createStatement();
@@ -274,6 +316,12 @@ public class UserDAO extends ClassDAO {
         return listing;
     }
 
+    /**
+     *
+     * @param userId
+     * @return
+     * @throws SQLException
+     */
     public User getUserbyId(String userId) throws SQLException {
         User u = null;
         query = "select * from user where userId = '" + userId + "'";
@@ -302,6 +350,11 @@ public class UserDAO extends ClassDAO {
         return u;
     }
 
+    /**
+     *
+     * @param args
+     * @throws SQLException
+     */
     public static void main(String[] args) throws SQLException {
         User user = new User("15005017", "Ayoub", "Kaoui", "", "TDI", "Development Informatique", "FULL", "ak123981", "k.ayoub@ntic.com", "student");
         UserDAO udao = new UserDAO();

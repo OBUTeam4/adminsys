@@ -19,13 +19,40 @@ import uk.ac.brookes.mscprojectadmin.tools.DBConnection;
  * @author oussamak
  */
 public class ClassDAO {
+
+    /**
+     *
+     */
     protected DBConnection connect;
+
+    /**
+     *
+     */
     protected Connection con;
+
+    /**
+     *
+     */
     protected Statement stmt;
+
+    /**
+     *
+     */
     protected ResultSet rs;
+
+    /**
+     *
+     */
     protected String query;
+
+    /**
+     *
+     */
     protected PreparedStatement preparedStatement;
     
+    /**
+     *
+     */
     protected ClassDAO(){
         createConnection();
     }
@@ -35,16 +62,32 @@ public class ClassDAO {
         con = connect.getConnection();
     }
     
+    /**
+     *
+     * @param date
+     * @return
+     */
     protected String parstDateToString(Date date){
         String formattedDate = new SimpleDateFormat("EEEE dd MMMM YYYY").format(date);
         return formattedDate;
     }
     
+    /**
+     *
+     * @param date
+     * @return
+     */
     protected String parseDateToYYYYMMDD(Date date){
         String formattedDate = new SimpleDateFormat("yyyy-MM-dd").format(date);
         return formattedDate; 
     }
     
+    /**
+     *
+     * @param table
+     * @param column
+     * @return
+     */
     protected int getLastRecordFormTable(String table, String column){
         
         int id=0;

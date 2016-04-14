@@ -15,22 +15,33 @@ import uk.ac.brookes.mscprojectadmin.beans.Criteria;
  */
 public class CriteriaDAO extends ClassDAO {
 
+    /**
+     *
+     */
     public CriteriaDAO() {
         super();
     }
 
     // add a new approval and return id 
+
+    /**
+     *
+     * @param criteria
+     * @return
+     * @throws SQLException
+     */
     public int addCriteria(Criteria criteria) throws SQLException {
         int criteriaId = 0;
-        String query = "INSERT INTO criteria(criteriaDescription, marks, comments, agreedComments) VALUES (?,?,?,?)";
+        //String query = "INSERT INTO criteria(criteriaDescription, marks, comments, agreedComments) VALUES (?,?,?,?)";
+        String query = "INSERT INTO criteria(marks, comments) VALUES (?,?)";
         //System.out.println("add approval query: " + query);
         try {
             // prepared statement to avoid SQL injection
             preparedStatement = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, criteria.getDescription());
-            preparedStatement.setString(2, criteria.getMarks());
-            preparedStatement.setString(3, criteria.getComments());
-            preparedStatement.setString(4, criteria.getAgreedComments());
+            //preparedStatement.setString(1, criteria.getDescription());
+            preparedStatement.setString(1, criteria.getMarks());
+            preparedStatement.setString(2, criteria.getComments());
+            //preparedStatement.setString(4, criteria.getAgreedComments());
 
             // execute insert
             preparedStatement.executeUpdate();
@@ -44,9 +55,6 @@ public class CriteriaDAO extends ClassDAO {
         } finally {
             if (preparedStatement != null) {
                 preparedStatement.close();
-            }
-            if (con != null) {
-                con.close();
             }
 
         }

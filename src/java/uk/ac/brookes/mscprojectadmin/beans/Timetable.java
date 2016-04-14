@@ -17,6 +17,13 @@ public class Timetable {
     private Date dueDate;
     private String recipient;
 
+    /**
+     *
+     * @param timetableId
+     * @param event
+     * @param dueDate
+     * @param recipient
+     */
     public Timetable(int timetableId, String event, Date dueDate, String recipient) {
         this.timetableId = timetableId;
         this.event = event;
@@ -24,37 +31,72 @@ public class Timetable {
         this.recipient = recipient;
     }
 
+    /**
+     *
+     */
     public Timetable() {
     }
 
+    /**
+     *
+     * @return
+     */
     public int getTimetableId() {
         return timetableId;
     }
 
+    /**
+     *
+     * @param timetableId
+     */
     public void setTimetableId(int timetableId) {
         this.timetableId = timetableId;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getEvent() {
         return event;
     }
 
+    /**
+     *
+     * @param event
+     */
     public void setEvent(String event) {
         this.event = event;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getDueDate() {
         return dueDate;
     }
 
+    /**
+     *
+     * @param dueDate
+     */
     public void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getRecipient() {
         return recipient;
     }
 
+    /**
+     *
+     * @param recipient
+     */
     public void setRecipient(String recipient) {
         this.recipient = recipient;
     }

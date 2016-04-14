@@ -24,32 +24,72 @@ public class ApproveControlerHelper {
     Map<String, String> formErrors;
     ApprovalDAO approvalDao;
 
+    /**
+     *
+     */
     public ApproveControlerHelper() {
         userdao = new UserDAO();
         diss = new DissRegistrationDAO();
         approvalDao = new ApprovalDAO();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     */
     public User getStudentInfosFromId(String id) throws SQLException {
         return userdao.getUserbyId(id);
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Approval getApprovalFromId(int id) {
         return approvalDao.getApprovalFromId(id);
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     */
     public boolean findRegistrationByID(int id) throws SQLException {
         return diss.findRegistrationByID(id);
     }
 
+    /**
+     *
+     * @param registrationId
+     * @param approval
+     * @return
+     * @throws SQLException
+     */
     public boolean addSupervisorApprovalToRegistrationForm(int registrationId, Approval approval) throws SQLException {
         return approvalDao.addSupervisorApprovalToRegistrationForm(registrationId, approval);
     }
 
+    /**
+     *
+     * @param registrationId
+     * @param approval
+     * @return
+     * @throws SQLException
+     */
     public boolean addModuleLeaderApprovalToRegistrationForm(int registrationId, Approval approval) throws SQLException {
         return approvalDao.addModuleLeaderApprovalToRegistrationForm(registrationId, approval);
     }
 
+    /**
+     *
+     * @param approval
+     * @return
+     * @throws SQLException
+     */
     public int addApproval(Approval approval) throws SQLException {
         return approvalDao.addApproval(approval);
     }

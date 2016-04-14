@@ -10,16 +10,34 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ *
+ * @author Quentin
+ */
 @WebFilter(urlPatterns = "/admin/*")
 public class AdminFilter implements Filter{
 
+    /**
+     *
+     */
     public AdminFilter() {
     }
 
+    /**
+     *
+     */
     @Override
     public void destroy() {
     }
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @param chain
+     * @throws IOException
+     * @throws ServletException
+     */
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest rq = (HttpServletRequest) request;
@@ -30,6 +48,11 @@ public class AdminFilter implements Filter{
         }*/
     }
 
+    /**
+     *
+     * @param fConfig
+     * @throws ServletException
+     */
     @Override
     public void init(FilterConfig fConfig) throws ServletException {
     }

@@ -23,6 +23,13 @@ import uk.ac.brookes.mscprojectadmin.helpers.ListsControlerHelper;
 @WebServlet(name = "listProposal", urlPatterns = {"/auth/listProposal"})
 public class ListProposal extends HttpServlet {
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -41,6 +48,13 @@ public class ListProposal extends HttpServlet {
         this.getServletContext().getRequestDispatcher("/auth/lists/proposalList.jsp").forward(request, response);
     }
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

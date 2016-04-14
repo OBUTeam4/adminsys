@@ -25,11 +25,29 @@ public class DissProposalDAO extends ClassDAO {
     private CriteriaDAO criteriaDao;
     private ApprovalDAO approvalDAO;
 
+    /**
+     *
+     */
     public DissProposalDAO() {
         super();
+        this.criteriaDao = new CriteriaDAO();
+        this.approvalDAO = new ApprovalDAO();
     }
 
     // add the proposal assessment to the DB. 
+
+    /**
+     *
+     * @param proposal
+     * @param intro
+     * @param methodology
+     * @param progress
+     * @param writtenPresentation
+     * @param projectPlan
+     * @param supervisorApproval
+     * @return
+     * @throws SQLException
+     */
     public int addProposal(Proposal proposal, Criteria intro, Criteria methodology, Criteria progress, Criteria writtenPresentation, Criteria projectPlan, Approval supervisorApproval) throws SQLException {
         int proposalID = 0;
 
@@ -41,10 +59,14 @@ public class DissProposalDAO extends ClassDAO {
 
         int approvalID = 0;
         String query = "INSERT INTO `proposalassessment`(`mark`, `total`, `comments`, `supervisorId`, `introId`, `methodologyId`, `progressId`, `writtenPresentationId`, "
-                + "`projectPlanId, "
-                + "`approvalId`) VALUES (?,?,?,?,?,?,?,?,?,?)";
+                + "`projectPlanId`) VALUES (?,?,?,?,?,?,?,?,?)";
         //System.out.println("add approval query: " + query);
         try {
+            System.out.println(intro);
+            System.out.println(intro.getComments());
+            System.out.println(intro.getMarks());
+            System.out.println(intro.getDescription());
+
             // add intro criteria
             introCriteriaID = criteriaDao.addCriteria(intro);
 
@@ -61,20 +83,19 @@ public class DissProposalDAO extends ClassDAO {
             projectPlanID = criteriaDao.addCriteria(projectPlan);
 
             // add approval 
-            approvalID = approvalDAO.addApproval(supervisorApproval);
-
+            //approvalID = approvalDAO.addApproval(supervisorApproval);
             // prepared statement to avoid SQL injection
             preparedStatement = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, proposal.getMark());
             preparedStatement.setString(2, proposal.getTotal());
             preparedStatement.setString(3, proposal.getComments());
-            preparedStatement.setInt(4, proposal.getSupervisorId());
+            preparedStatement.setString(4, proposal.getSupervisorId());
             preparedStatement.setInt(5, introCriteriaID);
             preparedStatement.setInt(6, methodologyID);
             preparedStatement.setInt(7, progressID);
             preparedStatement.setInt(8, writtenPresentationID);
             preparedStatement.setInt(9, projectPlanID);
-            preparedStatement.setInt(10, approvalID);
+            //preparedStatement.setInt(10, approvalID);
 
             // execute insert
             preparedStatement.executeUpdate();
@@ -89,16 +110,21 @@ public class DissProposalDAO extends ClassDAO {
             if (preparedStatement != null) {
                 preparedStatement.close();
             }
-            if (con != null) {
-                con.close();
-            }
 
         }
         System.out.println("Returned proposalID : " + proposalID);
         return proposalID;
     }
-    
-     // add the ID of the proposal Assessment to the project table
+
+    // add the ID of the proposal Assessment to the project table
+
+    /**
+     *
+     * @param proposalID
+     * @param projectID
+     * @return
+     * @throws SQLException
+     */
     public boolean addProposalAssessmentIdToProject(int proposalID, int projectID) throws SQLException {
         boolean updated = false;
         int addedProposalId = 0;
@@ -124,9 +150,14 @@ public class DissProposalDAO extends ClassDAO {
         }
         return updated;
     }
-    
 
     // retrieve list of project waiting for proposal
+
+    /**
+     *
+     * @param supervisorId
+     * @return
+     */
     public List<Project> getProposalForSupervisor(String supervisorId) {
         List<Project> list = new ArrayList<Project>();
         try {
@@ -193,7 +224,6 @@ public class DissProposalDAO extends ClassDAO {
                 Project p = new Project();
                 RegistrationForm rf = new RegistrationForm(rs.getInt("registrationFormId"));
                 User student = new User(rs.getString("studentId"));
-                User assessor = new User(rs.getString("assessorId"));
                 User supervisor = new User(rs.getString("supervisorId"));
                 // Approval moduleLeaderApproval = new Approval(rs.getInt("moduleLeaderApprovalID"));
                 // Approval supervisorApproval = new Approval(rs.getInt("supervisorApprovalID"));
@@ -205,10 +235,10 @@ public class DissProposalDAO extends ClassDAO {
                 p.setDissertationTitle(rs.getString("dissertationTitle"));
                 p.setStudentId(rs.getString("studentId"));
 
+                p.setProjectId(rs.getInt("projectId"));
                 student.setfName(rs.getString("fName"));
                 student.setlName(rs.getString("lName"));
 
-                rf.setAssessor(assessor);
                 rf.setSupervisor(supervisor);
                 rf.setProject(p);
                 rf.setStudent(student);
@@ -228,6 +258,32 @@ public class DissProposalDAO extends ClassDAO {
             rs = null;
         }
         return list;
+    }
+    
+    
+    // get and return a proposal based on ID 
+     public Approval getProposalFromId(int id) {
+        Approval approval = null;
+        try {
+            stmt = con.createStatement();
+            String query = "SELECT * FROM `approval` WHERE `approvalId` = " + id;
+            rs = stmt.executeQuery(query);
+            if (rs.next()) {
+                // User user = new User();
+                approval = new Approval();
+                approval.setApprovalId(id);
+                approval.setUserId(rs.getString("userId"));
+                approval.setApprovalStatus(rs.getString("status"));
+                approval.setApprovalDate(rs.getString("date"));
+                approval.setFeedbacks(rs.getString("feedbacks"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            stmt = null;
+            rs = null;
+        }
+        return approval;
     }
 
 }

@@ -37,6 +37,13 @@ public class ApproveRegistrationMLServlet extends HttpServlet {
     private int id;
     private ApproveControlerHelper approveControlerHelper;
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -113,6 +120,13 @@ public class ApproveRegistrationMLServlet extends HttpServlet {
 
     }
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

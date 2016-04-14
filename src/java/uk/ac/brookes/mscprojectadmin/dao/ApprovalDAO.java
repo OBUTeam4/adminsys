@@ -17,11 +17,21 @@ import uk.ac.brookes.mscprojectadmin.beans.User;
  */
 public class ApprovalDAO extends ClassDAO {
 
+    /**
+     *
+     */
     public ApprovalDAO() {
         super();
     }
 
     // add a new approval and return id 
+
+    /**
+     *
+     * @param approval
+     * @return
+     * @throws SQLException
+     */
     public int addApproval(Approval approval) throws SQLException {
         int approvalId = 0;
         String query = "INSERT INTO approval(userId, date, status, feedbacks) VALUES (?,?,?,?)";
@@ -55,6 +65,13 @@ public class ApprovalDAO extends ClassDAO {
     // check existing registration
     // add Module Leader approval for a Registration Form
 
+    /**
+     *
+     * @param registrationId
+     * @param approval
+     * @return
+     * @throws SQLException
+     */
     public boolean addModuleLeaderApprovalToRegistrationForm(int registrationId, Approval approval) throws SQLException {
         boolean updated = false;
         int addedApprovalId = 0;
@@ -110,6 +127,14 @@ public class ApprovalDAO extends ClassDAO {
     }
 
     // add Supervisor approval for a Registration Form
+
+    /**
+     *
+     * @param registrationId
+     * @param approval
+     * @return
+     * @throws SQLException
+     */
     public boolean addSupervisorApprovalToRegistrationForm(int registrationId, Approval approval) throws SQLException {
         boolean updated = false;
         int addedApprovalId = 0;
@@ -140,6 +165,12 @@ public class ApprovalDAO extends ClassDAO {
     }
 
     // get an approval by ID 
+
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Approval getApprovalFromId(int id) {
         Approval approval = null;
         try {

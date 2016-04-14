@@ -21,11 +21,18 @@ public class ListsControlerHelper {
     DissRegistrationDAO dissRegistrationDAO;
     DissProposalDAO dissProposalDAO;
 
+    /**
+     *
+     */
     public ListsControlerHelper() {
         dissRegistrationDAO = new DissRegistrationDAO();
         dissProposalDAO = new DissProposalDAO();
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Project> getSubmittedRegistrationForms() {
         return dissRegistrationDAO.getSubmittedRegistrationForms();
     }
@@ -36,18 +43,40 @@ public class ListsControlerHelper {
         ====== REGISTRATION FORMS ======
         ================================
      */
+
+    /**
+     *
+     * @param supervisorId
+     * @return
+     */
+
     public List<Project> getSubmittedRegFormsForSupervisor(String supervisorId) {
         return dissRegistrationDAO.getSubmittedRegFormsForSupervisor(supervisorId);
     }
 
+    /**
+     *
+     * @param supervisorId
+     * @return
+     */
     public List<Project> getReviewedRegFormsForSupervisor(String supervisorId) {
         return dissRegistrationDAO.getReviewedRegFormsForSupervisor(supervisorId);
     }
 
+    /**
+     *
+     * @param moduleLeaderId
+     * @return
+     */
     public List<Project> getSubmittedRegFormsForML(String moduleLeaderId) {
         return dissRegistrationDAO.getSubmittedRegFormsForML(moduleLeaderId);
     }
 
+    /**
+     *
+     * @param moduleLeaderId
+     * @return
+     */
     public List<Project> getReviewedRegFormsForML(String moduleLeaderId) {
         return dissRegistrationDAO.getReviewedRegFormsForML(moduleLeaderId);
     }
@@ -62,10 +91,22 @@ public class ListsControlerHelper {
         ====== PROPOSAL FORMS ======
         ============================
      */
+
+    /**
+     *
+     * @param supervisorId
+     * @return
+     */
+
     public List<Project> getProposalForSupervisor(String supervisorId) {
         return dissProposalDAO.getProposalForSupervisor(supervisorId);
     }
 
+    /**
+     *
+     * @param supervisorId
+     * @return
+     */
     public List<Project> getProposalReviewedBySupervisor(String supervisorId) {
         return dissProposalDAO.getProposalReviewedBySupervisor(supervisorId);
     }

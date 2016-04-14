@@ -19,10 +19,19 @@ public class EthicsDAO extends ClassDAO {
 
     DissRegistrationDAO diss;
 
+    /**
+     *
+     */
     public EthicsDAO() {
         super();
     }
 
+    /**
+     *
+     * @param userId
+     * @param e1
+     * @return
+     */
     public int addNewEthicsForm1(String userId, Ethics1 e1) {
         diss = new DissRegistrationDAO();
         int regfId = diss.getRegistrationFormIdByStudent(userId);
@@ -48,6 +57,12 @@ public class EthicsDAO extends ClassDAO {
         return result;
     }
 
+    /**
+     *
+     * @param userId
+     * @param e2
+     * @return
+     */
     public int addNewEthicsForm2(String userId, Ethics2 e2) {
         diss = new DissRegistrationDAO();
         int regfId = diss.getRegistrationFormIdByStudent(userId);
@@ -72,6 +87,11 @@ public class EthicsDAO extends ClassDAO {
         return result;
     }
 
+    /**
+     *
+     * @param registrationId
+     * @return
+     */
     public Ethics1 getEthics1(int registrationId) {
         System.out.println("regID = " + registrationId);
         Ethics1 e1 = null;
@@ -110,6 +130,11 @@ public class EthicsDAO extends ClassDAO {
         return e1;
     }
 
+    /**
+     *
+     * @param registrationId
+     * @return
+     */
     public Ethics2 getEthics2(int registrationId) {
         Ethics2 e2 = null;
         try {
@@ -141,6 +166,10 @@ public class EthicsDAO extends ClassDAO {
         return e2;
     }
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         EthicsDAO edao = new EthicsDAO();
         System.out.println(edao.getLastRecordFormTable("ethicsform2", "ethicsformId2"));

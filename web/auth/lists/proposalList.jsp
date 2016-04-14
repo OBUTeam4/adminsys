@@ -26,7 +26,7 @@
 
             <h1> List of proposal assessments </h1>
             <br/>
-            
+
             <h2> Proposal assessments waiting for review</h2>
             <table class="table">
                 <thead>
@@ -51,7 +51,7 @@
                             <td>${waiting.registrationForm.supervisor.userId}</td>
                             <td> Pending... </td>
                             <td>  <a href="<%=application.getContextPath()%>/auth/addProposalServlet?id=${waiting.projectId}"> Add proposal assessment </a> </td>
-                                
+
                         </tr>
                     </c:forEach>
                 </tbody>
@@ -64,7 +64,7 @@
             <h2> Proposal assessments reviewed</h2>
             <table class="table">
                 <thead>
-                   <tr>
+                    <tr>
                         <th>Firstname</th>
                         <th>Lastname</th>
                         <th>StudentID </th>
@@ -83,16 +83,13 @@
                             <td>${r.studentId}</td>
                             <td>${r.dissertationTitle}</td>
                             <td>${r.registrationForm.supervisor.userId}</td>
-                            <td>${r.registrationForm.assessor.userId}</td>
 
                             <td>
-                                <a href="<%=application.getContextPath()%>/auth/approveRegistrationSupervisor?id=${r.registrationForm.registrationFormId}"> ${r.registrationForm.supervisorApproval.approvalStatus} <br/> (View) </a>
+                                Assessed
                             </td>
 
-                            <td>
-                                <a href="<%=application.getContextPath()%>/auth/approveRegistrationModuleLeader?id=${r.registrationForm.registrationFormId}"> ${r.registrationForm.moduleLeaderApproval.approvalStatus} <br/> (View) </a>
-                            </td>
-                            <td>${r.registrationForm.status}</td>
+                            <td>  <a href="<%=application.getContextPath()%>/auth/ViewProposal?id=${r.projectId}"> (View) </a>  </td>
+
                         </tr>
                     </c:forEach>
                 </tbody>

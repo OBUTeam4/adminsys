@@ -25,12 +25,21 @@ public class DashboardControlerHelper {
     DashboardDAO ddao;
     List<Event> events;
 
+    /**
+     *
+     */
     public DashboardControlerHelper() {
         userdao = new UserDAO();
         ddao = new DashboardDAO();
         events = getUpcomingEvent(3);
     }
 
+    /**
+     *
+     * @param u
+     * @return
+     * @throws SQLException
+     */
     public String getDashboardFromUserOccupation(User u) throws SQLException {
         String userOccupation;
         String profileUrl = "";
@@ -65,6 +74,11 @@ public class DashboardControlerHelper {
         return events;
     }
     
+    /**
+     *
+     * @param flag
+     * @return
+     */
     public Event getAnEvent(String flag){
         Event e = null;
         for (int i=0; i<events.size(); i++){

@@ -24,12 +24,22 @@ public class EthicsFormControllerHelper {
     private DissRegistrationDAO diss;
     private FormsControlerHelper regf;
     Map<String, String> errors;
+
+    /**
+     *
+     */
     public EthicsFormControllerHelper(){
         edao = new EthicsDAO();
         diss = new DissRegistrationDAO();
         regf = new FormsControlerHelper();
     }
     
+    /**
+     *
+     * @param userId
+     * @param e1
+     * @return
+     */
     public int addNewEthicsForm1(String userId, Ethics1 e1){
         int success = edao.addNewEthicsForm1(userId, e1);
         if(success == 1){
@@ -41,6 +51,12 @@ public class EthicsFormControllerHelper {
         }
     }
     
+    /**
+     *
+     * @param userId
+     * @param e2
+     * @return
+     */
     public int addNewEthicsForm2(String userId, Ethics2 e2){
         int success = edao.addNewEthicsForm2(userId, e2);
         if(success == 1){
@@ -52,6 +68,12 @@ public class EthicsFormControllerHelper {
         }
     }
     
+    /**
+     *
+     * @param studentId
+     * @return
+     * @throws ParseException
+     */
     public String canSubmitEthics1(String studentId) throws ParseException{
         boolean dateValid = regf.checkRegSubmissionDeadline();
         String message = null;
@@ -79,6 +101,12 @@ public class EthicsFormControllerHelper {
         
     }
     
+    /**
+     *
+     * @param studentId
+     * @return
+     * @throws ParseException
+     */
     public String canSubmitEthics2(String studentId) throws ParseException{
         boolean dateValid = regf.checkRegSubmissionDeadline();
         String message = null;
@@ -117,7 +145,11 @@ public class EthicsFormControllerHelper {
         return message;   
     }
     
-    
+    /**
+     *
+     * @param registrationId
+     * @return
+     */
     public Ethics1 getEthics1Form(int registrationId){
         if(registrationId != 0){
             return edao.getEthics1(registrationId);
@@ -127,6 +159,11 @@ public class EthicsFormControllerHelper {
         }
     }
     
+    /**
+     *
+     * @param registrationId
+     * @return
+     */
     public Ethics2 getEthics2Form(int registrationId){
         if(registrationId != 0){
             return edao.getEthics2(registrationId);
@@ -136,6 +173,11 @@ public class EthicsFormControllerHelper {
         }
     }
     
+    /**
+     *
+     * @param e2
+     * @return
+     */
     public Map<String,String> validateInputs(Ethics2 e2){
         errors = new HashMap<String, String>();
         

@@ -52,9 +52,7 @@
                             <div class="form-group">
                                 <label for="supervisor"><b>Supervisor:  </b></label><label> <c:out value="${supervisor}" /></label><br />
                             </div>
-                            <div class="form-group">
-                                <label for="assessor"><b>Second Assessor:</b></label><label><c:out value="${assessor}" /> </label><br />
-                            </div>
+                            
                             <div class="form-group">
                                 <label for="diss_parties"><b>Related Parties:</b></label><label><c:out value="${project.relatedParties}" /></label><br />
                             </div>

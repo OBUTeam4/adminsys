@@ -72,17 +72,6 @@
                                 <span class="error"> ${errors['supervisor']} </span><span class="error"> ${errors['same']} </span>
                             </div>
                             <div class="form-group">
-                                <label for="assessor">Second Assessor  <span class="required">*</span> </label>
-                                <select name="assessor" class="form-control">
-                                    <option value="0">Select ...</option>
-                                    <c:forEach items="${assessors}" var="assessorList">
-                                        <option value="<c:out value="${assessorList.fName} ${assessorList.lName}" />"><c:out value="${assessorList.fName} ${assessorList.lName}" /></option>
-                                    </c:forEach>
-                                </select>
-                                <span class="error"> ${errors['assessor']} </span>
-                            </div>
-
-                            <div class="form-group">
                                 <label for="diss_parties">Related Parties: <span class="required">*</span> </label>
                                 <input type="text" class="form-control" name="diss_parties" value="<c:out value="${project.relatedParties}" />" />
                                 <span class="error"> ${errors['diss_parties']} </span>

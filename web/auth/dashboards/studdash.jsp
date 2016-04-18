@@ -33,7 +33,7 @@
         </div>
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Your Submissions <span class="error"><c:out value="${disapproval}"/></span></h3>
+                <h3 class="panel-title">Your Submissions <span class="error"><c:out value="${decision}"/></span></h3>
             </div>
             <div class="panel-body">
                 <div class="row">
@@ -65,6 +65,8 @@
                                            No submission
                                        </c:otherwise>   
                                         </c:choose>
+                        <br /><br />
+                        <a href="">See feedback</a>
                     </div>
                 </div>
             </div>
